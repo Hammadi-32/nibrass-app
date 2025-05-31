@@ -1,0 +1,462 @@
+ /* استيراد الخطوط من Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+/* استيراد Font Awesome (تأكد من تثبيته: npm install @fortawesome/fontawesome-free) */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  // خلفية متدرجة مشابهة للصورة
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  overflow: hidden; // لمنع أي عناصر من تجاوز الحدود
+}
+
+.auth-wrapper {
+  width: 100%;
+  max-width: 900px; // عرض أكبر للواجهة المقسمة
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); // ظل كبير للواجهة بالكامل
+  background-color: #fff; // خلفية بيضاء للجزء الرئيسي
+  overflow: hidden; // مهم للحدود الدائرية
+}
+
+.auth-container.custom-design {
+  display: flex;
+  width: 100%;
+  min-height: 550px; // ارتفاع ثابت للواجهة
+
+  .left-panel {
+    flex: 0 0 35%; // 35% من العرض
+    background: linear-gradient(135deg, #2c3e50 0%, #4a627a 100%); // تدرج داكن
+    padding: 40px 30px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px 0 0 20px; // حواف دائرية على اليسار فقط
+    position: relative; // للنقاط
+    transition: all 0.4s ease-in-out; // انتقال سلس
+
+    &.active {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); // لون مختلف عند التنشيط
+    }
+
+    .panel-title {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .panel-options {
+      width: 100%;
+      .option {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.1); // خلفية خفيفة
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); // ظل داخلي خفيف
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        &.active {
+          background-color: rgba(255, 255, 255, 0.3);
+          box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3);
+          transform: translateY(-2px);
+        }
+
+        .icon {
+          font-size: 1.2em;
+          margin-right: 15px;
+          opacity: 0.8;
+        }
+        span {
+          font-size: 1.1em;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .call-to-action-button {
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 8px;
+      span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .right-panel {
+    flex: 1; // يأخذ المساحة المتبقية
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; // نبدأ من الأعلى
+    position: relative; // للنقاط السفلية
+    // padding: 0px 10px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+
+      .logo {
+        font-size: 2.2em;
+        font-weight: 700;
+        color: #4a627a;
+        opacity: 0.9;
+        letter-spacing: 1px;
+      }
+
+      .call-to-action-small {
+        background-color: #f0f4f7;
+        border: 1px solid #d0dbe4;
+        color: #4a627a;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+        &:hover {
+          background-color: #e3e9ed;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .form-section {
+      flex-grow: 1; // لكي يدفع العناصر السفلية للأسفل
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-title {
+      font-size: 2em;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .custom-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; // مسافة بين مجموعات الإدخال
+      width: 100%;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // عمودين
+      gap: 20px; // مسافة بين العناصر في الشبكة
+
+      .full-width-grid-item {
+        grid-column: 1 / -1; // يأخذ عرض العمودين
+      }
+
+      
+    }
+    
+    .input-group {
+        position: relative;
+        label {
+            display: block;
+            font-size: 0.85em;
+        color: #777;
+        margin-bottom: 8px;
+        text-align: left;
+        // .input-group:nth-child(2n+1) {
+        //    margin-right: 10px;
+        // }
+    }
+    
+    .custom-input, .custom-select {
+        width: 100%;
+        padding: 12px 15px;
+        // padding: 12px 0px;
+        padding-right: 40px; // مسافة للأيقونة
+        border: none;
+        border-radius: 8px;
+        background-color: #f0f4f7;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); // ظل داخلي خفيف
+        font-size: 1em;
+        color: #333;
+        outline: none;
+        transition: all 0.3s ease;
+        -webkit-appearance: none; /* لإزالة السهم الافتراضي للـ select */
+        -moz-appearance: none;
+        appearance: none;
+        
+        &:focus {
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(91, 126, 252, 0.3); // ظل و وميض أزرق
+          background-color: #fff;
+        }
+
+        &::placeholder {
+            color: #bbb;
+        }
+    }
+    
+      .custom-select {
+        cursor: pointer;
+      }
+
+      .input-icon {
+        position: absolute;
+        right: 15px;
+        top: 70%; // لضبط موضع الأيقونة
+        transform: translateY(-50%);
+        color: #aaa;
+        font-size: 0.9em;
+        pointer-events: none; // لمنع الأيقونة من منع النقر على الحقل
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 9%;
+        top: 70%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #aaa;
+        font-size: 0.9em;
+        transition: color 0.2s ease;
+        &:hover {
+          color: #777;
+        }
+      }
+
+      .select-arrow {
+        position: absolute;
+        right: 15px;
+        top: 60%;
+        transform: translateY(-50%);
+        color: #aaa;
+        pointer-events: none;
+      }
+
+      .error-message {
+        font-size: 0.75em;
+        color: #e74c3c;
+        margin-top: 5px;
+        text-align: right;
+      }
+    }
+
+    .submit-button {
+      background: linear-gradient(45deg, #3498db 0%, #2980b9 100%); // تدرج أزرق للزر
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(45deg, #2980b9 0%, #3498db 100%);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background: #ccc;
+        color: #888;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    .dots-bottom {
+      position: absolute;
+      bottom: 20px;
+      right: 50%;
+      transform: translateX(50%);
+      display: flex;
+      gap: 8px;
+      span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: #bbb;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+// الاستجابة - جعلها عمودية على الشاشات الصغيرة
+@media (max-width: 768px) {
+  .auth-container.custom-design {
+    flex-direction: column;
+    min-height: auto; // السماح بارتفاع تلقائي
+    .left-panel {
+      flex: none; // إزالة المرونة
+      width: 100%;
+      border-radius: 20px 20px 0 0; // حواف دائرية علوية
+      padding: 30px 20px;
+      .panel-options {
+        display: none; // إخفاء الخيارات الجانبية في العرض العمودي
+      }
+      .call-to-action-button {
+        margin-top: 20px;
+      }
+      .dots {
+        display: none;
+      }
+      &.active {
+        // لا داعي لتغيير الخلفية عند التنشيط في هذا العرض
+      }
+    }
+
+    .right-panel {
+      padding: 30px 20px;
+      border-radius: 0 0 20px 20px; // حواف دائرية سفلية
+
+      .header {
+        margin-bottom: 30px;
+        flex-direction: column; // جعل الهيدر عمودي
+        .call-to-action-small {
+          margin-top: 15px;
+        }
+      }
+      .form-title {
+        margin-bottom: 20px;
+      }
+      .input-grid {
+        grid-template-columns: 1fr; // عمود واحد
+      }
+      .submit-button {
+        margin-top: 20px;
+      }
+      .dots-bottom {
+        display: none;
+      }
+    }
+  }
+}
+
+ 
+// .auth-card {
+//   width: 100%;
+//   max-width: 400px;
+//   padding: 2rem;
+// //   margin: 2rem auto;
+// //   padding: 1.5rem;
+//   border-radius: 12px;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+//   background: #f9fafb; // أبيض رمادي فاتح
+
+//   mat-card-title {
+//     font-size: 1.8rem;
+//     font-weight: 700;
+//     color: #1e3a8a; // أزرق داكن
+//     text-align: center;
+//   }
+
+//   mat-card-subtitle {
+//     font-size: 1rem;
+//     color: #6b7280; // رمادي متوسط
+//     text-align: center;
+//     margin-bottom: 1rem;
+//   }
+
+//   .full-width {
+//     width: 100%;
+//   }
+
+//   button {
+//     margin-top: 1rem;
+//   }
+
+//   a {
+//     color: #3b82f6; // أزرق فاتح
+//     text-decoration: none;
+//     font-weight: 600;
+//     display: block;
+//     text-align: center;
+//     margin-top: 1rem;
+
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// }
+
+
+// .auth-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+//   background-color: #f4f6f8;
+//   padding: 1rem;
+// }
+
+// // .auth-card {
+// //   width: 100%;
+// //   max-width: 400px;
+// //   padding: 2rem;
+// // }
+
+// .full-width {
+//   width: 100%;
+// }
+
+// .text-link {
+//   text-align: center;
+//   margin-top: 1rem;
+// }
