@@ -1,0 +1,18 @@
+<div class="container py-5">
+    <h2 class="text-center text-primary mb-4">Governorates List</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let gov of governorates">
+            <div class="card h-100 shadow-sm border-0 governorate-card">
+                <div class="card-body">
+                    <h5 class="card-title text-primary" [routerLink]="[gov.governorateId,'governorate-details']">{{ gov.nameEn }}</h5>
+                    <p class="card-text mb-1">
+                        <strong>Cities:</strong> {{ gov.cityCount ||20}}
+                    </p>
+                    <p class="card-text">
+                        <!-- <strong>Schools:</strong> {{ gov.schoolCount ||20}} -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
