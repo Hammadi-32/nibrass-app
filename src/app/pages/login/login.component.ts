@@ -19,6 +19,7 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): {
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [
     CommonModule,
     RouterModule,
@@ -47,7 +48,11 @@ export class LoginComponent {
   initForm(): void {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: [''],
+      lastName: [''],
+      confirmPassword: [''],
+      role: ['']
     });
 
     if (!this.isLoginMode) {
