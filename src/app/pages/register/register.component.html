@@ -1,0 +1,26 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <h2>إنشاء حساب</h2>
+    <form>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>الاسم الكامل</mat-label>
+        <input matInput type="text" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>البريد الإلكتروني</mat-label>
+        <input matInput type="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>كلمة المرور</mat-label>
+        <input matInput type="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width">تسجيل</button>
+    </form>
+    <p class="text-link">
+      لديك حساب؟ <a routerLink="/login">تسجيل الدخول</a>
+    </p>
+  </mat-card>
+</div>

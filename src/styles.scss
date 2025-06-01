@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+ @use '@angular/material' as mat;
+
+ $primary: #007acc;
+ $font-family-base: 'Cairo', sans-serif;
+ $body-bg: #f8f9fa;
+
+ @use "bootstrap/scss/bootstrap";
+
+ html {
+   @include mat.theme((color: (theme-type: light,
+         primary: mat.$azure-palette,
+         tertiary: mat.$blue-palette,
+       ),
+       typography: Roboto,
+       density: 0,
+     ));
+ }
+
+ body {
+   margin: 0;
+   font-family: Roboto, "Helvetica Neue", sans-serif;
+   background-color: $body-bg;
+ }

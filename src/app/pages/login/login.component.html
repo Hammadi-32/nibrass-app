@@ -1,0 +1,143 @@
+<div class="auth-wrapper">
+  <div class="auth-container custom-design">
+    <div class="left-panel" [class.active]="!isLoginMode">
+      <h2 class="panel-title">LOGIN</h2>
+      <div class="panel-options">
+        <div class="option" [class.active]="isLoginMode" (click)="toggleMode()">
+          <i class="fas fa-sign-in-alt icon"></i>
+          <span>Sign In</span>
+        </div>
+        <div class="option" [class.active]="!isLoginMode" (click)="toggleMode()">
+          <i class="fas fa-user-plus icon"></i>
+          <span>Register</span>
+        </div>
+        </div>
+      <button class="call-to-action-button">CALL TO ACTION</button>
+      <div class="dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="header">
+        <h2 class="logo">NIBRAS</h2>
+        <button class="call-to-action-small">CAILL ACTION</button>
+      </div>
+
+      <div class="form-section">
+        <h3 class="form-title">{{ isLoginMode ? 'LOGIN' : 'REGISTRATION' }}</h3>
+
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="custom-form">
+          <ng-container *ngIf="isLoginMode">
+            <div class="input-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" formControlName="email" placeholder="Email" class="custom-input" required>
+              <i class="fas fa-envelope input-icon"></i>
+              <div *ngIf="authForm.get('email')?.hasError('required') && authForm.get('email')?.touched" class="error-message">
+                Email is required.
+              </div>
+              <div *ngIf="authForm.get('email')?.hasError('email') && authForm.get('email')?.touched" class="error-message">
+                Invalid email format.
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="login-password">Password</label>
+              <input [type]="hidePassword ? 'password' : 'text'" id="login-password" formControlName="password" placeholder="Password" class="custom-input" required minlength="6">
+              <i class="fas fa-lock input-icon"></i>
+              <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+                <i class="fas" [class.fa-eye]="!hidePassword" [class.fa-eye-slash]="hidePassword"></i>
+              </button>
+              <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched" class="error-message">
+                Password is required.
+              </div>
+              <div *ngIf="authForm.get('password')?.hasError('minlength') && authForm.get('password')?.touched" class="error-message">
+                Password must be at least 6 characters.
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="!isLoginMode">
+            <div class="input-grid">
+              <div class="input-group">
+                <label for="reg-first-name">First Name</label>
+                <input type="text" id="reg-first-name" formControlName="firstName" placeholder="First Name" class="custom-input" required>
+                <div *ngIf="authForm.get('firstName')?.hasError('required') && authForm.get('firstName')?.touched" class="error-message">
+                  First Name is required.
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="reg-last-name">Last Name</label>
+                <input type="text" id="reg-last-name" formControlName="lastName" placeholder="Last Name" class="custom-input" required>
+                <div *ngIf="authForm.get('lastName')?.hasError('required') && authForm.get('lastName')?.touched" class="error-message">
+                  Last Name is required.
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" formControlName="email" placeholder="Email" class="custom-input" required>
+                <div *ngIf="authForm.get('email')?.hasError('required') && authForm.get('email')?.touched" class="error-message">
+                  Email is required.
+                </div>
+                <div *ngIf="authForm.get('email')?.hasError('email') && authForm.get('email')?.touched" class="error-message">
+                  Invalid email format.
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="reg-password">Password</label>
+                <input [type]="hidePassword ? 'password' : 'text'" id="reg-password" formControlName="password" placeholder="Password" class="custom-input" required minlength="6">
+                <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+                  <i class="fas" [class.fa-eye]="!hidePassword" [class.fa-eye-slash]="hidePassword"></i>
+                </button>
+                <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched" class="error-message">
+                  Password is required.
+                </div>
+                <div *ngIf="authForm.get('password')?.hasError('minlength') && authForm.get('password')?.touched" class="error-message">
+                  Password must be at least 6 characters.
+                </div>
+              </div>
+              <div class="input-group full-width-grid-item">
+                <label for="reg-confirm-password">Confirm Password</label>
+                <input [type]="hideConfirmPassword ? 'password' : 'text'" id="reg-confirm-password" formControlName="confirmPassword" placeholder="Confirm Password" class="custom-input" required>
+                <button type="button" class="toggle-password" (click)="hideConfirmPassword = !hideConfirmPassword">
+                  <i class="fas" [class.fa-eye]="!hideConfirmPassword" [class.fa-eye-slash]="hideConfirmPassword"></i>
+                </button>
+                <div *ngIf="authForm.get('confirmPassword')?.hasError('required') && authForm.get('confirmPassword')?.touched" class="error-message">
+                  Confirm Password is required.
+                </div>
+                <div *ngIf="authForm.get('confirmPassword')?.errors?.['mismatch'] && authForm.get('confirmPassword')?.touched" class="error-message">
+                  Passwords do not match.
+                </div>
+              </div>
+              <div class="input-group full-width-grid-item">
+                <label for="reg-role">Role</label>
+                <select id="reg-role" formControlName="role" class="custom-select" required>
+                  <option value="" disabled selected>Select Role</option>
+                  <option value="user">User
+
+<!-- <div class="auth-container">
+  <mat-card class="auth-card">
+  <mat-card-header>
+    <mat-card-title>تسجيل الدخول</mat-card-title>
+    <mat-card-subtitle>أهلاً بك! الرجاء إدخال بياناتك</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>البريد الإلكتروني</mat-label>
+        <input matInput type="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>كلمة المرور</mat-label>
+        <input matInput type="password" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width">دخول</button>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <a routerLink="/register">ليس لديك حساب؟ سجّل الآن</a>
+  </mat-card-actions>
+</mat-card> -->
