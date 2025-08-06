@@ -23,7 +23,7 @@ export class GovernoratesComponent implements OnInit {
   constructor(private governorateServices: GovernorateServices) { }
   
   ngOnInit(): void {
-    this.getAllGovernorates()
+    // this.getAllGovernorates()
   }
 
   getAllGovernorates() {

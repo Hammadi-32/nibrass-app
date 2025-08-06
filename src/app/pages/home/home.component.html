@@ -1,0 +1,32 @@
+<div class="home-page" dir="rtl">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>نبراس - لنضيء طريق التعليم من جديد</h1>
+      <p>منصة لعرض المدارس المتضررة واحتياجاتها بدقة وشفافية</p>
+    </div>
+  </section>
+
+  <!-- School Categories -->
+  <section class="explore-section">
+    <h2>استعرض المدارس حسب الموقع</h2>
+    <button class="explore-button">ابدأ التصفح</button>
+  </section>
+
+  <!-- Sample Schools -->
+  <section class="schools-section">
+    <h2>بعض المدارس المتضررة</h2>
+    <div class="schools-list">
+      <div class="school-card" *ngFor="let school of sampleSchools">
+        <img [src]="school.image" alt="صورة المدرسة" />
+        <h3>{{ school.name }}</h3>
+        <p>الموقع: {{ school.location }}</p>
+        <p>اللوازم المطلوبة:</p>
+        <ul>
+          <li *ngFor="let item of school.needs">{{ item }}</li>
+        </ul>
+        <button>عرض التفاصيل</button>
+      </div>
+    </div>
+  </section>
+</div>
