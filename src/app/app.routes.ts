@@ -19,17 +19,22 @@ export const routes: Routes = [
   {
     path: 'governorates',
     loadComponent: () =>
-      import('./components/Governorates/components/component/governorates.component').then((m) => m.GovernoratesComponent),
+      import('./pages/Governorates/components/component/governorates.component').then((m) => m.GovernoratesComponent),
   },
   {
     path: 'schools',
-    loadComponent: () => 
+    loadComponent: () =>
       import('./pages/schools/schools.component').then((m) => m.SchoolsComponent)
   },
   {
     path: 'governorates/:governorateId/governorate-details',
     loadComponent: () =>
-      import('./components/Governorates/components/governorate-details/governorate-details.component').then((m) => m.GovernorateDetailsComponent),
+      import('./pages/Governorates/components/governorate-details/governorate-details.component').then((m) => m.GovernorateDetailsComponent),
+  },
+  {
+    path: 'cities',
+    loadComponent: () =>
+      import('./pages/cities/component/cities.component').then((m) => m.CitiesComponent),
   },
   {
     path: '',

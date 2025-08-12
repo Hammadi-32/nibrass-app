@@ -1,0 +1,14 @@
+<nav class="sidebar" [ngStyle]="{'width':sidebarClosed?'50px':'220px','padding': sidebarClosed?'12px':'20px'}">
+  <ul>
+    <li *ngFor="let item of menuItems" [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px' ,'background':sidebarClosed?'#FFFFFF':'#F0F0F0'}" class="item">
+      <span class="material-icons">{{ item.icon }}</span>
+      <a *ngIf="!sidebarClosed" [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
+    </li>
+
+    <li [ngStyle]="{'padding':sidebarClosed? '10px 0px':'padding: 11px 10px;','right':sidebarClosed?'15px':'182px'}"
+      class="arrow-icon">
+      <span class="material-icons icon" *ngIf="!sidebarClosed" (click)="sideBar()">keyboard_double_arrow_right</span>
+      <span class="material-icons icon" *ngIf="sidebarClosed" (click)="sideBar()">keyboard_double_arrow_left</span>
+    </li>
+  </ul>
+</nav>

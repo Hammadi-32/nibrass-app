@@ -1,0 +1,50 @@
+.sidebar {
+  width: 220px;
+  background-color: #FFFFFF;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  direction: rtl;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  padding: 11px 10px;
+  align-items: center;
+  width: 100%;
+  border-radius: 11px;
+}
+
+.item {
+  background: #F0F0F0;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.sidebar ul li a {
+  padding-right: 9px;
+}
+
+.arrow-icon {
+  padding: 10px 0px;
+  position: absolute;
+  bottom: -8px;
+}
+
+.icon {
+  cursor: pointer;
+}

@@ -1,0 +1,40 @@
+<div class="container py-5" *ngIf="governorate">
+  <h2 class="text-center text-primary mb-4">Governorate: {{ governorate.nameEn }}</h2>
+
+  <!-- الإحصائيات -->
+  <div class="row text-center mb-4">
+    <div class="col-md-4">
+      <div class="stats-card">
+        <h4>{{ coveredSchools }} / {{ totalSchools }}</h4>
+        <p>Schools Covered</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stats-card">
+        <h4>{{ coveredCities }} / {{ totalCities }}</h4>
+        <p>Cities Covered</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stats-card">
+        <h4>{{ damagePercentage | number:'1.0-1' }}%</h4>
+        <p>Damage Percentage</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-4">
+      <canvas id="schoolsCoverageChart"></canvas>
+      <p class="mt-2">Schools Coverage</p>
+    </div>
+    <div class="col-md-4">
+      <canvas id="citiesCoverageChart"></canvas>
+      <p class="mt-2">Cities Coverage</p>
+    </div>
+    <div class="col-md-4">
+      <canvas id="damageChart"></canvas>
+      <p class="mt-2">Damage in Schools</p>
+    </div>
+  </div>
+</div>

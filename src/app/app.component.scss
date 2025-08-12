@@ -3,3 +3,42 @@ body {
   font-family: 'Segoe UI', sans-serif;
   direction: rtl;
 }
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #FFFFFF;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.hidden {
+  transform: translateX(100%);
+}
+
+.content {
+  flex-grow: 1;
+  margin-right: 240px;
+  transition: margin-right 0.3s ease;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.content.full-width {
+  margin-right: 0;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+  width: 0
+}
