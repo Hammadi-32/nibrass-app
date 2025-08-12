@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 // دالة التحقق من تطابق كلمتي المرور (للتسجيل)
@@ -39,7 +39,9 @@ export class LoginComponent {
   hidePassword = true;
   hideConfirmPassword = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -85,5 +87,9 @@ export class LoginComponent {
       // التعامل مع النموذج غير الصالح (مثلاً، إظهار رسائل خطأ عامة أو تمييز الحقول)
       this.authForm.markAllAsTouched(); // لجعل جميع الحقول تظهر أخطائها
     }
+  }
+
+  login(){
+    this.router.navigateByUrl('home');
   }
 }

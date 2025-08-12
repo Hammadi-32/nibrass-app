@@ -1,0 +1,35 @@
+<div class="schools-page" dir="rtl">
+  <h1>المدارس المتضررة</h1>
+
+  <!-- اختيار المحافظة -->
+  <div class="filter">
+    <label>اختر المحافظة:</label>
+    <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
+      <option value="">-- اختر --</option>
+      <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
+    </select>
+  </div>
+
+  <!-- البحث النصي -->
+  <div class="filter">
+    <label>بحث:</label>
+    <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="اسم المدرسة أو المدينة..." />
+  </div>
+
+  <!-- عرض المدارس -->
+  <div class="schools-list" *ngIf="filteredSchools.length > 0">
+    <div class="school-card" *ngFor="let school of filteredSchools">
+      <img [src]="school.image" alt="صورة المدرسة" />
+      <h3>{{ school.name }}</h3>
+      <p>المحافظة: {{ school.province }}</p>
+      <p>المدينة: {{ school.city }}</p>
+      <p>اللوازم المطلوبة:</p>
+      <ul>
+        <li *ngFor="let item of school.needs">{{ item }}</li>
+      </ul>
+      <button>عرض التفاصيل</button>
+    </div>
+  </div>
+
+  <p *ngIf="filteredSchools.length === 0">لا توجد نتائج مطابقة.</p>
+</div>
