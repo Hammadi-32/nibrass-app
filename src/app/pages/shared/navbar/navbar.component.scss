@@ -1,40 +1,40 @@
 .navbar {
-    font-family: 'Segoe UI', sans-serif;
+  position: sticky;
+  top: 0;
+  // width: 100%;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #005c99;
+  color: white;
+  padding: 10px 20px;
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .image-container{
+    max-height: 5vh;
+    cursor: pointer;
+  }
+  
+  ul {
+    margin-bottom: 0;
+  }
+  .nav-links {
+    list-style: none;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #005c99;
-    color: white;
-    padding: 10px 20px;
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .image-container{
-      max-height: 5vh;
-    }
+    gap: 20px;
     
-    ul {
-      margin-bottom: 0;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      
-
-      li a {
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
+    li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
       }
     }
+  }
 }

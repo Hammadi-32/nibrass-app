@@ -89,8 +89,7 @@ export class LoginComponent {
     }
   }
 
-  print(){
-    console.log("hello")
+  login(){
     this.router.navigateByUrl('home');
   }
 }
