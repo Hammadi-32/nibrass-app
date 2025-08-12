@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GovernorateServices } from '../../services/governorate.services';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 import { Governorates } from '../../models/governorate.model';
 import { RouterModule } from '@angular/router';
 
@@ -21,9 +20,10 @@ export class GovernoratesComponent implements OnInit {
   governorates: Governorates[] = [];
 
   constructor(private governorateServices: GovernorateServices) { }
-  
+
   ngOnInit(): void {
-    // this.getAllGovernorates()
+    this.getAllGovernorates();
+  
   }
 
   getAllGovernorates() {

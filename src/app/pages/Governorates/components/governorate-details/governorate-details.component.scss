@@ -1,0 +1,23 @@
+.stats-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stats-card h4 {
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stats-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+canvas {
+  max-width: 250px;
+  margin: auto;
+}
