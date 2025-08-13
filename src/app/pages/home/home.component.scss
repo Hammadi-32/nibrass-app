@@ -46,43 +46,60 @@
     }
   }
 
+  // .schools-section {
+  //   padding: 20px;
+
+  //   .schools-list {
+  //     display: flex;
+  //     flex-wrap: wrap;
+  //     gap: 20px;
+  //     justify-content: center;
+
+  //     .school-card {
+  //       width: 280px;
+  //       border: 1px solid #ccc;
+  //       border-radius: 10px;
+  //       padding: 16px;
+  //       background-color: #f9f9f9;
+
+  //       img {
+  //         width: 100%;
+  //         height: 150px;
+  //         object-fit: cover;
+  //         border-radius: 6px;
+  //       }
+
+  //       h3 {
+  //         margin-top: 10px;
+  //         font-size: 20px;
+  //       }
+
+  //       button {
+  //         background-color: #007acc;
+  //         color: white;
+  //         border: none;
+  //         padding: 8px 12px;
+  //         border-radius: 5px;
+  //         margin-top: 10px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // For charts
   .schools-section {
     padding: 20px;
+    text-align: center;
 
-    .schools-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+    h2 {
+      color: #005c99;
+      margin-bottom: 20px;
+    }
 
-      .school-card {
-        width: 280px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 16px;
-        background-color: #f9f9f9;
-
-        img {
-          width: 100%;
-          height: 150px;
-          object-fit: cover;
-          border-radius: 6px;
-        }
-
-        h3 {
-          margin-top: 10px;
-          font-size: 20px;
-        }
-
-        button {
-          background-color: #007acc;
-          color: white;
-          border: none;
-          padding: 8px 12px;
-          border-radius: 5px;
-          margin-top: 10px;
-        }
-      }
+    .chart-container {
+      max-width: 400px;
+      margin: 0 auto;
     }
   }
+
 }

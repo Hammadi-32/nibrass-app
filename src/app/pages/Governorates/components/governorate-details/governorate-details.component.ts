@@ -86,7 +86,7 @@ export class GovernorateDetailsComponent implements OnInit {
         labels: ['Damaged Schools', 'Undamaged Schools'],
         datasets: [{
           data: [this.governorate.damagedSchools, this.totalSchools - this.governorate.damagedSchools],
-          backgroundColor: ['#dc3545', '#28a745']
+          backgroundColor: ['#007bff', '#28a745']
         }]
       }
     });

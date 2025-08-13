@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,13 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-
+export class HomeComponent implements AfterViewInit {
   constructor(private router: Router){}
+
+  stats = {
+    covered: 12,
+    damaged: 8
+  };
 
   sampleSchools = [
     {
@@ -31,7 +36,37 @@ export class HomeComponent {
     }
   ];
 
+  ngAfterViewInit(): void {
+    this.createChart();
+  }
+
   redirctToSchools(){
     this.router.navigateByUrl('/schools')
+  }
+
+  createChart() {
+    new Chart('schoolsChart', {
+      type: 'doughnut',
+      data: {
+        labels: ['مدارس تم تغطيتها', 'مدارس متضررة'],
+        datasets: [{
+          data: [this.stats.covered, this.stats.damaged],
+          backgroundColor: ['#4caf50', '#007bff'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              font: {
+                size: 14
+              }
+            }
+          }
+        }
+      }
+    });
   }
 }

@@ -1,0 +1,103 @@
+/* الخلفية الرمادية والتمركز */
+.popup {
+    width: 450px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 20px 25px;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
+
+/* العنوان */
+.popup h1.popup-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+}
+
+/* زر الإغلاق */
+.popup .close-popup {
+    text-decoration: none;
+    cursor: pointer;
+    color: #999;
+}
+
+.popup .close-popup:hover {
+    color: #555;
+}
+
+/* العناوين الصغيرة */
+.popup label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* الحقول */
+.popup input,
+.popup textarea,
+.popup select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.popup textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* خطأ الحقول */
+.popup .error-icon {
+    color: #f44336;
+    font-size: 18px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* أزرار وأسفل الفورم */
+.popup button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #6a1b9a; /* أرجواني */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.popup button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Dropdowns وأيقونات */
+.popup .dropdown {
+    width: 48%;
+    display: inline-block;
+    margin-right: 4%;
+}
+
+.popup .dropdown:last-child {
+    margin-right: 0;
+}
+
+/* Flex container للأيقونات */
+.popup .icon-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}

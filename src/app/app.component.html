@@ -1,10 +1,15 @@
 <div class="app-container">
-    <app-sidebar class="sidebar" [ngStyle]="{'width':sidebarClosed?'50px':'220px'}"
-        (toggleSideBar)="toggleSideBar($event)"></app-sidebar>
+    <app-navbar *ngIf="!hideLayout()" class="navbar"></app-navbar>
 
-    <div class="content" [ngStyle]="{'margin-right': sidebarClosed?'50px':'220px'}" [class.full-width]="hideLayout()">
-        <app-navbar *ngIf="!hideLayout()"></app-navbar>
-        <router-outlet></router-outlet>
+    <div class="main-content">
+        <app-sidebar class="sidebar" [ngStyle]="{'width': sidebarClosed ? '50px' : '220px'}"
+            (toggleSideBar)="toggleSideBar($event)">
+        </app-sidebar>
+
+        <div class="content" [ngStyle]="{'margin-right': sidebarClosed ? '50px' : '220px'}"
+            [class.full-width]="hideLayout()">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
 

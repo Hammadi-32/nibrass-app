@@ -4,18 +4,42 @@ body {
   direction: rtl;
 }
 
+:root {
+  --navbar-height: 50px;
+}
+
 .app-container {
   display: flex;
+  flex-direction: column;
   height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: #0078d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  z-index: 1100;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
   overflow: hidden;
 }
 
 .sidebar {
   width: 220px;
   background-color: #FFFFFF;
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
   position: fixed;
-  top: 0;
+  top: var(--navbar-height);
   bottom: 0;
   right: 0;
   transition: transform 0.3s ease;
@@ -29,9 +53,10 @@ body {
 .content {
   flex-grow: 1;
   margin-right: 240px;
+  margin-top: var(--navbar-height);
   transition: margin-right 0.3s ease;
   overflow-y: auto;
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
 }
 
 .content.full-width {
@@ -40,5 +65,5 @@ body {
 
 ::-webkit-scrollbar {
   height: 0;
-  width: 0
+  width: 0;
 }

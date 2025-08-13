@@ -27,7 +27,7 @@ export class AppComponent {
     return this.router.url === '/login'
   }
 
-  sidebarClosed: boolean = false;
+  sidebarClosed: boolean = true;
   toggleSideBar(event: boolean) {
     this.sidebarClosed = event;
     console.log(event)

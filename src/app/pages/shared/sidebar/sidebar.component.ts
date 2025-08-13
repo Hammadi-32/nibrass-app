@@ -16,9 +16,9 @@ import { RouterModule } from '@angular/router';
 export class SidebarComponent {
 
   @Output() toggleSideBar = new EventEmitter<boolean>()
-  sidebarClosed: boolean = false;
+  sidebarClosed: boolean = true;
   menuItems = [
-    { icon: 'account_circle', label: 'الملف الشخصي', route: '/profile' },
+    { icon: 'account_circle', label: 'الملف الشخصي', route: '/user-profile' },
     { icon: 'account_balance', label: 'المحافظات', route: '/governorates' },
     { icon: 'location_city', label: 'المدن', route: '/cities' },
     { icon: 'school', label: 'المدارس', route: '/schools' },

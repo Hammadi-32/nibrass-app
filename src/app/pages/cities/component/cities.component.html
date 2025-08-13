@@ -1,1 +1,16 @@
-<div>test</div>
+<div class="container py-5 cities">
+    <h2 class="text-center text-primary mb-4">قائمة المدن</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let city of cities">
+            <div class="custom-card" [routerLink]="[city.cityName, 'city-details']">
+                <img [src]="city.image" alt="{{ city.cityName }}">
+                <div class="card-text-section">
+                    <h5>{{ city.cityName }}</h5>
+                    <p>{{ city.description }}</p>
+                    <p>عدد المدارس: {{ city.schoolCount }}</p>
+                    <p>المحافظة: {{ city.govermentName }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

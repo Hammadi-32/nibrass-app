@@ -13,8 +13,15 @@
     <button class="explore-button" (click)="redirctToSchools()">ابدأ التصفح</button>
   </section>
 
+  <section class="schools-section" dir="rtl">
+    <h2>إحصائيات المدارس</h2>
+    <div class="chart-container">
+      <canvas id="schoolsChart"></canvas>
+    </div>
+  </section>
+
   <!-- Sample Schools -->
-  <section class="schools-section">
+  <!-- <section class="schools-section">
     <h2>بعض المدارس المتضررة</h2>
     <div class="schools-list">
       <div class="school-card" *ngFor="let school of sampleSchools">
@@ -29,5 +36,5 @@
         <button>عرض التفاصيل</button>
       </div>
     </div>
-  </section>
+  </section> -->
 </div>
