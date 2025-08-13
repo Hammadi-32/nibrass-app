@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GovernorateServices } from '../../services/governorate.services';
 import { CommonModule } from '@angular/common';
-import { Governorates } from '../../models/governorate.model';
+import { Governorates, JsonData } from '../../models/governorate.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -18,17 +18,20 @@ import { RouterModule } from '@angular/router';
 export class GovernoratesComponent implements OnInit {
 
   governorates: Governorates[] = [];
+  fakeGovernorates: any = new JsonData;
+  
 
   constructor(private governorateServices: GovernorateServices) { }
 
   ngOnInit(): void {
     this.getAllGovernorates();
-  
+    console.log(this.fakeGovernorates.FakeGovernorates)
   }
 
   getAllGovernorates() {
-    this.governorateServices.getListGovernorates().subscribe(res => {
-      this.governorates = res;
-    })
+    this.governorates = this.fakeGovernorates.FakeGovernorates
+    // this.governorateServices.getListGovernorates().subscribe(res => {
+    // this.governorates = res;
+    // })
   }
 }

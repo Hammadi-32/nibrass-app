@@ -5,7 +5,7 @@
   <div class="filter">
     <label>اختر المحافظة:</label>
     <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
-      <option value="">-- اختر --</option>
+      <option value="">-- الكل --</option>
       <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
     </select>
   </div>
