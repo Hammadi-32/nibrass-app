@@ -37,6 +37,11 @@ export const routes: Routes = [
       import('./pages/cities/component/cities.component').then((m) => m.CitiesComponent),
   },
   {
+    path: 'user-profile',
+    loadComponent: () =>
+      import('./pages/user-profile/user-profile.component').then((m) => m.UserProfileComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
