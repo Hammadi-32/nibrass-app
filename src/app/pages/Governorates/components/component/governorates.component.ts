@@ -19,13 +19,12 @@ export class GovernoratesComponent implements OnInit {
 
   governorates: Governorates[] = [];
   fakeGovernorates: any = new JsonData;
-  
+
 
   constructor(private governorateServices: GovernorateServices) { }
 
   ngOnInit(): void {
     this.getAllGovernorates();
-    console.log(this.fakeGovernorates.FakeGovernorates)
   }
 
   getAllGovernorates() {
