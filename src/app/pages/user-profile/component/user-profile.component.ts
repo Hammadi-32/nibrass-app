@@ -46,14 +46,25 @@ export class UserProfileComponent implements OnInit {
       this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
     })
   }
+
   editProfile() {
-    this.dialog.open(UpdateUserProfileComponent, {
+    const dialogRef = this.dialog.open(UpdateUserProfileComponent, {
       width: 'auto',
       height: 'auto',
       data: {
         usreData: this.user
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.user.email = result.email;
+        this.user.username = result.username;
+        this.user.fullName = result.fullName;
+      }
+    });
+
   }
 
   changePassword() {

@@ -3,11 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../models/user-profile.model";
 
-@Injectable(
-    {
-        providedIn: 'root'
-    }
-)
+@Injectable({
+    providedIn: 'root'
+})
 export class UserProfileService {
     private baseURL: string = 'https://localhost:7177/api/User'
     constructor(private http: HttpClient) {
@@ -15,5 +13,17 @@ export class UserProfileService {
 
     getUserData(userId: string): Observable<User> {
         return this.http.get<User>(`${this.baseURL}/${userId}`)
+    }
+
+    updateUserProfile(data: any) {
+        return this.http.put(this.baseURL, data)
+    }
+
+    IsValidPassword(password: string, userId: string) {
+        return this.http.get(`${this.baseURL}/isValidPassword?password=${password}&userId=${userId}`)
+    }
+
+    changePassword(newPassword: string, userId: string) {
+        return this.http.put(`${this.baseURL}/changePassword?newPassword=${newPassword}&userId=${userId}`, '')
     }
 }

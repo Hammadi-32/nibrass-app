@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip'; // << Add this
 import { User } from '../../models/user-profile.model';
+import { UserProfileService } from '../../services/user-profile.services';
 
 @Component({
   selector: 'app-update-user-profile',
@@ -12,7 +13,7 @@ import { User } from '../../models/user-profile.model';
       CommonModule,
       FormsModule,
       ReactiveFormsModule,
-      MatTooltipModule
+      MatTooltipModule,
     ],
   templateUrl: './update-user-profile.component.html',
   styleUrl: './update-user-profile.component.scss',
@@ -25,7 +26,8 @@ export class UpdateUserProfileComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UpdateUserProfileComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userServeic: UserProfileService
   ) {
     this.usreData = data.usreData;
   }
@@ -34,18 +36,31 @@ export class UpdateUserProfileComponent implements OnInit {
     this.initForm();
   }
 
-  formData(data: any) {
-    console.log(data.value)
+  formData(data: FormGroup) {
+    const newData = {
+      userId: this.usreData.userId,
+      username: data.value.username,
+      email: data.value.email,
+      fullName: data.value.fullName
+    }
+    this.seveChange(newData)
   }
 
   initForm() {
     this.userForm = this.fb.group({
       username: [this.usreData.username || '', Validators.required],
-      fullName: [this.usreData.fullName || ''],
-      email: [this.usreData.email || ''],
+      fullName: [this.usreData.fullName || '', Validators.required],
+      email: [this.usreData.email || '', Validators.required],
     });
   }
-  closeDialog(isSubmit: boolean = false) {
-    this.dialogRef.close(isSubmit);
+
+  closeDialog(data?: any) {
+    this.dialogRef.close(data);
+  }
+
+  seveChange(data: any) {
+    this.userServeic.updateUserProfile(data).subscribe(res => {
+      this.closeDialog(data);
+    })
   }
 }
