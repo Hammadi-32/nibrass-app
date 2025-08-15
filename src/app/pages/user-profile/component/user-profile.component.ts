@@ -42,18 +42,28 @@ export class UserProfileComponent implements OnInit {
   getUserProfileData() {
     this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
       this.user = res;
-      console.log(this.user)
       this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
     })
   }
+
   editProfile() {
-    this.dialog.open(UpdateUserProfileComponent, {
+    const dialogRef = this.dialog.open(UpdateUserProfileComponent, {
       width: 'auto',
       height: 'auto',
       data: {
         usreData: this.user
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        this.user.email = result.email;
+        this.user.username = result.username;
+        this.user.fullName = result.fullName;
+      }
+    });
+
   }
 
   changePassword() {
@@ -69,6 +79,4 @@ export class UserProfileComponent implements OnInit {
   convertToDataUrl(fileContents: string, contentType: string): string {
     return `data:${contentType};base64,${fileContents}`;
   }
-
-
 }

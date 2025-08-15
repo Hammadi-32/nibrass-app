@@ -28,9 +28,16 @@ export class GovernoratesComponent implements OnInit {
   }
 
   getAllGovernorates() {
-    this.governorates = this.fakeGovernorates.FakeGovernorates
-    // this.governorateServices.getListGovernorates().subscribe(res => {
-    // this.governorates = res;
-    // })
+    this.governorateServices.getListGovernorates().subscribe(res => {
+      this.governorates = res;
+      this.governorates.forEach(g => {
+        g.imageSrc = this.convertToDataUrl(g.governorateImageUrl?.base64String!, g.governorateImageUrl?.contentType!)
+
+      })
+    })
+  }
+
+  convertToDataUrl(fileContents: string, contentType: string): string {
+    return `data:${contentType};base64,${fileContents}`;
   }
 }

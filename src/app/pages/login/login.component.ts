@@ -40,7 +40,7 @@ export class LoginComponent {
   hideConfirmPassword = true;
 
   constructor(private fb: FormBuilder,
-              private router: Router
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -69,17 +69,14 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    console.log('submit')
     if (this.authForm.valid) {
       const email = this.authForm.value.email;
       const password = this.authForm.value.password;
 
       if (this.isLoginMode) {
-        console.log('بيانات تسجيل الدخول:', { email, password });
         // هنا يمكنك استدعاء خدمة تسجيل الدخول الخاصة بك
       } else {
         const confirmPassword = this.authForm.value.confirmPassword;
-        console.log('بيانات التسجيل:', { email, password, confirmPassword });
         // هنا يمكنك استدعاء خدمة التسجيل الخاصة بك
       }
       // في كلا الحالتين، يمكنك توجيه المستخدم أو إظهار رسالة نجاح/خطأ
@@ -89,7 +86,7 @@ export class LoginComponent {
     }
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('home');
   }
 }

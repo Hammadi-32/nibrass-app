@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { GovernorateServices } from '../../services/governorate.services';
-import { ActivatedRoute } from '@angular/router';
-import { Governorates } from '../../models/governorate.model';
+import { GovernorateSummary } from '../../models/governorate.model';
 import { Chart } from 'chart.js/auto';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-governorate-details',
   imports:
     [
-      CommonModule
+      CommonModule,
+      RouterModule,
+
     ],
   templateUrl: './governorate-details.component.html',
   styleUrl: './governorate-details.component.scss',
@@ -17,64 +19,51 @@ import { Chart } from 'chart.js/auto';
 })
 export class GovernorateDetailsComponent implements OnInit {
 
-  governorate: any;
-
-  // أرقام الإحصائيات
-  totalSchools = 0;
-  coveredSchools = 0;
-  totalCities = 0;
-  coveredCities = 0;
-  damagePercentage = 0;
+  governorate!: GovernorateSummary;
+  governorateIdRout: string = '';
+  constructor
+    (
+      private governorateServices: GovernorateServices,
+      private route: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
-    // بيانات تجريبية
-    this.governorate = {
-      nameEn: "Damascus",
-      totalSchoolCount: 30,
-      totalCityCount: 8,
-      coveredSchoolCount: 18,
-      coveredCityCount: 5,
-      damagedSchools: 7 // عدد المدارس المتضررة
-    };
+    this.route.params.subscribe(params => {
+      this.governorateIdRout = params['governorateId'];
+    });
+    this.getGovernorateSummary();
+  }
 
-    // الحسابات
-    this.totalSchools = this.governorate.totalSchoolCount;
-    this.coveredSchools = this.governorate.coveredSchoolCount;
-    this.totalCities = this.governorate.totalCityCount;
-    this.coveredCities = this.governorate.coveredCityCount;
-
-    // النسبة المئوية للضرر
-    this.damagePercentage = (this.governorate.damagedSchools / this.totalSchools) * 100;
-
+  getGovernorateSummary() {
+    this.governorateServices.getGovernorateSummary(this.governorateIdRout).subscribe(res => {
+      this.governorate = res;
+    })
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.renderCharts()
     }, 2000);
-
   }
 
   renderCharts() {
-    // Chart المدارس المغطاة
     new Chart(document.getElementById('schoolsCoverageChart') as HTMLCanvasElement, {
       type: 'doughnut',
       data: {
-        labels: ['Covered Schools', 'Remaining Schools'],
+        labels: [this.governorate.schoolsCoverage?.[0].label, this.governorate.schoolsCoverage?.[1].label],
         datasets: [{
-          data: [this.coveredSchools, this.totalSchools - this.coveredSchools],
+          data: [this.governorate.schoolsCoverage?.[0].value, this.governorate.schoolsCoverage?.[1].value],
           backgroundColor: ['#28a745', '#dcdcdc']
         }]
       }
     });
 
-    // Chart المدن المغطاة
     new Chart(document.getElementById('citiesCoverageChart') as HTMLCanvasElement, {
       type: 'doughnut',
       data: {
-        labels: ['Covered Cities', 'Remaining Cities'],
+        labels: [this.governorate.citiesCoverage?.[0].label, this.governorate.citiesCoverage?.[1].label],
         datasets: [{
-          data: [this.coveredCities, this.totalCities - this.coveredCities],
+          data: [this.governorate.citiesCoverage?.[0].value, this.governorate.citiesCoverage?.[1].value],
           backgroundColor: ['#007bff', '#dcdcdc']
         }]
       }
@@ -83,9 +72,9 @@ export class GovernorateDetailsComponent implements OnInit {
     new Chart(document.getElementById('damageChart') as HTMLCanvasElement, {
       type: 'pie',
       data: {
-        labels: ['Damaged Schools', 'Undamaged Schools'],
+        labels: [this.governorate.damageChart?.[0].label, this.governorate.damageChart?.[1].label],
         datasets: [{
-          data: [this.governorate.damagedSchools, this.totalSchools - this.governorate.damagedSchools],
+          data: [this.governorate.damageChart?.[0].value, this.governorate.damageChart?.[1].value],
           backgroundColor: ['#007bff', '#28a745']
         }]
       }

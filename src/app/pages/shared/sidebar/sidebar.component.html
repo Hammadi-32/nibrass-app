@@ -1,9 +1,13 @@
 <nav class="sidebar" [ngStyle]="{'width':sidebarClosed?'50px':'220px','padding': sidebarClosed?'12px':'20px'}">
   <ul>
-    <li *ngFor="let item of menuItems" [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px' ,'background':sidebarClosed?'#FFFFFF':'#F0F0F0'}" class="item">
-      <span class="material-icons" (click)="sideBar()">{{ item.icon }}</span>
-      <a *ngIf="!sidebarClosed" [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
-    </li>
+    <div *ngFor="let item of menuItems">
+      <li
+        [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px' ,'background':sidebarClosed?'#FFFFFF':'#F0F0F0'}"
+        class="item" [routerLink]="item.route" routerLinkActive="active">
+        <span class="material-icons" (click)="sideBar()">{{ item.icon }}</span>
+        <a *ngIf="!sidebarClosed">{{ item.label }}</a>
+      </li>
+    </div>
 
     <li [ngStyle]="{'padding':sidebarClosed? '10px 0px':'padding: 11px 10px;','right':sidebarClosed?'15px':'182px'}"
       class="arrow-icon">

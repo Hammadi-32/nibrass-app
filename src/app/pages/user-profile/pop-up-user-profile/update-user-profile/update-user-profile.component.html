@@ -14,13 +14,15 @@
             <!-- Username -->
             <div class="form-input">
                 <label for="username">Username <span class="required">*</span></label>
-                <input type="text" class="input" placeholder="Enter username" formControlName="username">
-                <div class="error"
-                    *ngIf="userForm.get('username')?.invalid && (userForm.get('username')?.dirty || userForm.get('username')?.touched)">
-                    <span matTooltip="Please enter a valid username" [matTooltipPosition]="'left'"
-                        class="material-icons error-icon icon">
-                        error
-                    </span>
+                <div class="input-container">
+                    <input type="text" class="input" placeholder="Enter username" formControlName="username">
+                    <div class="error-icon-wrapper"
+                        *ngIf="userForm.get('username')?.invalid && (userForm.get('username')?.dirty || userForm.get('username')?.touched)">
+                        <span matTooltip="Please enter a valid username" [matTooltipPosition]="'left'"
+                            class="material-icons error-icon icon">
+                            error
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -28,7 +30,7 @@
             <div class="form-input">
                 <label for="email">Email <span class="required">*</span></label>
                 <input type="email" class="input" placeholder="Enter email" formControlName="email">
-                <div class="error"
+                <div class="error-icon-wrapper" [ngStyle]="{'top':'57%'}"
                     *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)">
                     <span matTooltip="Please enter a valid email" [matTooltipPosition]="'left'"
                         class="material-icons error-icon icon">
@@ -41,7 +43,7 @@
             <div class="form-input">
                 <label for="fullName">Full Name <span class="required">*</span></label>
                 <input type="text" class="input" placeholder="Enter full name" formControlName="fullName">
-                <div class="error"
+                <div class="error-icon-wrapper" [ngStyle]="{'top':'57%'}"
                     *ngIf="userForm.get('fullName')?.invalid && (userForm.get('fullName')?.dirty || userForm.get('fullName')?.touched)">
                     <span matTooltip="Please enter your full name" [matTooltipPosition]="'left'"
                         class="material-icons error-icon icon">
