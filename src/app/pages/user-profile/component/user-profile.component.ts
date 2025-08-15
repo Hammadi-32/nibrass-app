@@ -42,7 +42,6 @@ export class UserProfileComponent implements OnInit {
   getUserProfileData() {
     this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
       this.user = res;
-      console.log(this.user)
       this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
     })
   }
@@ -80,6 +79,4 @@ export class UserProfileComponent implements OnInit {
   convertToDataUrl(fileContents: string, contentType: string): string {
     return `data:${contentType};base64,${fileContents}`;
   }
-
-
 }

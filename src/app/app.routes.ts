@@ -34,7 +34,12 @@ export const routes: Routes = [
   {
     path: 'cities',
     loadComponent: () =>
-      import('./pages/cities/component/cities.component').then((m) => m.CitiesComponent),
+      import('./pages/cities/component/cities.component').then((m) => m.CitiesListComponent),
+  },
+  {
+    path: 'governorates/:governorateId/cities',
+    loadComponent: () =>
+      import('./pages/cities/governorate-cities-list-component/governorate-cities-list-component.component').then((m) => m.GovernorateCitiesListComponentComponent),
   },
   {
     path: 'user-profile',

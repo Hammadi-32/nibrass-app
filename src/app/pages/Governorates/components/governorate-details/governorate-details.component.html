@@ -1,24 +1,26 @@
 <div class="container py-5" *ngIf="governorate">
-  <h2 class="text-center text-primary mb-4">Governorate: {{ governorate.nameEn }}</h2>
+  <h2 class="text-center text-primary mb-4">المحافظة: {{ governorate.nameEn }}</h2>
+  <button class="btn-go" [routerLink]="['/governorates', governorateIdRout, 'cities']" routerLinkActive="active">
+    اذهب إلى المدن
+  </button>
 
-  <!-- الإحصائيات -->
   <div class="row text-center mb-4">
     <div class="col-md-4">
       <div class="stats-card">
-        <h4>{{ coveredSchools }} / {{ totalSchools }}</h4>
-        <p>Schools Covered</p>
+        <h4>{{governorate.coveredSchools }} / {{ governorate.totalSchools }}</h4>
+        <p>المدارس المغطاة</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stats-card">
-        <h4>{{ coveredCities }} / {{ totalCities }}</h4>
-        <p>Cities Covered</p>
+        <h4>{{ governorate.coveredCities }} / {{governorate.totalCities }}</h4>
+        <p>المدن المغطاة</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stats-card">
-        <h4>{{ damagePercentage | number:'1.0-1' }}%</h4>
-        <p>Damage Percentage</p>
+        <h4>{{ governorate.damagePercentage| number:'1.0-1' }}%</h4>
+        <p>نسبة الأضرار</p>
       </div>
     </div>
   </div>
@@ -26,15 +28,15 @@
   <div class="row text-center">
     <div class="col-md-4">
       <canvas id="schoolsCoverageChart"></canvas>
-      <p class="mt-2">Schools Coverage</p>
+      <p class="mt-2">تغطية المدارس</p>
     </div>
     <div class="col-md-4">
       <canvas id="citiesCoverageChart"></canvas>
-      <p class="mt-2">Cities Coverage</p>
+      <p class="mt-2">تغطية المدن</p>
     </div>
     <div class="col-md-4">
       <canvas id="damageChart"></canvas>
-      <p class="mt-2">Damage in Schools</p>
+      <p class="mt-2">الأضرار في المدارس</p>
     </div>
   </div>
 </div>

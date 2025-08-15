@@ -30,6 +30,5 @@ export class AppComponent {
   sidebarClosed: boolean = true;
   toggleSideBar(event: boolean) {
     this.sidebarClosed = event;
-    console.log(event)
   }
 }

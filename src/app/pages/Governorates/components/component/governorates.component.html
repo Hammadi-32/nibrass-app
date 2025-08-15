@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-md-4 mb-4" *ngFor="let gov of governorates">
             <div class="custom-card" [routerLink]="[gov.governorateId, 'governorate-details']">
-                <img src="assets/school2.jpg" alt="{{ gov.nameEn }}">
+                <img [src]="gov.imageSrc" alt="{{ gov.nameEn }}">
                 <div class="card-text-section">
-                    <h5>{{ gov.nameAr }}</h5>
-                    <p>عاصمة سوريا، المعروفة بأهميتها السياسية والثقافية والتاريخية</p>
+                    <h5>{{ gov.nameAr + ' | '+ gov.nameEn }}</h5>
+                    <p>{{gov.description}}</p>
                 </div>
             </div>
         </div>
