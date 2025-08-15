@@ -1,26 +1,28 @@
 .home-page {
   font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
   color: #333;
 
+  /* Hero Section */
   .hero {
-    background-image: url('/assets/hero.jpg'); // عدّل حسب الصورة المتاحة
-    background-size: cover;
-    background-position: center;
-    height: 400px;
+    background: url('/assets/hero.jpg') center/cover no-repeat;
+    height: 350px;
     position: relative;
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 92, 153, 0.6);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #fff;
+      color: white;
       text-align: center;
+      padding: 0 20px;
 
       h1 {
         font-size: 36px;
+        font-weight: bold;
         margin-bottom: 10px;
       }
 
@@ -31,75 +33,245 @@
     }
   }
 
-  .explore-section {
-    text-align: center;
-    padding: 40px 20px;
+  /* Stats Cards */
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 30px 20px;
+    margin-top: -40px; /* تداخل مع الـ Hero */
+    position: relative;
+    z-index: 1;
 
-    .explore-button {
-      background-color: #005c99;
-      color: #fff;
-      padding: 10px 20px;
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 26px;
+        color: #005c99;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #777;
+      }
+    }
+  }
+
+  /* Charts Section */
+  .charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+
+    .chart-item {
+      background: white;
+      max-height: 50vh;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  /* Latest Schools */
+  .latest-schools {
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 20px;
+      color: #005c99;
+      text-align: center;
+    }
+
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+
+      .school-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+        img {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+        }
+
+        .content {
+          padding: 15px;
+          h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+          }
+          p {
+            font-size: 14px;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+
+  /* CTA Section */
+  .cta {
+    background: #005c99;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 30px 20px;
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    button {
+      background: white;
+      color: #005c99;
       border: none;
+      padding: 10px 20px;
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: #f2f2f2;
+      }
     }
   }
-
-  // .schools-section {
-  //   padding: 20px;
-
-  //   .schools-list {
-  //     display: flex;
-  //     flex-wrap: wrap;
-  //     gap: 20px;
-  //     justify-content: center;
-
-  //     .school-card {
-  //       width: 280px;
-  //       border: 1px solid #ccc;
-  //       border-radius: 10px;
-  //       padding: 16px;
-  //       background-color: #f9f9f9;
-
-  //       img {
-  //         width: 100%;
-  //         height: 150px;
-  //         object-fit: cover;
-  //         border-radius: 6px;
-  //       }
-
-  //       h3 {
-  //         margin-top: 10px;
-  //         font-size: 20px;
-  //       }
-
-  //       button {
-  //         background-color: #007acc;
-  //         color: white;
-  //         border: none;
-  //         padding: 8px 12px;
-  //         border-radius: 5px;
-  //         margin-top: 10px;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // For charts
-  .schools-section {
-    padding: 20px;
-    text-align: center;
-
-    h2 {
-      color: #005c99;
-      margin-bottom: 20px;
-    }
-
-    .chart-container {
-      max-width: 400px;
-      margin: 0 auto;
-    }
-  }
-
 }
+
+// .home-page {
+//   font-family: 'Segoe UI', sans-serif;
+//   color: #333;
+
+//   .hero {
+//     background-image: url('/assets/hero.jpg'); // عدّل حسب الصورة المتاحة
+//     background-size: cover;
+//     background-position: center;
+//     height: 400px;
+//     position: relative;
+
+//     .overlay {
+//       background-color: rgba(0, 0, 0, 0.6);
+//       height: 100%;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//       color: #fff;
+//       text-align: center;
+
+//       h1 {
+//         font-size: 36px;
+//         margin-bottom: 10px;
+//       }
+
+//       p {
+//         font-size: 18px;
+//         max-width: 600px;
+//       }
+//     }
+//   }
+
+//   .explore-section {
+//     text-align: center;
+//     padding: 40px 20px;
+
+//     .explore-button {
+//       background-color: #005c99;
+//       color: #fff;
+//       padding: 10px 20px;
+//       border: none;
+//       border-radius: 8px;
+//       font-size: 16px;
+//       cursor: pointer;
+//     }
+//   }
+
+//   // .schools-section {
+//   //   padding: 20px;
+
+//   //   .schools-list {
+//   //     display: flex;
+//   //     flex-wrap: wrap;
+//   //     gap: 20px;
+//   //     justify-content: center;
+
+//   //     .school-card {
+//   //       width: 280px;
+//   //       border: 1px solid #ccc;
+//   //       border-radius: 10px;
+//   //       padding: 16px;
+//   //       background-color: #f9f9f9;
+
+//   //       img {
+//   //         width: 100%;
+//   //         height: 150px;
+//   //         object-fit: cover;
+//   //         border-radius: 6px;
+//   //       }
+
+//   //       h3 {
+//   //         margin-top: 10px;
+//   //         font-size: 20px;
+//   //       }
+
+//   //       button {
+//   //         background-color: #007acc;
+//   //         color: white;
+//   //         border: none;
+//   //         padding: 8px 12px;
+//   //         border-radius: 5px;
+//   //         margin-top: 10px;
+//   //       }
+//   //     }
+//   //   }
+//   // }
+
+//   // For charts
+//   .schools-section {
+//     padding: 20px;
+//     text-align: center;
+
+//     h2 {
+//       color: #005c99;
+//       margin-bottom: 20px;
+//     }
+
+//     .chart-container {
+//       max-height: 400px;
+//       // margin: 0 auto;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//     }
+//   }
+
+// }

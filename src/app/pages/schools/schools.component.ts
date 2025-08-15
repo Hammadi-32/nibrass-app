@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
-import { FooterComponent } from '../shared/footer/footer.component';
 
 interface School {
   name: string;
@@ -14,7 +12,7 @@ interface School {
 
 @Component({
   selector: 'app-schools',
-  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.scss'
 })

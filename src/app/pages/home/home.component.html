@@ -1,5 +1,5 @@
 <div class="home-page" dir="rtl">
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
     <div class="overlay">
       <h1>نبراس - لنضيء طريق التعليم من جديد</h1>
@@ -7,34 +7,51 @@
     </div>
   </section>
 
-  <!-- School Categories -->
-  <section class="explore-section">
-    <h2>استعرض المدارس حسب المحافظة</h2>
-    <button class="explore-button" (click)="redirctToSchools()">ابدأ التصفح</button>
+  <!-- KPIs Cards -->
+  <section class="stats-cards">
+    <div class="card">
+      <h3>🏫</h3>
+      <h2>{{ displayStats.totalSchools }}</h2>
+      <p>مدارس مسجلة</p>
+    </div>
+    <div class="card">
+      <h3>✅</h3>
+      <h2>{{ displayStats.coveredSchools }}</h2>
+      <p>مدارس مغطاة</p>
+    </div>
+    <div class="card">
+      <h3>🚧</h3>
+      <h2>{{ displayStats.damagedSchools }}</h2>
+      <p>مدارس متضررة</p>
+    </div>
+    <div class="card">
+      <h3>👥</h3>
+      <h2>{{ displayStats.donors }}</h2>
+      <p>جهات مشاركة</p>
+    </div>
   </section>
 
-  <section class="schools-section" dir="rtl">
-    <h2>إحصائيات المدارس</h2>
-    <div class="chart-container">
+  <!-- Charts -->
+  <section class="charts">
+    <div class="chart-item">
       <canvas id="schoolsChart"></canvas>
     </div>
+    <div class="chart-item">
+      <canvas id="schoolsBar"></canvas>
+    </div>
   </section>
 
-  <!-- Sample Schools -->
-  <!-- <section class="schools-section">
-    <h2>بعض المدارس المتضررة</h2>
-    <div class="schools-list">
-      <div class="school-card" *ngFor="let school of sampleSchools">
-        <img [src]="school.image" alt="صورة المدرسة" />
-        <h3>{{ school.name }}</h3>
-        <p>المحافظة: {{ school.province }}</p>
-        <p>المدينة: {{ school.city }}</p>
-        <p>اللوازم المطلوبة:</p>
-        <ul>
-          <li *ngFor="let item of school.needs">{{ item }}</li>
-        </ul>
-        <button>عرض التفاصيل</button>
-      </div>
+  <!-- Latest Schools -->
+  <section class="latest-schools">
+    <h2>أحدث المدارس المضافة</h2>
+    <div class="schools-grid">
+      <!-- بطاقات مدارس -->
     </div>
-  </section> -->
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>استعرض جميع المدارس واعرف احتياجاتها</h2>
+    <button (click)="redirctToSchools()">ابدأ التصفح</button>
+  </section>
 </div>
