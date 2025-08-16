@@ -1,35 +1,43 @@
 <div class="schools-page" dir="rtl">
-  <h1>المدارس المتضررة</h1>
-
-  <!-- اختيار المحافظة -->
-  <div class="filter">
-    <label>اختر المحافظة:</label>
-    <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
-      <option value="">-- الكل --</option>
-      <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
-    </select>
+  <div class="header-bar">
+    <h1>المدارس المتضررة</h1>
+    <button class="add-btn" (click)="addSchool()">➕ إضافة مدرسة جديدة</button>
   </div>
 
-  <!-- البحث النصي -->
-  <div class="filter">
-    <label>بحث:</label>
-    <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="اسم المدرسة أو المدينة..." />
-  </div>
-
-  <!-- عرض المدارس -->
-  <div class="schools-list" *ngIf="filteredSchools.length > 0">
-    <div class="school-card" *ngFor="let school of filteredSchools">
-      <img [src]="school.image" alt="صورة المدرسة" />
-      <h3>{{ school.name }}</h3>
-      <p>المحافظة: {{ school.province }}</p>
-      <p>المدينة: {{ school.city }}</p>
-      <p>اللوازم المطلوبة:</p>
-      <ul>
-        <li *ngFor="let item of school.needs">{{ item }}</li>
-      </ul>
-      <button>عرض التفاصيل</button>
+  <!-- فلاتر وبحث -->
+  <div class="filters-card">
+    <div class="filter-item">
+      <label>اختر المحافظة:</label>
+      <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
+        <option value="">-- الكل --</option>
+        <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
+      </select>
+    </div>
+    <div class="filter-item">
+      <label>بحث:</label>
+      <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="اسم المدرسة أو المدينة..." />
     </div>
   </div>
 
-  <p *ngIf="filteredSchools.length === 0">لا توجد نتائج مطابقة.</p>
+  <!-- عرض المدارس -->
+  <div class="schools-grid" *ngIf="filteredSchools.length > 0">
+    <div class="school-card" *ngFor="let school of filteredSchools">
+      <div class="image-wrapper">
+        <img [src]="school.image" alt="صورة المدرسة" />
+      </div>
+      <div class="card-content">
+        <h3>{{ school.name }}</h3>
+        <p class="location">📍 {{ school.province }} - {{ school.city }}</p>
+        <div class="needs">
+          <p>اللوازم المطلوبة:</p>
+          <ul>
+            <li *ngFor="let item of school.needs">{{ item }}</li>
+          </ul>
+        </div>
+        <button class="details-btn">عرض التفاصيل</button>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="filteredSchools.length === 0" class="no-results">لا توجد نتائج مطابقة.</p>
 </div>

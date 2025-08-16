@@ -39,6 +39,48 @@ export class SchoolsComponent {
     city: 'حرستا',
     needs: ['5 شبابيك', '7 طاولات'],
     image: 'assets/school2.jpg'
+  },
+  {
+    name: 'مدرسة المتفوقين',
+    province: 'حلب',
+    city: 'صلاح الدين',
+    needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
+    image: 'assets/school1.jpeg'
+  },
+  {
+    name: 'مدرسة المنارة',
+    province: 'حلب',
+    city: 'كفر حمرة',
+    needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
+    image: 'assets/school1.jpeg'
+  },
+  {
+    name: 'مدرسة النور',
+    province: 'إدلب',
+    city: 'سراقب',
+    needs: ['10 مقاعد', 'سبورة'],
+    image: 'assets/school2.jpg'
+  },
+  {
+    name: 'مدرسة النهضة',
+    province: 'ريف دمشق',
+    city: 'حرستا',
+    needs: ['5 شبابيك', '7 طاولات'],
+    image: 'assets/school2.jpg'
+  },
+  {
+    name: 'مدرسة المتفوقين',
+    province: 'حلب',
+    city: 'صلاح الدين',
+    needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
+    image: 'assets/school1.jpeg'
+  },
+  {
+    name: 'مدرسة المنارة',
+    province: 'حمص',
+    city: 'باب سباع',
+    needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
+    image: 'assets/school1.jpeg'
   }
 ];
 
@@ -71,6 +113,8 @@ export class SchoolsComponent {
       );
     }
   }
+
+  addSchool(){}
 
 }
 
