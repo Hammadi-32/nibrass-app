@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from './pages/shared/footer/footer.component';
 import { NavbarComponent } from './pages/shared/navbar/navbar.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "./pages/shared/sidebar/sidebar.component";
@@ -11,7 +10,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterOutlet,
     NavbarComponent,
-    FooterComponent,
     SidebarComponent,
     CommonModule
   ],
