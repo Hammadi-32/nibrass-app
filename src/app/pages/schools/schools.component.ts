@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface School {
@@ -17,20 +17,21 @@ interface School {
   styleUrl: './schools.component.scss'
 })
 
-export class SchoolsComponent {
+export class SchoolsComponent implements OnInit {
+  
   schoolsData = [
   {
     name: 'مدرسة الأمل',
     province: 'إدلب',
     city: 'معرة مصرين',
-    needs: ['6 نوافذ', '4 أبواب', '15 طاولة'],
+    needs: ['6 نوافذ', '4 أبواب', '15 طاولة', '20 كرسي', '15 طاولة', '20 كرسي'],
     image: 'assets/school1.jpeg'
   },
   {
     name: 'مدرسة النور',
     province: 'إدلب',
     city: 'سراقب',
-    needs: ['10 مقاعد', 'سبورة'],
+    needs: ['10 مقاعد', 'سبورة', '10 كراسي', 'مدافئ', '10 شبابيك'],
     image: 'assets/school2.jpg'
   },
   {
@@ -84,8 +85,12 @@ export class SchoolsComponent {
   }
 ];
 
+  ngOnInit(): void {
+    this.filteredSchools = this.schoolsData;
+  }
+
   provinces = [...new Set(this.schoolsData.map(s => s.province))];
-  selectedProvince: string | null = null;
+  selectedProvince: string | null = "";
   filteredSchools: School[] = []; 
 
   onProvinceChange() {

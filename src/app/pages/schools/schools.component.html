@@ -9,7 +9,7 @@
     <div class="filter-item">
       <label>اختر المحافظة:</label>
       <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
-        <option value="">-- الكل --</option>
+        <option value="" selected> كل المدراس </option>
         <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
       </select>
     </div>
@@ -31,7 +31,8 @@
         <div class="needs">
           <p>اللوازم المطلوبة:</p>
           <ul>
-            <li *ngFor="let item of school.needs">{{ item }}</li>
+            <li *ngFor="let item of school.needs | slice:0:3">{{ item }}</li>
+            <span *ngIf="school.needs.length > 3">...</span>
           </ul>
         </div>
         <button class="details-btn">عرض التفاصيل</button>
