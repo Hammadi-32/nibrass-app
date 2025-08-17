@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
 
 interface School {
   name: string;
@@ -18,6 +20,7 @@ interface School {
 })
 
 export class SchoolsComponent implements OnInit {
+  constructor(private dialog: MatDialog){}
   
   schoolsData = [
   {
@@ -119,7 +122,18 @@ export class SchoolsComponent implements OnInit {
     }
   }
 
-  addSchool(){}
+  addSchool(){
+    const dialogRef = this.dialog.open(AddSchoolDialogComponent, {
+      width: '50vw',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+      if (result) {
+        this.filteredSchools.push(result);
+        console.log('Schools', this.filteredSchools);
+      }
+    })
+  }
 
 }
 

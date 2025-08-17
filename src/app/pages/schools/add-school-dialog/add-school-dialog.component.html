@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>➕ إضافة مدرسة جديدة</h2>
+<div mat-dialog-content>
+  <form #schoolForm="ngForm">
+    <!-- اسم المدرسة -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>اسم المدرسة</mat-label>
+      <input matInput [(ngModel)]="school.name" name="name" required />
+    </mat-form-field>
+
+    <!-- المحافظة -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>المحافظة</mat-label>
+      <mat-select [(ngModel)]="school.province" name="province" required>
+        <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- المدينة -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>المدينة / البلدة</mat-label>
+      <input matInput [(ngModel)]="school.city" name="city" required />
+    </mat-form-field>
+
+    <!-- اللوازم المطلوبة -->
+    <div class="needs-section">
+      <label>اللوازم المطلوبة:</label>
+      <div *ngFor="let item of school.needs; let i = index" class="needs-item">
+        <input matInput [(ngModel)]="school.needs[i]" [name]="'need' + i" />
+        <button mat-icon-button color="warn" (click)="removeNeed(i)">
+          ✖
+        </button>
+      </div>
+      <button mat-button (click)="addNeed()">➕ إضافة لوازم</button>
+    </div>
+
+    <!-- اسم المدير -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>اسم المدير الكامل</mat-label>
+      <input matInput [(ngModel)]="school.managerName" name="managerName" required />
+    </mat-form-field>
+
+    <!-- رقم المدير -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>رقم تواصل المدير</mat-label>
+      <input matInput type="tel" [(ngModel)]="school.managerPhone" name="managerPhone" required />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">إلغاء</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!schoolForm.form.valid">
+    حفظ
+  </button>
+</div>
