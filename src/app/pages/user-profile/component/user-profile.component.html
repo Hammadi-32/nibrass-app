@@ -19,8 +19,14 @@
         </div>
 
         <div class="profile-links">
-            <div (click)="editProfile()">تعديل الملف الشخصي</div>
-            <div (click)="changePassword()">تغيير كلمة المرور</div>
+            <button (click)="editProfile()">
+                <mat-icon>edit</mat-icon>
+                تعديل الملف الشخصي
+            </button>
+            <button class="secondary" (click)="changePassword()">
+                <mat-icon>lock</mat-icon>
+                تغيير كلمة المرور
+            </button>
         </div>
     </div>
 
@@ -35,11 +41,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let school of schools">
-                    <td>{{ school.governorate }}</td>
-                    <td>{{ school.city }}</td>
-                    <td>{{ school.name }}</td>
+                <tr *ngFor="let school of user.schools">
+                    <td>{{ school.governorateName }}</td>
+                    <td>{{ school.cityName }}</td>
+                    <td>{{ school.schoolName }}</td>
                 </tr>
+
             </tbody>
         </table>
     </div>

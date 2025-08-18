@@ -9,8 +9,17 @@ export interface User {
     isActive: boolean;
     profileImageUrl?: FileData;
     imageSrc?: string;
+    schools?: School[];
 }
 export interface FileData {
     base64String: string;
     contentType: string
+}
+export interface School {
+    schoolId: string;
+    governorateId: string;
+    cityId: string;
+    governorateName: string;
+    cityName: string;
+    schoolName: string;
 }
