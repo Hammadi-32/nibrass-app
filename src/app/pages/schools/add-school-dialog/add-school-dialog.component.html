@@ -1,55 +1,155 @@
-<h2 mat-dialog-title>➕ إضافة مدرسة جديدة</h2>
-<div mat-dialog-content>
-  <form #schoolForm="ngForm">
-    <!-- اسم المدرسة -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>اسم المدرسة</mat-label>
-      <input matInput [(ngModel)]="school.name" name="name" required />
-    </mat-form-field>
-
-    <!-- المحافظة -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>المحافظة</mat-label>
-      <mat-select [(ngModel)]="school.province" name="province" required>
-        <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- المدينة -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>المدينة / البلدة</mat-label>
-      <input matInput [(ngModel)]="school.city" name="city" required />
-    </mat-form-field>
-
-    <!-- اللوازم المطلوبة -->
-    <div class="needs-section">
-      <label>اللوازم المطلوبة:</label>
-      <div *ngFor="let item of school.needs; let i = index" class="needs-item">
-        <input matInput [(ngModel)]="school.needs[i]" [name]="'need' + i" />
-        <button mat-icon-button color="warn" (click)="removeNeed(i)">
-          ✖
-        </button>
-      </div>
-      <button mat-button (click)="addNeed()">➕ إضافة لوازم</button>
+<!-- حاوية بحواف دائرية وتدرّج في الترويسة -->
+<div class="dialog-surface" dir="rtl">
+  <header class="dialog-header">
+    <div class="header-icon">
+      <mat-icon>school</mat-icon>
     </div>
+    <div class="header-text">
+      <h3 class="title"> إضافة مدرسة جديدة</h3>
+      <p class="subtitle">أدخل بيانات المدرسة بدقة لتسهيل التواصل والدعم</p>
+    </div>
+  </header>
 
-    <!-- اسم المدير -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>اسم المدير الكامل</mat-label>
-      <input matInput [(ngModel)]="school.managerName" name="managerName" required />
-    </mat-form-field>
+  <mat-divider></mat-divider>
 
-    <!-- رقم المدير -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>رقم تواصل المدير</mat-label>
-      <input matInput type="tel" [(ngModel)]="school.managerPhone" name="managerPhone" required />
-    </mat-form-field>
-  </form>
-</div>
+  <div mat-dialog-content class="dialog-content">
+    <form #schoolForm="ngForm" (ngSubmit)="onSave()" class="form-grid" autocomplete="off">
+      <!-- اسم المدرسة -->
+      <mat-form-field appearance="outline">
+        <mat-label>اسم المدرسة</mat-label>
+        <input matInput [(ngModel)]="school.name" name="name" required
+               placeholder="مثال: مدرسة النهضة" />
+        <mat-icon matSuffix>apartment</mat-icon>
+        <mat-hint align="start">الاسم الرسمي كما في السجلات</mat-hint>
+        <mat-error *ngIf="schoolForm.submitted && !school?.name">الاسم مطلوب</mat-error>
+      </mat-form-field>
 
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">إلغاء</button>
-  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!schoolForm.form.valid">
-    حفظ
-  </button>
+      <!-- المحافظة -->
+      <mat-form-field appearance="outline">
+        <mat-label>المحافظة</mat-label>
+        <input
+          type="text"
+          matInput
+          [matAutocomplete]="provAuto"
+          [(ngModel)]="school.province"
+          name="province"
+          required
+          placeholder="اختر المحافظة" />
+        <mat-autocomplete #provAuto="matAutocomplete" autoActiveFirstOption>
+          <mat-option *ngFor="let prov of provinces | filterStartsWith: school?.province" [value]="prov">
+            {{ prov }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix>map</mat-icon>
+        <mat-error *ngIf="schoolForm.submitted && !school?.province">المحافظة مطلوبة</mat-error>
+      </mat-form-field>
+
+      <!-- المدينة -->
+      <mat-form-field appearance="outline">
+        <mat-label>المدينة / البلدة</mat-label>
+        <input matInput [(ngModel)]="school.city" name="city" required placeholder="مثال: إدلب" />
+        <mat-icon matSuffix>location_city</mat-icon>
+        <mat-error *ngIf="schoolForm.submitted && !school?.city">المدينة مطلوبة</mat-error>
+      </mat-form-field>
+
+      <!-- اللوازم المطلوبة كـ Chips مع أوتوكومبليت -->
+      <mat-form-field class="grid-span-2" appearance="outline">
+        <mat-label>اللوازم المطلوبة*</mat-label>
+
+        <mat-chip-grid #chipGrid aria-label="لوازم مطلوبة">
+          <mat-chip-row
+            *ngFor="let need of school.needs; let i = index"
+            [editable]="true"
+            (removed)="removeNeed(i)">
+            {{ need }}
+            <button matChipRemove aria-label="إزالة">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+
+          <input
+            placeholder="اكتب ثم اضغط إدخال…"
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addNeed($event)"
+            (input)="chipInputValue = $any($event.target).value"
+            [matAutocomplete]="needsAuto"/>
+
+          </mat-chip-grid>
+          
+          <mat-autocomplete #needsAuto="matAutocomplete" autoActiveFirstOption>
+            <mat-option *ngFor="let opt of commonNeeds | filterStartsWith: chipInputValue" (onSelectionChange)="addNeedFromOption($event.source.selected, opt)">
+              {{ opt }}
+            </mat-option>
+          </mat-autocomplete>
+          
+          <!-- حقل خفي من أجل الخطأ -->
+        <input
+          type="hidden"
+          name="needsRequired"
+          [ngModel]="school.needs.length ? 'ok' : ''"
+          required
+          #needsCtrl="ngModel"/>
+
+        <!-- رسالة الخطأ -->
+        <mat-error *ngIf="(!school.needs.length && schoolForm.submitted)">
+          يجب إضافة عنصر واحد على الأقل في اللوازم
+        </mat-error>
+        <mat-hint align="start">مثال: دفاتر، أقلام، حقائب، سبورات…</mat-hint>
+      </mat-form-field>
+
+      <!-- اسم المدير -->
+      <mat-form-field appearance="outline">
+        <mat-label>اسم المدير الكامل</mat-label>
+        <input matInput [(ngModel)]="school.managerName" name="managerName" required placeholder="مثال: أحمد محمود العلي" />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="schoolForm.submitted && !school?.managerName">هذا الحقل مطلوب</mat-error>
+      </mat-form-field>
+
+      <!-- رقم المدير -->
+      <mat-form-field appearance="outline">
+        <mat-label>رقم تواصل المدير</mat-label>
+        <input matInput type="tel" [(ngModel)]="school.managerPhone" name="managerPhone" required
+               placeholder="+"
+               pattern="^+\d$" />
+        <mat-icon matPrefix>call</mat-icon>
+        <button mat-icon-button matSuffix type="button" aria-label="نسخ" (click)="copyPhone(school.managerPhone)" [disabled]="!school?.managerPhone">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+        <mat-error *ngIf="schoolForm.submitted && !school?.managerPhone">رقم الهاتف مطلوب</mat-error>
+      </mat-form-field>
+
+      <!-- ملاحظات -->
+      <mat-form-field class="grid-span-2" appearance="outline">
+        <mat-label>ملاحظات إضافية (اختياري)</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="school.notes" name="notes" placeholder="أي تفاصيل مهمة عن المدرسة أو طرق التسليم…"></textarea>
+        <mat-icon matSuffix>notes</mat-icon>
+      </mat-form-field>
+
+      <!-- الموافقة والتأكيد على صحة البيانات -->
+      <mat-checkbox class="grid-span-2" [(ngModel)]="confirmAccurate" name="confirmAccurate" required>
+        أؤكد أن البيانات المدخلة صحيحة قدر الإمكان
+      </mat-checkbox>
+
+      <!-- مساحة صغيرة لضمان عدم اختباء الحقول خلف أزرار الفوتر المثبتة -->
+      <div class="footer-spacer grid-span-2"></div>
+    </form>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-stroked-button (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      إلغاء
+    </button>
+
+    <button mat-flat-button color="primary"
+            (click)="onSave()"
+            [disabled]="!schoolForm.form.valid || !confirmAccurate || school.needs.length === 0">
+      <mat-icon>save</mat-icon>
+      حفظ
+    </button>
+  </div>
 </div>

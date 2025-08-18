@@ -124,8 +124,8 @@ export class SchoolsComponent implements OnInit {
 
   addSchool(){
     const dialogRef = this.dialog.open(AddSchoolDialogComponent, {
-      width: '50vw',
-      disableClose: true
+      width: 'auto',
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe(result =>{
       if (result) {
