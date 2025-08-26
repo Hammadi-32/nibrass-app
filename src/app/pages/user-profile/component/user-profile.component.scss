@@ -1,127 +1,218 @@
 .profile-page {
-    display: flex;
-    gap: 40px;
-    padding: 30px;
-    direction: rtl;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f4f6f9;
-    min-height: 90vh;
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: 24px;
+  padding: 24px;
+  direction: rtl;
+  font-family: 'Segoe UI', sans-serif;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .profile-card {
-    width: 35%;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 20px;
 }
 
-.profile-header h2 {
-    margin-top: 15px;
-    font-size: 22px;
-    color: #333;
+.profile-header {
+  text-align: center;
+  margin-bottom: 16px;
 }
 
-.profile-avatar img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid #6a1b9a;
+.profile-avatar {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  background: #f7f7f7;
+  overflow: hidden;
 }
 
-.username {
-    color: #777;
-    font-size: 14px;
-    margin-top: 5px;
+.profile-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
+.full-name { margin: 8px 0 4px; }
+.username  { color: #6b7280; font-size: 14px; }
 
 .profile-details {
-    border-top: 1px solid #eee;
-    margin-top: 15px;
-    padding-top: 15px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
 }
 
-.role-title {
-    font-weight: bold;
-    margin-top: 10px;
-    color: #444;
-}
+.role-title { font-weight: 700; margin-top: 8px; }
 
 .profile-links {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
 
-.profile-links button {
-    background: #6a1b9a;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
+  button {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
     cursor: pointer;
-    font-size: 15px;
-    transition: 0.3s;
-}
+    text-align: center;
+    transition: box-shadow .2s ease, transform .02s;
 
-.profile-links button:hover {
-    background: #4a148c;
-}
-
-.profile-links button.secondary {
-    background: #0078d4;
-}
-
-.profile-links button.secondary:hover {
-    background: #005a9e;
+  }
+  button:hover { box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+  button:active { transform: translateY(1px); }
+  
+  .logout-btn{
+    color: red;
+  }
 }
 
 .permissions-table {
-    flex-grow: 1;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.permissions-table h3 {
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.permissions-table table {
+  h3 { margin: 6px 0 12px; }
+  table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.permissions-table th,
-.permissions-table td {
+    background: #fff;
     border: 1px solid #eee;
-    padding: 10px 12px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  th, td { padding: 10px 12px; border-bottom: 1px solid #f1f1f1; }
+  th { background: #f9fafb; font-weight: 700; }
+  tbody tr:hover { background: #fcfcfc; }
 }
 
-.permissions-table th {
-    background-color: #f5f5f5;
-    font-weight: bold;
+.empty-state {
+  padding: 16px;
+  background: #fff;
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+  color: #6b7280;
+  text-align: center;
 }
 
-.permissions-table tr:hover {
-    background-color: #fafafa;
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px);
+  padding: 0; border: 0; height: 1px; width: 1px; overflow: hidden;
 }
 
-.profile-links button mat-icon {
-    vertical-align: middle;
-    margin-left: 6px;
-    font-size: 20px;
+/* Skeleton بسيط */
+.skeleton { display: grid; gap: 12px; }
+.avatar-skeleton {
+  width: 104px; height: 104px; border-radius: 50%; margin: 0 auto;
+  background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+  animation: pulse 1.6s infinite;
+}
+.line-skeleton {
+  height: 12px; background: #eee; border-radius: 6px; margin-inline: auto;
+  &.w-60 { width: 60%; } &.w-40 { width: 40%; }
+}
+@keyframes pulse {
+  0% { opacity: .6; } 50% { opacity: 1; } 100% { opacity: .6; }
 }
 
-.permissions-table h3 mat-icon {
-    vertical-align: middle;
-    margin-left: 6px;
-    color: #6a1b9a;
-}
+
+// .profile-page {
+//     display: flex;
+//     gap: 40px;
+//     padding: 30px;
+//     direction: rtl;
+//     font-family: 'Segoe UI', sans-serif;
+// }
+
+// .profile-card {
+//     width: 40%;
+//     flex-shrink: 0;
+// }
+
+// .profile-header {
+//     text-align: center;
+//     margin-bottom: 20px;
+
+//     h2 {
+//         margin-top: 53px;
+//     }
+// }
+
+// .profile-avatar {
+//     width: 80px;
+//     height: 80px;
+//     // background-color: #6a1b9a;
+//     background-color: #fff;
+//     border-radius: 50%;
+//     margin: 0 auto 10px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// img {
+//     width: 150px;
+//     height: 150px;
+//     border-radius: 100px;
+//     margin-top: 18px;
+// }
+
+// .username {
+//     color: gray;
+//     font-size: 14px;
+// }
+
+// .profile-details {
+//     border-top: 1px solid #ddd;
+//     padding-top: 10px;
+// }
+
+// .role-title {
+//     font-weight: bold;
+//     margin-top: 10px;
+// }
+
+// .profile-links a {
+//     display: block;
+//     color: #0078d4;
+//     margin: 5px 0;
+//     text-decoration: none;
+// }
+
+// .beta-badge {
+//     background-color: #ffcc80;
+//     color: #b35a00;
+//     padding: 2px 8px;
+//     border-radius: 10px;
+//     display: inline-block;
+//     margin-top: 10px;
+// }
+
+// .language-select {
+//     margin-top: 15px;
+// }
+
+// .permissions-table {
+//     flex-grow: 1;
+// }
+
+// .permissions-table table {
+//     width: 100%;
+//     border-collapse: collapse;
+//     text-align: center;
+// }
+
+// .permissions-table th,
+// .permissions-table td {
+//     border: 1px solid #ddd;
+//     padding: 8px 12px;
+// }
+
+// .permissions-table th {
+//     background-color: #f5f5f5;
+// }

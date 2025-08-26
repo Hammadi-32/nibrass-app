@@ -38,10 +38,9 @@ export class LoginComponent {
   isLoginMode = true; // true لتسجيل الدخول، false للتسجيل
   hidePassword = true;
   hideConfirmPassword = true;
+  show: boolean = false;
 
-  constructor(private fb: FormBuilder,
-    private router: Router
-  ) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -54,7 +53,8 @@ export class LoginComponent {
       firstName: [''],
       lastName: [''],
       confirmPassword: [''],
-      role: ['']
+      role: [''],
+      remember: [false]
     });
 
     if (!this.isLoginMode) {
@@ -67,7 +67,7 @@ export class LoginComponent {
     this.isLoginMode = !this.isLoginMode;
     this.initForm(); // إعادة تهيئة النموذج عند تبديل الوضع
   }
-
+  errorMessage: string = 'خطأ في بيانات الدخول';
   onSubmit(): void {
     if (this.authForm.valid) {
       const email = this.authForm.value.email;
@@ -75,6 +75,7 @@ export class LoginComponent {
 
       if (this.isLoginMode) {
         // هنا يمكنك استدعاء خدمة تسجيل الدخول الخاصة بك
+        this.login()
       } else {
         const confirmPassword = this.authForm.value.confirmPassword;
         // هنا يمكنك استدعاء خدمة التسجيل الخاصة بك
@@ -88,5 +89,10 @@ export class LoginComponent {
 
   login() {
     this.router.navigateByUrl('home');
+  }
+
+  invalid(ctrl: string) {
+    const c = this.authForm.get(ctrl);
+    return !!(c && c.invalid && (c.dirty || c.touched));
   }
 }
