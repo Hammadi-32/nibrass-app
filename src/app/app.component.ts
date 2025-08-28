@@ -22,7 +22,8 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   hideLayout(): boolean {
-    return this.router.url === '/login'
+    const shouldHide = this.router.url === '/auth/login' || this.router.url === '/auth/register';
+    return shouldHide;
   }
 
   sidebarClosed: boolean = true;
