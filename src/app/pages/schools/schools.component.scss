@@ -1,8 +1,5 @@
-*{
-  font-family: 'Segoe UI', sans-serif;
-}
-
 .schools-page {
+  font-family: 'Segoe UI', sans-serif;
   padding: 20px;
   background-color: #f5f7fa;
   min-height: 100vh;
@@ -88,12 +85,17 @@
       }
 
       .card-content {
+        .icon{
+          font-size: large;
+        }
         padding: 15px;
         h3 {
           margin: 0 0 5px;
           font-size: 18px;
         }
         .location {
+          display: flex;
+          align-items: center;
           font-size: 13px;
           color: #777;
           margin-bottom: 10px;
@@ -131,5 +133,11 @@
     text-align: center;
     color: #777;
     margin-top: 30px;
+  }
+
+  mat-icon{
+    height: auto !important;
+    width: auto !important;
+    padding-left: 5px;
   }
 }

@@ -1,4 +1,70 @@
-<div class="profile-page">
+<div class="profile-page" dir="rtl">
+  @if (user; as u) {
+    <section class="profile-card" aria-label="بطاقة الملف الشخصي">
+      <header class="profile-header">
+        <figure class="profile-avatar" aria-label="صورة المستخدم">
+          <img
+            [src]="u.imageSrc || 'assets/images/default-avatar.png'"
+            [alt]="u.fullName || 'مستخدم'"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <h2 class="full-name">{{ u.fullName }}</h2>
+        <p class="username" aria-label="اسم المستخدم">&#64;{{ u.username }}</p>
+      </header>
+
+      <div class="profile-details">
+        <p class="email" aria-label="البريد الإلكتروني">{{ u.email }}</p>
+        <p class="role-title">الأدوار</p>
+        <p class="role">{{ u.role }}</p>
+      </div>
+
+      <nav class="profile-links" aria-label="إجراءات الحساب">
+        <button type="button" (click)="editProfile()" aria-label="تعديل الملف الشخصي">تعديل الملف الشخصي</button>
+        <button type="button" (click)="changePassword()" aria-label="تغيير كلمة المرور">تغيير كلمة المرور</button>
+        <button type="button" routerLink="/auth/login" class="logout-btn" (click)="logout()" aria-label="تسجيل خروج">تسجيل خروج</button>
+      </nav>
+    </section>
+
+    <section class="permissions-table" aria-label="المدارس المضافة">
+      <h3>المدارس المضافة</h3>
+
+      @if (schools && schools.length > 0) {
+        <table>
+          <caption class="visually-hidden">قائمة المدارس المضافة للمستخدم</caption>
+          <thead>
+            <tr>
+              <th scope="col">المحافظة</th>
+              <th scope="col">المدينة</th>
+              <th scope="col">اسم المدرسة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let school of schools;">
+              <td>{{ school.governorate }}</td>
+              <td>{{ school.city }}</td>
+              <td>{{ school.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      } @else {
+        <div class="empty-state">لا توجد مدارس مضافة حتى الآن.</div>
+      }
+    </section>
+  } @else {
+    <div class="skeleton">
+      <div class="avatar-skeleton"></div>
+      <div class="line-skeleton w-60"></div>
+      <div class="line-skeleton w-40"></div>
+    </div>
+  }
+</div>
+
+
+
+
+<!-- <div class="profile-page">
     @if (user) {
 
     <div class="profile-card">
@@ -19,14 +85,8 @@
         </div>
 
         <div class="profile-links">
-            <button (click)="editProfile()">
-                <mat-icon>edit</mat-icon>
-                تعديل الملف الشخصي
-            </button>
-            <button class="secondary" (click)="changePassword()">
-                <mat-icon>lock</mat-icon>
-                تغيير كلمة المرور
-            </button>
+            <div (click)="editProfile()">تعديل الملف الشخصي</div>
+            <div (click)="changePassword()">تغيير كلمة المرور</div>
         </div>
     </div>
 
@@ -41,15 +101,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let school of user.schools">
-                    <td>{{ school.governorateName }}</td>
-                    <td>{{ school.cityName }}</td>
-                    <td>{{ school.schoolName }}</td>
+                <tr *ngFor="let school of schools">
+                    <td>{{ school.governorate }}</td>
+                    <td>{{ school.city }}</td>
+                    <td>{{ school.name }}</td>
                 </tr>
-
             </tbody>
         </table>
     </div>
     }
 
-</div>
+</div> -->

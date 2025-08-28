@@ -27,7 +27,10 @@
       </div>
       <div class="card-content">
         <h3>{{ school.name }}</h3>
-        <p class="location">📍 {{ school.province }} - {{ school.city }}</p>
+        <p class="location">
+          <mat-icon aria-hidden="true" class="icon">place</mat-icon> 
+          <span>{{ school.province }} - {{ school.city }}</span>
+        </p>
         <div class="needs">
           <p>اللوازم المطلوبة:</p>
           <ul>
@@ -35,7 +38,7 @@
             <span *ngIf="school.needs.length > 3">...</span>
           </ul>
         </div>
-        <button class="details-btn">عرض التفاصيل</button>
+        <button class="details-btn" (click)="goToDetails()">عرض التفاصيل</button>
       </div>
     </div>
   </div>

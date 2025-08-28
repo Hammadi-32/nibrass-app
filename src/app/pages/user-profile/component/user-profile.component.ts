@@ -3,25 +3,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserProfileComponent } from '../pop-up-user-profile/update-user-profile/update-user-profile.component';
-import { School, User } from '../models/user-profile.model';
+import { User } from '../models/user-profile.model';
 import { UserProfileService } from '../services/user-profile.services';
 import { ChangePasswordComponent } from '../pop-up-user-profile/change-password/change-password.component';
-import { MatIconModule } from "@angular/material/icon";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatIconModule
-  ],
+  imports:
+    [
+      CommonModule,
+      FormsModule,
+      RouterModule
+    ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-
-  user!: User;
 
   constructor
     (
@@ -35,10 +34,28 @@ export class UserProfileComponent implements OnInit {
     this.getUserProfileData();
   }
 
+  // user!: User;
+   user: User = {
+    userId: 'u_001',
+    username: 'hamza.al.saado',
+    email: 'hamza.al.saado@gmail.com',
+    password: '9808080',
+    role: 'مدير',
+    fullName: 'حمزة السعدو',
+    createdAt: new Date(),
+    isActive: true,
+    imageSrc: 'assets/profile-1.png',
+  };
+
+  schools = [
+    { governorate: 'دمشق', city: 'المزة', name: 'مدرسة النهضة', view: true, edit: false, delete: false },
+    { governorate: 'حلب', city: 'سيف الدولة', name: 'مدرسة السلام', view: false, edit: true, delete: false },
+    { governorate: 'حمص', city: 'كرم الشامي', name: 'مدرسة الوحدة', view: true, edit: true, delete: true }
+  ];
+
   getUserProfileData() {
     this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
       this.user = res;
-console.log(this.user.schools)
       this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
     })
   }
@@ -76,4 +93,9 @@ console.log(this.user.schools)
   convertToDataUrl(fileContents: string, contentType: string): string {
     return `data:${contentType};base64,${fileContents}`;
   }
+
+  logout(){
+
+  }
+
 }

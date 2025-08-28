@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 interface School {
   name: string;
@@ -14,13 +16,13 @@ interface School {
 
 @Component({
   selector: 'app-schools',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.scss'
 })
 
 export class SchoolsComponent implements OnInit {
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog, private router: Router){}
   
   schoolsData = [
   {
@@ -135,5 +137,8 @@ export class SchoolsComponent implements OnInit {
     })
   }
 
+  goToDetails(){
+    this.router.navigateByUrl('schools/11/school-details')
+  }
 }
 

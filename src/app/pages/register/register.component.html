@@ -1,26 +1,47 @@
-<div class="auth-container">
-  <mat-card class="auth-card">
-    <h2>إنشاء حساب</h2>
-    <form>
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>الاسم الكامل</mat-label>
-        <input matInput type="text" required>
-      </mat-form-field>
+<h2 class="title">إنشاء حساب</h2>
+<br>
+<!-- <p class="subtitle">ابدأ رحلتك خلال دقائق ✨</p> -->
 
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>البريد الإلكتروني</mat-label>
-        <input matInput type="email" required>
-      </mat-form-field>
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate class="form">
+  <label class="field">
+    <span>الاسم الكامل</span>
+    <input type="text" formControlName="fullName" placeholder="الاسم الكامل" autocomplete="name">
+    <small class="error" *ngIf="invalid('fullName')">الاسم مطلوب</small>
+  </label>
 
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>كلمة المرور</mat-label>
-        <input matInput type="password" required>
-      </mat-form-field>
+  <label class="field">
+    <span>البريد الإلكتروني</span>
+    <input type="email" formControlName="email" placeholder="name@example.com" autocomplete="email">
+    <small class="error" *ngIf="invalid('email')">صيغة بريد غير صحيحة</small>
+  </label>
 
-      <button mat-raised-button color="primary" class="full-width">تسجيل</button>
-    </form>
-    <p class="text-link">
-      لديك حساب؟ <a routerLink="/login">تسجيل الدخول</a>
-    </p>
-  </mat-card>
-</div>
+  <label class="field">
+    <span>كلمة المرور</span>
+    <div class="password">
+      <input [type]="show1 ? 'text' : 'password'" formControlName="password" placeholder="على الأقل 8 أحرف" autocomplete="new-password">
+      <button type="button" class="ghost" (click)="show1 = !show1">{{ show1 ? 'إخفاء' : 'إظهار' }}</button>
+    </div>
+    <small class="error" *ngIf="invalid('password')">8 أحرف على الأقل</small>
+  </label>
+
+  <label class="field">
+    <span>تأكيد كلمة المرور</span>
+    <div class="password">
+      <input [type]="show2 ? 'text' : 'password'" formControlName="confirmPassword" placeholder="أعد كتابة كلمة المرور" autocomplete="new-password">
+      <button type="button" class="ghost" (click)="show2 = !show2">{{ show2 ? 'إخفاء' : 'إظهار' }}</button>
+    </div>
+    <small class="error" *ngIf="form.hasError('mismatch')">كلمتا المرور غير متطابقتين</small>
+  </label>
+
+  <label class="check">
+    <input type="checkbox" formControlName="acceptTerms"> <span>أوافق على الشروط</span>
+  </label>
+
+  <button class="primary" type="submit" [disabled]="form.invalid">إنشاء الحساب</button>
+
+  <p class="switch">
+    لديك حساب؟ <a routerLink="/auth/login">تسجيل الدخول</a>
+  </p>
+
+  <p class="server-error" *ngIf="error">{{ error }}</p>
+</form>
