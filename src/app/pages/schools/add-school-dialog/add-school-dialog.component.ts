@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { SchoolsServices } from '../services/schools.services';
 
 export interface SchoolModel {
   name: string;
@@ -24,6 +25,23 @@ export interface SchoolModel {
   managerName: string;
   managerPhone: string;
   notes?: string;
+}
+
+interface SwaggerSchoolModel {
+  nameAr: string;
+  nameEn: string;
+  city: string;
+  description: string;
+  estimatedRenovationCost: number;
+  governortesId: string;
+  userId: string;
+  needs: string[];
+  headTeacherName: string;
+  headTeacherNumber: number;
+}
+interface RequiredRenovations{
+  renovationTypeId: string;
+  notes: string;
 }
 
 /* ========= Pipe للفلترة كما في القالب المقترح ========= */
@@ -37,7 +55,6 @@ export class FilterStartsWithPipe implements PipeTransform {
   }
 }
 
-/* ===================== المكوّن ===================== */
 @Component({
   selector: 'app-add-school-dialog',
   standalone: true,
@@ -64,10 +81,9 @@ export class FilterStartsWithPipe implements PipeTransform {
   styleUrls: ['./add-school-dialog.component.scss'],
 })
 export class AddSchoolDialogComponent {
-  // محافظات (مؤقتًا)
+
   provinces: string[] = ['إدلب', 'حلب', 'دمشق', 'حمص', 'حماة'];
 
-  // نموذج البيانات
   school: SchoolModel = {
     name: '',
     province: '',
@@ -90,7 +106,10 @@ export class AddSchoolDialogComponent {
   confirmAccurate = false;
   chipInputValue: string = '';
 
-  constructor(private dialogRef: MatDialogRef<AddSchoolDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<AddSchoolDialogComponent>,
+    private schoolsService: SchoolsServices
+  ) {}
 
   /* ========= Chips: إضافة/إزالة ========= */
   addNeed(event: MatChipInputEvent): void {
@@ -98,7 +117,7 @@ export class AddSchoolDialogComponent {
     if (value && !this.school.needs.includes(value)) {
       this.school.needs.push(value);
     }
-    // تنظيف الحقل
+
     if (event.chipInput) {
       event.chipInput.clear();
     }
@@ -133,12 +152,12 @@ export class AddSchoolDialogComponent {
     navigator.clipboard?.writeText(val).catch(() => {});
   }
 
-  /* ========= حفظ/إلغاء ========= */
   onCancel() {
     this.dialogRef.close();
   }
 
-  onSave(form?: NgForm) {
+  onSave(form?: any) {
+    console.log('school data:' ,form)
     if (!this.school.needs.length) {
     // علّم الحقل الخفي كـ touched لعرض رسالة الخطأ
     const ctrl = form?.controls?.['needsRequired'];
