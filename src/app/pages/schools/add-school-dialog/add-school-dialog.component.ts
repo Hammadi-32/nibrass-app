@@ -17,7 +17,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/ma
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { SchoolsServices } from '../services/schools.services';
 
-export interface SchoolModel {
+export interface SwaggerSchoolModel {
   name: string;
   province: string;
   city: string;
@@ -27,7 +27,7 @@ export interface SchoolModel {
   notes?: string;
 }
 
-interface SwaggerSchoolModel {
+interface SchoolModel {
   nameAr: string;
   nameEn: string;
   city: string;
@@ -38,10 +38,6 @@ interface SwaggerSchoolModel {
   needs: string[];
   headTeacherName: string;
   headTeacherNumber: number;
-}
-interface RequiredRenovations{
-  renovationTypeId: string;
-  notes: string;
 }
 
 /* ========= Pipe للفلترة كما في القالب المقترح ========= */
@@ -84,7 +80,7 @@ export class AddSchoolDialogComponent {
 
   provinces: string[] = ['إدلب', 'حلب', 'دمشق', 'حمص', 'حماة'];
 
-  school: SchoolModel = {
+  school: SwaggerSchoolModel = {
     name: '',
     province: '',
     city: '',

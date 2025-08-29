@@ -1,0 +1,31 @@
+<div class="pending-page" dir="rtl">
+  <h1>مدارس بانتظار المراجعة</h1>
+
+  <div *ngIf="pendingSchools.length > 0; else noPending">
+    <div class="school-card" *ngFor="let school of pendingSchools; let i = index">
+      <h3>{{ school.nameAr }}</h3>
+      <p><strong>المحافظة:</strong> {{ school.governorateName }}</p>
+      <p><strong>المدينة:</strong> {{ school.city }}</p>
+      <p><strong>مدير المدرسة:</strong> {{ school.headTeacherName }}</p>
+      <p><strong>رقم التواصل:</strong> +{{ school.headTeacherNumber }}</p>
+
+      <h4>اللوازم المطلوبة:</h4>
+      <ul>
+        <li *ngFor="let item of school.needs">{{ item }}</li>
+      </ul>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="approveSchool(i)">
+          <mat-icon>check</mat-icon> قبول
+        </button>
+        <button mat-raised-button color="warn" (click)="rejectSchool(i)">
+          <mat-icon>close</mat-icon> رفض
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noPending>
+    <p>لا توجد مدارس بانتظار المراجعة حالياً.</p>
+  </ng-template>
+</div>

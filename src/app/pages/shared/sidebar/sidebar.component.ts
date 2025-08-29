@@ -24,6 +24,7 @@ export class SidebarComponent {
     { icon: 'location_city', label: 'المدن', route: '/cities' },
     { icon: 'school', label: 'المدارس', route: '/schools' },
     { icon: 'insert_chart', label: 'التقارير', route: '/reports' },
+    { icon: 'hourglass_bottom', label: 'مدارس بانتظار المراجعة', route: '/pending-schools' },
   ];
 
   sideBar() {
