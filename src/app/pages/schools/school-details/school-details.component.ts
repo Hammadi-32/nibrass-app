@@ -14,6 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
+  standalone: true,
   selector: 'app-school-details',
   imports: [CommonModule,
     // Material

@@ -146,7 +146,7 @@
     </button>
 
     <button mat-flat-button color="primary"
-            (click)="onSave()"
+            (click)="onSave(school)"
             [disabled]="!schoolForm.form.valid || !confirmAccurate || school.needs.length === 0">
       <mat-icon>save</mat-icon>
       حفظ

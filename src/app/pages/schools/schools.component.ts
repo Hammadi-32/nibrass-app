@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { SchoolsServices } from './services/schools.services';
 
 interface School {
   name: string;
@@ -14,15 +15,38 @@ interface School {
   image: string;
 }
 
+interface SwaggerSchool {
+  nameAr: string;
+  nameEn: string;
+  addressDetails: string;
+  cityId: string;
+  schoolTypeId: string;
+  schoolStatusId: string;
+  latitude: string;
+  longitude: string;
+  conditionDescription: string;
+  estimatedRenovationCost: string;
+  studentCapacity: string;
+  numberOfClassrooms: string;
+  yearEstablished: string;
+  addedByUserId: string;
+  requiredRenovations: RequiredRenovations[];
+}
+interface RequiredRenovations{
+  renovationTypeId: string;
+  notes: string;
+}
+
 @Component({
   selector: 'app-schools',
+  standalone: true,
   imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './schools.component.html',
-  styleUrl: './schools.component.scss'
+  styleUrl: './schools.component.scss',
 })
 
 export class SchoolsComponent implements OnInit {
-  constructor(private dialog: MatDialog, private router: Router){}
+  constructor(private dialog: MatDialog, private router: Router, private schoolsService: SchoolsServices){}
   
   schoolsData = [
   {
@@ -91,12 +115,19 @@ export class SchoolsComponent implements OnInit {
 ];
 
   ngOnInit(): void {
-    this.filteredSchools = this.schoolsData;
+    this.getschools();
   }
-
+  getschools() {
+    this.schoolsService.getSchoolss().subscribe(res => {
+      // console.log(res)
+      this.filteredSchools = res;
+    })
+  }
+  
   provinces = [...new Set(this.schoolsData.map(s => s.province))];
   selectedProvince: string | null = "";
   filteredSchools: School[] = []; 
+  
 
   onProvinceChange() {
     if (this.selectedProvince) {
@@ -132,7 +163,6 @@ export class SchoolsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if (result) {
         this.filteredSchools.push(result);
-        console.log('Schools', this.filteredSchools);
       }
     })
   }
