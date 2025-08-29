@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-// import { GovernorateSummary } from "../models/governorate.model";
 
 @Injectable({
     providedIn: 'root'

@@ -39,9 +39,10 @@ interface RequiredRenovations{
 
 @Component({
   selector: 'app-schools',
+  standalone: true,
   imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './schools.component.html',
-  styleUrl: './schools.component.scss'
+  styleUrl: './schools.component.scss',
 })
 
 export class SchoolsComponent implements OnInit {
