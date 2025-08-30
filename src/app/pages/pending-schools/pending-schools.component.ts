@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
 interface SchoolModel {
@@ -20,7 +21,11 @@ interface SchoolModel {
 @Component({
   selector: 'app-pending-schools',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './pending-schools.component.html',
   styleUrl: './pending-schools.component.scss'
 })
@@ -48,7 +53,7 @@ export class PendingSchoolsComponent implements OnInit {
         headTeacherNumber: 963953275789
       },
       {
-        nameAr: 'مدرسة الفتح',
+        nameAr: 'مدرسة المنارة',
         nameEn: 'Al Fateh',
         city: 'ضاحية الوليد',
         description: '',

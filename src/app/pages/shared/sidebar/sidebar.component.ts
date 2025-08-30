@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { getUserInfo } from '../../../functions/getUserInfo';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,11 +10,17 @@ import { RouterModule } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
-
+export class SidebarComponent implements OnInit {
+  
   @Output() toggleSideBar = new EventEmitter<boolean>()
   sidebarClosed: boolean = true;
   userRole: string = 'admin';
+  userInfo: any;
+
+  ngOnInit(): void {
+    this.userInfo = getUserInfo();
+    this.userRole = this.userInfo.role
+  }
 
   menuItems = [
     { icon: 'account_circle', label: 'الملف الشخصي', route: '/user-profile' },

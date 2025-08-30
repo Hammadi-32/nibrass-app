@@ -1,17 +1,5 @@
-$border-radius: 16px;
 
 /* ===== Theme Tokens ===== */
-:root {
-  --brand: #2563eb;        /* أزرق */
-  --brand-600: #1d4ed8;
-  --ink: #0f172a;          /* نص داكن */
-  --muted: #64748b;        /* نص ثانوي */
-  --card: #ffffff;
-  --bg: #f8fafc;
-  --ring: 0 0 0 3px rgba(37, 99, 235, .14);
-  --radius: 16px;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --ink: #e5e7eb;
@@ -33,7 +21,7 @@ $border-radius: 16px;
 /* ===== HERO ===== */
 .school-hero {
   position: relative;
-  border-radius: $border-radius; 
+  border-radius: var(--radius); 
   overflow: hidden; 
   isolation: isolate;
 
@@ -120,7 +108,7 @@ $border-radius: 16px;
 .card {
   background: var(--card);
   border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
-  border-radius: $border-radius;
+  border-radius: var(--radius);
   padding: 18px;
   box-shadow: 0 10px 30px rgba(2,6,23,.06);
 

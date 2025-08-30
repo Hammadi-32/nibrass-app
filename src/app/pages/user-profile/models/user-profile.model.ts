@@ -2,14 +2,14 @@ export interface User {
     userId: string;
     username: string;
     email: string;
-    password: string;
     fullName: string;
-    role: string;
     createdAt: Date;
     isActive: boolean;
     profileImageUrl?: FileData;
     imageSrc?: string;
     schools?: School[];
+    role: string;
+    password: string;
 }
 export interface FileData {
     base64String: string;
@@ -17,9 +17,9 @@ export interface FileData {
 }
 export interface School {
     schoolId: string;
-    governorateId: string;
-    cityId: string;
-    governorateName: string;
-    cityName: string;
     schoolName: string;
+    governorateId: string;
+    governorateName: string;
+    cityId: string;
+    cityName: string;
 }

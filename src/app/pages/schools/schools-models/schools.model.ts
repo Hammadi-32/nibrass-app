@@ -19,7 +19,7 @@ export class JsonSchoolData{
       needs: ['6 نوافذ', '4 أبواب', '15 طاولة', '20 كرسي', '15 طاولة', '20 كرسي'],
       image: 'assets/school1.jpeg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '22',
@@ -29,7 +29,7 @@ export class JsonSchoolData{
       needs: ['10 مقاعد', 'سبورة', '10 كراسي', 'مدافئ', '10 شبابيك'],
       image: 'assets/school2.jpg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '111111',
@@ -39,7 +39,7 @@ export class JsonSchoolData{
       needs: ['5 شبابيك', '7 طاولات'],
       image: 'assets/school2.jpg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '111111',
@@ -49,7 +49,7 @@ export class JsonSchoolData{
       needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
       image: 'assets/school1.jpeg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '111111',
@@ -59,7 +59,7 @@ export class JsonSchoolData{
       needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
       image: 'assets/school1.jpeg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '111111',
@@ -69,7 +69,7 @@ export class JsonSchoolData{
       needs: ['10 مقاعد', 'سبورة'],
       image: 'assets/school2.jpg',
       managerName: 'Hamza',
-      managerPhone: '+963932588670'
+      managerPhone: '963932588670'
     },
     {
       schoolId: '111111',

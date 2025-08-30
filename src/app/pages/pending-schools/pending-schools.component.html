@@ -1,31 +1,64 @@
 <div class="pending-page" dir="rtl">
-  <h1>مدارس بانتظار المراجعة</h1>
-
-  <div *ngIf="pendingSchools.length > 0; else noPending">
-    <div class="school-card" *ngFor="let school of pendingSchools; let i = index">
-      <h3>{{ school.nameAr }}</h3>
-      <p><strong>المحافظة:</strong> {{ school.governorateName }}</p>
-      <p><strong>المدينة:</strong> {{ school.city }}</p>
-      <p><strong>مدير المدرسة:</strong> {{ school.headTeacherName }}</p>
-      <p><strong>رقم التواصل:</strong> +{{ school.headTeacherNumber }}</p>
-
-      <h4>اللوازم المطلوبة:</h4>
-      <ul>
-        <li *ngFor="let item of school.needs">{{ item }}</li>
-      </ul>
-
-      <div class="actions">
-        <button mat-raised-button color="primary" (click)="approveSchool(i)">
-          <mat-icon>check</mat-icon> قبول
-        </button>
-        <button mat-raised-button color="warn" (click)="rejectSchool(i)">
-          <mat-icon>close</mat-icon> رفض
-        </button>
-      </div>
+  <header class="page-head">
+    <div class="titles">
+      <h1>مدارس بانتظار المراجعة</h1>
+      <p class="muted">العدد: {{ pendingSchools?.length || 0 }}</p>
     </div>
-  </div>
+  </header>
+
+  <ng-container *ngIf="pendingSchools?.length; else noPending">
+    <section class="grid">
+      <article class="school-card" *ngFor="let school of pendingSchools; index as i">
+        <div class="top">
+          <div>
+            <h3 class="name rtl-text">{{ school.nameAr }}</h3>
+            <p class="loc">
+              <mat-icon aria-hidden="true">place</mat-icon>
+              <span class="rtl-text">{{ school.governorateName }} – {{ school.city }}</span>
+            </p>
+          </div>
+          <span class="badge">بانتظار</span>
+        </div>
+
+        <div class="meta">
+          <div class="row">
+            <mat-icon>person</mat-icon>
+            <div class="label">مدير المدرسة</div>
+            <div class="value rtl-text">{{ school.headTeacherName || '—' }}</div>
+          </div>
+          <div class="row">
+            <mat-icon>call</mat-icon>
+            <div class="label">رقم التواصل</div>
+            <div class="value tel">+{{ school.headTeacherNumber || '—' }}</div>
+          </div>
+        </div>
+
+        <div class="needs">
+          <div class="label">اللوازم المطلوبة</div >
+          <ul class="need-list">
+            <li *ngFor="let item of school.needs; let last = last" [class.sep]="!last">
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="actions">
+          <button mat-flat-button color="primary" (click)="approveSchool(i)">
+            <mat-icon>check</mat-icon><span>قبول</span>
+          </button>
+          <button mat-flat-button class="close-btn" (click)="rejectSchool(i)">
+            <mat-icon>close</mat-icon><span>رفض</span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </ng-container>
 
   <ng-template #noPending>
-    <p>لا توجد مدارس بانتظار المراجعة حالياً.</p>
+    <section class="empty">
+      <mat-icon>inventory_2</mat-icon>
+      <h3>لا توجد مدارس بانتظار المراجعة حالياً</h3>
+      <p class="muted">ستظهر المدارس هنا عند إرسالها.</p>
+    </section>
   </ng-template>
 </div>

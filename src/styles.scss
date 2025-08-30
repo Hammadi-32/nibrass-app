@@ -1,11 +1,12 @@
 // @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @use '@angular/material' as mat;
+@use "bootstrap/scss/bootstrap";
+@import "./scss-rules/variables";
 
  $primary: #007acc;
  $font-family-base: 'Cairo', sans-serif;
  $body-bg: #f8f9fa;
 
- @use "bootstrap/scss/bootstrap";
 
  html {
    @include mat.theme((color: (theme-type: light,
