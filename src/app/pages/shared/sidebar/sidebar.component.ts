@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   
   @Output() toggleSideBar = new EventEmitter<boolean>()
   sidebarClosed: boolean = true;
-  userRole: string = 'admin';
+  userRole: string = 'Administrator';
   userInfo: any;
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
     { icon: 'account_balance', label: 'المحافظات', route: '/governorates' },
     { icon: 'location_city', label: 'المدن', route: '/cities' },
     { icon: 'school', label: 'المدارس', route: '/schools' },
-    { icon: 'insert_chart', label: 'التقارير', route: '/reports' },
+    // { icon: 'insert_chart', label: 'التقارير', route: '/reports' },
     { icon: 'hourglass_bottom', label: 'مدارس بانتظار المراجعة', route: '/pending-schools', onlyAdmin: true },
   ];
 
