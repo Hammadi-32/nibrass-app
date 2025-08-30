@@ -31,6 +31,51 @@
         max-width: 600px;
       }
     }
+
+    .overlay {
+      position: relative;
+    }
+
+    .login-btn {
+      position: absolute;
+      inset-block-start: 16px;
+      inset-inline-start: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+
+      background: rgba(255, 255, 255, 0.85);
+      color: #005c99;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      transition: transform .06s ease, box-shadow .2s ease, background-color .2s;
+    }
+
+    .login-btn:hover {
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .login-btn:active { transform: translateY(1px); }
+
+    .login-btn mat-icon {
+      width: 18px; height: 18px; font-size: 18px; line-height: 1;
+    }
+
+    /* على الشاشات الصغيرة: وسّع مساحة اللمس وثبّت النص */
+    @media (max-width: 420px) {
+      .login-btn { padding: 9px 12px; font-size: 13px; }
+    }
   }
 
   /* Stats Cards */

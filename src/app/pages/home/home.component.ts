@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Chart } from 'chart.js/auto';
 import { JsonData } from '../Governorates/models/governorate.model';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [
-    CommonModule
-  ],
+  imports: [ CommonModule, MatIconModule, RouterLink ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -36,14 +35,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.animateValue('coveredSchools', this.endStats.coveredSchools, 1500);
     this.animateValue('damagedSchools', this.endStats.damagedSchools, 1500);
     this.animateValue('donors', this.endStats.donors, 1500);
-    this.createChart();
-    this.createBarChart();
+    // this.createChart();
+    // this.createBarChart();
   }
 
   fakeGovernorates: any = new JsonData;
   stats = {
-    covered: 12,
-    damaged: 8
+    covered: 112,
+    damaged: 175
   };
 
   sampleSchools = [
@@ -64,7 +63,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
-    
+    setTimeout(() => {
+      this.createChart();
+      this.createBarChart();
+    }, 1500);
   }
 
   redirctToSchools(){

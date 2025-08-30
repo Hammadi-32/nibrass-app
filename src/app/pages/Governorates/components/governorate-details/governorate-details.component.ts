@@ -37,6 +37,7 @@ export class GovernorateDetailsComponent implements OnInit {
   getGovernorateSummary() {
     this.governorateServices.getGovernorateSummary(this.governorateIdRout).subscribe(res => {
       this.governorate = res;
+      console.log('govern: ', this.governorate)
     })
   }
 
@@ -50,7 +51,7 @@ export class GovernorateDetailsComponent implements OnInit {
     new Chart(document.getElementById('schoolsCoverageChart') as HTMLCanvasElement, {
       type: 'doughnut',
       data: {
-        labels: [this.governorate.schoolsCoverage?.[0].label, this.governorate.schoolsCoverage?.[1].label],
+        labels: ['مدارس تم تغطيتها', 'مدارس متبقية'],
         datasets: [{
           data: [this.governorate.schoolsCoverage?.[0].value, this.governorate.schoolsCoverage?.[1].value],
           backgroundColor: ['#28a745', '#dcdcdc']
@@ -61,7 +62,7 @@ export class GovernorateDetailsComponent implements OnInit {
     new Chart(document.getElementById('citiesCoverageChart') as HTMLCanvasElement, {
       type: 'doughnut',
       data: {
-        labels: [this.governorate.citiesCoverage?.[0].label, this.governorate.citiesCoverage?.[1].label],
+        labels: ['مدن تم تغطيتها', 'مدن متبقية'],
         datasets: [{
           data: [this.governorate.citiesCoverage?.[0].value, this.governorate.citiesCoverage?.[1].value],
           backgroundColor: ['#007bff', '#dcdcdc']
@@ -72,7 +73,7 @@ export class GovernorateDetailsComponent implements OnInit {
     new Chart(document.getElementById('damageChart') as HTMLCanvasElement, {
       type: 'pie',
       data: {
-        labels: [this.governorate.damageChart?.[0].label, this.governorate.damageChart?.[1].label],
+        labels: ['مدارس خارج الخدمة', 'مدارس تعمل'],
         datasets: [{
           data: [this.governorate.damageChart?.[0].value, this.governorate.damageChart?.[1].value],
           backgroundColor: ['#007bff', '#28a745']

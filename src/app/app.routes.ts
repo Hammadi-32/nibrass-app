@@ -71,6 +71,12 @@ export const routes: Routes = [
     title: 'الملف الشخصي'
   },
   {
+    path: 'about',
+    loadComponent: () =>
+      import('./pages/about/about.component').then((m) => m.AboutComponent),
+    title: 'من نحن'
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
