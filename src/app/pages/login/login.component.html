@@ -30,7 +30,7 @@
     ليس لديك حساب؟ <a routerLink="/auth/register">إنشاء حساب</a>
   </p>
 
-  <p class="server-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="server-error" *ngIf="isThereError">{{ errorMessage }}</p>
 </form>
 
 

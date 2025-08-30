@@ -35,17 +35,17 @@ export class JsonData {
     FakeGovernorates: Governorates[] = [
         { governorateId: '1111', nameAr: 'ادلب', nameEn: 'IDLIB', cityCount: 20, description: '', imageSrc: 'assets/idlib.jpg' },
         { governorateId: '2222', nameAr: 'حلب', nameEn: 'ALEPPO', cityCount: 20, description: '', imageSrc: 'assets/aleppo.jpeg' },
+        { governorateId: '44444', nameAr: 'حمص', nameEn: 'HOMS', cityCount: 20, description: '', imageSrc: 'assets/homs.jpeg' },
+        { governorateId: '77777', nameAr: 'دمشق', nameEn: 'DAMASCUS', cityCount: 20, description: '', imageSrc: 'assets/Damascus.jpeg' },
+        { governorateId: '88888', nameAr: 'ريف دمشق', nameEn: 'DAMASCUS Countryside', cityCount: 20, description: '', imageSrc: 'assets/Damascus-Countryside.jpeg' },
         { governorateId: '3333', nameAr: 'حماة', nameEn: 'HAMAH', cityCount: 20, description: '', imageSrc: 'assets/hamah.jpeg' },
-        { governorateId: '44444', nameAr: 'حمص', nameEn: 'HOMS', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '55555', nameAr: 'اللاذقية', nameEn: 'LATAKIA', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '66666', nameAr: 'طرطوس', nameEn: 'TARTOUS', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '77777', nameAr: 'دمشق', nameEn: 'DAMASCUS', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '88888', nameAr: 'ريف دمشق', nameEn: 'DAMASCUS Countryside', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '99999', nameAr: 'القنيطرة', nameEn: 'QUNEITRA', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '101010', nameAr: 'درعا', nameEn: 'DARAA', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '11-11-11', nameAr: 'السويداء', nameEn: 'AS-SUAWDA', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '12-12-12', nameAr: 'دير الزور', nameEn: 'DEIR EZ-ZOR', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '13-13-13', nameAr: 'الرقة', nameEn: 'AL RAQQA', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' },
-        { governorateId: '14-14-14', nameAr: 'الحسكة', nameEn: 'AL HASAKAH', cityCount: 20, description: '', imageSrc: 'assets/school2.jpg' }
+        { governorateId: '55555', nameAr: 'اللاذقية', nameEn: 'LATAKIA', cityCount: 20, description: '', imageSrc: 'assets/latakia.jpeg' },
+        { governorateId: '66666', nameAr: 'طرطوس', nameEn: 'TARTOUS', cityCount: 20, description: '', imageSrc: 'assets/tartous.jpeg' },
+        { governorateId: '99999', nameAr: 'القنيطرة', nameEn: 'QUNEITRA', cityCount: 20, description: '', imageSrc: 'assets/qunaitira.jpg' },
+        { governorateId: '101010', nameAr: 'درعا', nameEn: 'DARAA', cityCount: 20, description: '', imageSrc: 'assets/daraa.jpeg' },
+        { governorateId: '11-11-11', nameAr: 'السويداء', nameEn: 'AS-SUAWDA', cityCount: 20, description: '', imageSrc: 'assets/al-swaidaa.jpeg' },
+        { governorateId: '12-12-12', nameAr: 'دير الزور', nameEn: 'DEIR EZ-ZOR', cityCount: 20, description: '', imageSrc: 'assets/deir-alzor.jpg' },
+        { governorateId: '13-13-13', nameAr: 'الرقة', nameEn: 'AL RAQQA', cityCount: 20, description: '', imageSrc: 'assets/al-raqah.jpg' },
+        { governorateId: '14-14-14', nameAr: 'الحسكة', nameEn: 'AL HASAKAH', cityCount: 20, description: '', imageSrc: 'assets/al-hasakah.jpg' }
     ]
 }

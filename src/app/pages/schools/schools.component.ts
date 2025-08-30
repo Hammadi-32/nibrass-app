@@ -49,85 +49,85 @@ export class SchoolsComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router, private schoolsService: SchoolsServices){}
   
   schoolsData = [
-  {
-    name: 'مدرسة الأمل',
-    province: 'إدلب',
-    city: 'معرة مصرين',
-    needs: ['6 نوافذ', '4 أبواب', '15 طاولة', '20 كرسي', '15 طاولة', '20 كرسي'],
-    image: 'assets/school1.jpeg'
-  },
-  {
-    name: 'مدرسة النور',
-    province: 'إدلب',
-    city: 'سراقب',
-    needs: ['10 مقاعد', 'سبورة', '10 كراسي', 'مدافئ', '10 شبابيك'],
-    image: 'assets/school2.jpg'
-  },
-  {
-    name: 'مدرسة النهضة',
-    province: 'ريف دمشق',
-    city: 'حرستا',
-    needs: ['5 شبابيك', '7 طاولات'],
-    image: 'assets/school2.jpg'
-  },
-  {
-    name: 'مدرسة المتفوقين',
-    province: 'حلب',
-    city: 'صلاح الدين',
-    needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
-    image: 'assets/school1.jpeg'
-  },
-  {
-    name: 'مدرسة المنارة',
-    province: 'حلب',
-    city: 'كفر حمرة',
-    needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
-    image: 'assets/school1.jpeg'
-  },
-  {
-    name: 'مدرسة النور',
-    province: 'إدلب',
-    city: 'سراقب',
-    needs: ['10 مقاعد', 'سبورة'],
-    image: 'assets/school2.jpg'
-  },
-  {
-    name: 'مدرسة النهضة',
-    province: 'ريف دمشق',
-    city: 'حرستا',
-    needs: ['5 شبابيك', '7 طاولات'],
-    image: 'assets/school2.jpg'
-  },
-  {
-    name: 'مدرسة المتفوقين',
-    province: 'حلب',
-    city: 'صلاح الدين',
-    needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
-    image: 'assets/school1.jpeg'
-  },
-  {
-    name: 'مدرسة المنارة',
-    province: 'حمص',
-    city: 'باب سباع',
-    needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
-    image: 'assets/school1.jpeg'
-  }
-];
+    {
+      name: 'مدرسة الأمل',
+      province: 'إدلب',
+      city: 'معرة مصرين',
+      needs: ['6 نوافذ', '4 أبواب', '15 طاولة', '20 كرسي', '15 طاولة', '20 كرسي'],
+      image: 'assets/school1.jpeg'
+    },
+    {
+      name: 'مدرسة النور',
+      province: 'إدلب',
+      city: 'سراقب',
+      needs: ['10 مقاعد', 'سبورة', '10 كراسي', 'مدافئ', '10 شبابيك'],
+      image: 'assets/school2.jpg'
+    },
+    {
+      name: 'مدرسة النهضة',
+      province: 'ريف دمشق',
+      city: 'حرستا',
+      needs: ['5 شبابيك', '7 طاولات'],
+      image: 'assets/school2.jpg'
+    },
+    {
+      name: 'مدرسة المتفوقين',
+      province: 'حلب',
+      city: 'صلاح الدين',
+      needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
+      image: 'assets/school1.jpeg'
+    },
+    {
+      name: 'مدرسة المنارة',
+      province: 'حلب',
+      city: 'كفر حمرة',
+      needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
+      image: 'assets/school1.jpeg'
+    },
+    {
+      name: 'مدرسة النور',
+      province: 'إدلب',
+      city: 'سراقب',
+      needs: ['10 مقاعد', 'سبورة'],
+      image: 'assets/school2.jpg'
+    },
+    {
+      name: 'مدرسة النهضة',
+      province: 'ريف دمشق',
+      city: 'حرستا',
+      needs: ['5 شبابيك', '7 طاولات'],
+      image: 'assets/school2.jpg'
+    },
+    {
+      name: 'مدرسة المتفوقين',
+      province: 'حلب',
+      city: 'صلاح الدين',
+      needs: ['22 نوافذ', '11 أبواب', '4 طاولة'],
+      image: 'assets/school1.jpeg'
+    },
+    {
+      name: 'مدرسة المنارة',
+      province: 'حمص',
+      city: 'باب سباع',
+      needs: ['18 نوافذ', '20 أبواب', '6 طاولة'],
+      image: 'assets/school1.jpeg'
+    }
+  ];
 
   ngOnInit(): void {
     this.getschools();
   }
+
+  provinces = [...new Set(this.schoolsData.map(s => s.province))];
+  selectedProvince: string | null = "";
+  // schools: School[] = []
+  filteredSchools: School[] = this.schoolsData; 
   getschools() {
     this.schoolsService.getSchoolss().subscribe(res => {
-      // console.log(res)
+      // this.schools = res
       this.filteredSchools = res;
     })
   }
-  
-  provinces = [...new Set(this.schoolsData.map(s => s.province))];
-  selectedProvince: string | null = "";
-  filteredSchools: School[] = []; 
-  
 
   onProvinceChange() {
     if (this.selectedProvince) {

@@ -55,7 +55,6 @@ body {
 .content {
   flex-grow: 1;
   margin-right: 240px;
-  margin-top: var(--navbar-height);
   transition: margin-right 0.3s ease;
   overflow-y: auto;
   height: calc(100vh - var(--navbar-height));

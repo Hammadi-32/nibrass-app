@@ -47,6 +47,10 @@
 .profile-details {
   border-top: 1px solid #eee;
   padding-top: 12px;
+
+  .role {
+    padding-left: 10px;
+  }
 }
 
 .role-title { font-weight: 700; margin-top: 8px; }

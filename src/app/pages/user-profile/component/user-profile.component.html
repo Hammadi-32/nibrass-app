@@ -4,7 +4,7 @@
       <header class="profile-header">
         <figure class="profile-avatar" aria-label="صورة المستخدم">
           <img
-            [src]="u.imageSrc || 'assets/images/default-avatar.png'"
+            [src]="u.imageSrc || 'assets/profile-1.png'"
             [alt]="u.fullName || 'مستخدم'"
             loading="lazy"
             decoding="async"
@@ -14,9 +14,9 @@
         <p class="username" aria-label="اسم المستخدم">&#64;{{ u.username }}</p>
       </header>
 
-      <div class="profile-details">
+      <div dir="ltr" class="profile-details">
         <p class="email" aria-label="البريد الإلكتروني">{{ u.email }}</p>
-        <p class="role-title">الأدوار</p>
+        <p class="role-title"> Role - الدور</p>
         <p class="role">{{ u.role }}</p>
       </div>
 
@@ -42,9 +42,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let school of schools;">
-              <td>{{ school.governorate }}</td>
-              <td>{{ school.city }}</td>
-              <td>{{ school.name }}</td>
+              <td>{{ school.governorateName }}</td>
+              <td>{{ school.cityName }}</td>
+              <td>{{ school.schoolName }}</td>
             </tr>
           </tbody>
         </table>
