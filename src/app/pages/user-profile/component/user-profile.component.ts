@@ -78,25 +78,4 @@ export class UserProfileComponent implements OnInit {
     localStorage.clear();
   }
 
-}
-
-
-//  user: User = {
-  //   userId: 'u_001',
-  //   username: 'hamza.al.saado',
-  //   email: 'hamza.al.saado@gmail.com',
-  //   password: '9808080',
-  //   role: 'مدير',
-  //   fullName: 'حمزة السعدو',
-  //   createdAt: new Date(),
-  //   isActive: true,
-  //   imageSrc: 'assets/profile-1.png',
-  // };
-
-  // schools = [
-  //   { governorate: 'دمشق', city: 'المزة', name: 'مدرسة النهضة', view: true, edit: false, delete: false },
-  //   { governorate: 'حلب', city: 'سيف الدولة', name: 'مدرسة السلام', view: false, edit: true, delete: false },
-  //   { governorate: 'حمص', city: 'كرم الشامي', name: 'مدرسة الوحدة', view: true, edit: true, delete: true }
-  // ];
-
-  
+}  

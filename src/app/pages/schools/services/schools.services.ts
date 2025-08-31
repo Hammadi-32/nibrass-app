@@ -52,7 +52,10 @@ export class SchoolsServices {
         return this.http.put(`${this.baseUrl}`, data)
     }
 
-    getNonApprovedSchools():Observable<School[]> {
+    getNonApprovedSchools(): Observable<School[]> {
         return this.http.get<School[]>(`${this.baseUrl}/non-approved-schools`)
+    }
+    getDashboardData() {
+        return this.http.get(`${this.baseUrl}/dashboard-data`)
     }
 }

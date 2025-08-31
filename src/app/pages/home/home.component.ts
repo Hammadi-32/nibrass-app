@@ -5,17 +5,23 @@ import { Chart } from 'chart.js/auto';
 import { JsonData } from '../Governorates/models/governorate.model';
 import { MatIconModule } from '@angular/material/icon';
 import { getUserInfo } from '../../functions/getUserInfo';
+import { SchoolStatisticsDto } from './models/home.model';
+import { SchoolsServices } from '../schools/services/schools.services';
 
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule, MatIconModule, RouterLink ],
+  imports: [CommonModule, MatIconModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   isLoggedin: boolean = false;
+  dashboardData!: SchoolStatisticsDto;
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private schoolService:SchoolsServices
+  ) { }
 
   // القيم النهائية
   endStats = {
@@ -34,6 +40,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit(): void {
+    this.getDashboardData()
     this.animateValue('totalSchools', this.endStats.totalSchools, 1500);
     this.animateValue('coveredSchools', this.endStats.coveredSchools, 1500);
     this.animateValue('damagedSchools', this.endStats.damagedSchools, 1500);
@@ -41,7 +48,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // this.createChart();
     // this.createBarChart();
     const userInfo = getUserInfo();
-    userInfo? this.isLoggedin = true : this.isLoggedin = false;
+    userInfo ? this.isLoggedin = true : this.isLoggedin = false;
+    
+  }
+
+  getDashboardData() {
+    this.schoolService.getDashboardData().subscribe(res=>{
+      console.log(res)
+    })
   }
 
   fakeGovernorates: any = new JsonData;
@@ -74,7 +88,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, 1500);
   }
 
-  redirctToSchools(){
+  redirctToSchools() {
     this.router.navigateByUrl('/schools')
   }
 
@@ -113,7 +127,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     new Chart('schoolsBar', {
       type: 'line',
       data: {
-        labels: this.fakeGovernorates.FakeGovernorates.map((g:any) => g.nameAr),
+        labels: this.fakeGovernorates.FakeGovernorates.map((g: any) => g.nameAr),
         datasets: [
           {
             label: 'مدارس مغطاة',

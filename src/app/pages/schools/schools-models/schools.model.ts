@@ -1,3 +1,5 @@
+import { FileData } from "../../user-profile/models/user-profile.model";
+
 export interface School {
   schoolId: string;
   nameAr: string;
@@ -13,6 +15,8 @@ export interface School {
   isApproved: boolean;
   isRequirementsMet: boolean;
   needs: string[];
+  imageSrc: any;
+  profileImageUrl: FileData
 }
 
 export interface CreateSchool {
@@ -26,7 +30,7 @@ export interface CreateSchool {
   needs: string[];
   headTeacherName: string;
   headTeacherNumber: number;
-  schoolImageBase64?: string | null;
+  schoolImageBase64?: any | null;
 }
 
 export interface UpdateSchool {

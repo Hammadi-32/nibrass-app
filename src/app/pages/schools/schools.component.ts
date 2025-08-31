@@ -137,8 +137,13 @@ export class SchoolsComponent implements OnInit {
 
   getschools() {
     this.schoolsService.getSchoolss().subscribe(res => {
-      this.schools = res
+      this.schools = res;
+      console.log(res)
       this.filteredSchools = res;
+      this.schools.forEach(s=>{
+        s.imageSrc=this.convertToDataUrl(s.profileImageUrl?.base64String!, s.profileImageUrl?.contentType!)
+      })
+      console.log(this.schools)
     })
   }
 
@@ -239,5 +244,10 @@ export class SchoolsComponent implements OnInit {
       this.governorates = res;
     })
   }
+
+  convertToDataUrl(fileContents: string, contentType: string): string {
+    return `data:${contentType};base64,${fileContents}`;
+  }
+
 }
 

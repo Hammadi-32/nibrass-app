@@ -187,19 +187,20 @@ export class AddSchoolDialogComponent implements OnInit {
   }
 
   preview: string | ArrayBuffer | null = null;
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    console.log(file)
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        console.log(reader.result)
-        this.school.schoolImageBase64 = reader.result as any || ''; // Base64
-        this.preview = reader.result;
+  onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
 
-        console.log(this.school.schoolImageBase64)
-      };
-      reader.readAsDataURL(file);
-    }
+    // للعرض المسبق
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result;
+    };
+    reader.readAsDataURL(file);
+
+    // خزّن الملف داخل النموذج
+    this.school.schoolImageBase64 = file; // لاحظ: نخزن الملف نفسه
   }
+}
 }
