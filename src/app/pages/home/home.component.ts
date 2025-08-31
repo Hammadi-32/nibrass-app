@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Chart } from 'chart.js/auto';
 import { JsonData } from '../Governorates/models/governorate.model';
 import { MatIconModule } from '@angular/material/icon';
+import { getUserInfo } from '../../functions/getUserInfo';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  isLoggedin: boolean = false;
+
   constructor(private router: Router){}
 
   // القيم النهائية
@@ -37,6 +40,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.animateValue('donors', this.endStats.donors, 1500);
     // this.createChart();
     // this.createBarChart();
+    const userInfo = getUserInfo();
+    userInfo? this.isLoggedin = true : this.isLoggedin = false;
   }
 
   fakeGovernorates: any = new JsonData;
