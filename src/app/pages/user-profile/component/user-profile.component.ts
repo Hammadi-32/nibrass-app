@@ -19,38 +19,16 @@ import { getUserInfo } from '../../../functions/getUserInfo';
 export class UserProfileComponent implements OnInit {
   userInfo: any;
   user!: User;
-  schools: School[] = [];
+  schools: any = [];
   constructor( private dialog: MatDialog, private userService: UserProfileService) {}
 
   ngOnInit(): void {
     this.user = getUserInfo();
+    if (this.user) {
+      this.schools = this.user.schools;
+    }
     // this.getUserProfileData();
   }
-
-  //  user: User = {
-  //   userId: 'u_001',
-  //   username: 'hamza.al.saado',
-  //   email: 'hamza.al.saado@gmail.com',
-  //   password: '9808080',
-  //   role: 'مدير',
-  //   fullName: 'حمزة السعدو',
-  //   createdAt: new Date(),
-  //   isActive: true,
-  //   imageSrc: 'assets/profile-1.png',
-  // };
-
-  // schools = [
-  //   { governorate: 'دمشق', city: 'المزة', name: 'مدرسة النهضة', view: true, edit: false, delete: false },
-  //   { governorate: 'حلب', city: 'سيف الدولة', name: 'مدرسة السلام', view: false, edit: true, delete: false },
-  //   { governorate: 'حمص', city: 'كرم الشامي', name: 'مدرسة الوحدة', view: true, edit: true, delete: true }
-  // ];
-
-  // getUserProfileData() {
-  //   this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
-  //     this.user = res;
-  //     this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
-  //   })
-  // }
 
   editProfile() {
     const dialogRef = this.dialog.open(UpdateUserProfileComponent, {
@@ -91,3 +69,29 @@ export class UserProfileComponent implements OnInit {
   }
 
 }
+
+
+//  user: User = {
+  //   userId: 'u_001',
+  //   username: 'hamza.al.saado',
+  //   email: 'hamza.al.saado@gmail.com',
+  //   password: '9808080',
+  //   role: 'مدير',
+  //   fullName: 'حمزة السعدو',
+  //   createdAt: new Date(),
+  //   isActive: true,
+  //   imageSrc: 'assets/profile-1.png',
+  // };
+
+  // schools = [
+  //   { governorate: 'دمشق', city: 'المزة', name: 'مدرسة النهضة', view: true, edit: false, delete: false },
+  //   { governorate: 'حلب', city: 'سيف الدولة', name: 'مدرسة السلام', view: false, edit: true, delete: false },
+  //   { governorate: 'حمص', city: 'كرم الشامي', name: 'مدرسة الوحدة', view: true, edit: true, delete: true }
+  // ];
+
+  // getUserProfileData() {
+  //   this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
+  //     this.user = res;
+  //     this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
+  //   })
+  // }

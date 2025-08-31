@@ -8,9 +8,9 @@
   <div class="filters-card">
     <div class="filter-item">
       <label>اختر المحافظة:</label>
-      <select [(ngModel)]="selectedProvince" (change)="onProvinceChange(); onSearchChange()">
+      <select [(ngModel)]="selectedGovernorateId" (change)="onProvinceChange(); onSearchChange()">
         <option value="" selected> كل المدراس </option>
-        <option *ngFor="let prov of provinces" [value]="prov">{{ prov }}</option>
+        <option *ngFor="let govern of governorates" [value]="govern.governorateId">{{ govern.nameAr }}</option>
       </select>
     </div>
     <div class="filter-item">
@@ -23,13 +23,13 @@
   <div class="schools-grid" *ngIf="filteredSchools.length > 0">
     <div class="school-card" *ngFor="let school of filteredSchools">
       <div class="image-wrapper">
-        <img [src]="school.image" alt="صورة المدرسة" />
+        <img src="assets/school2.jpg" alt="صورة المدرسة" />
       </div>
       <div class="card-content">
-        <h3>{{ school.name }}</h3>
+        <h3>{{ school.nameAr }}</h3>
         <p class="location">
           <mat-icon aria-hidden="true" class="icon">place</mat-icon> 
-          <span>{{ school.province }} - {{ school.city }}</span>
+          <span>{{ school.governortesName }} - {{ school.city }}</span>
         </p>
         <div class="needs">
           <p>اللوازم المطلوبة:</p>

@@ -17,39 +17,50 @@
       <!-- اسم المدرسة -->
       <mat-form-field appearance="outline">
         <mat-label>اسم المدرسة</mat-label>
-        <input matInput [(ngModel)]="school.name" name="name" required
+        <input matInput [(ngModel)]="school.nameAr" name="nameAr" required
                placeholder="مثال: مدرسة النهضة" />
         <mat-icon matSuffix>apartment</mat-icon>
         <mat-hint align="start">الاسم الرسمي كما في السجلات</mat-hint>
-        <mat-error *ngIf="schoolForm.submitted && !school?.name">الاسم مطلوب</mat-error>
+        <mat-error *ngIf="schoolForm.submitted && !school?.nameAr">الاسم مطلوب</mat-error>
       </mat-form-field>
 
       <!-- المحافظة -->
       <mat-form-field appearance="outline">
         <mat-label>المحافظة</mat-label>
-        <input
+        <mat-select
           type="text"
           matInput
-          [matAutocomplete]="provAuto"
-          [(ngModel)]="school.province"
-          name="province"
+          [(ngModel)]="school.governorateId"
+          name="governorateId"
           required
-          placeholder="اختر المحافظة" />
-        <mat-autocomplete #provAuto="matAutocomplete" autoActiveFirstOption>
-          <mat-option *ngFor="let prov of provinces | filterStartsWith: school?.province" [value]="prov">
-            {{ prov }}
+          placeholder="اختر المحافظة" >
+        <!-- <mat-autocomplete #provAuto="matAutocomplete" autoActiveFirstOption> -->
+          <mat-option *ngFor="let gov of filteredGovernorates" [value]="gov.governorateId">
+            {{ gov.nameAr }}
           </mat-option>
-        </mat-autocomplete>
+        <!-- </mat-autocomplete> -->
+        </mat-select>
         <mat-icon matSuffix>map</mat-icon>
-        <mat-error *ngIf="schoolForm.submitted && !school?.province">المحافظة مطلوبة</mat-error>
+        <mat-error *ngIf="schoolForm.submitted && !school?.governorateId">المحافظة مطلوبة</mat-error>
       </mat-form-field>
 
       <!-- المدينة -->
       <mat-form-field appearance="outline">
         <mat-label>المدينة / البلدة</mat-label>
-        <input matInput [(ngModel)]="school.city" name="city" required placeholder="مثال: إدلب" />
+        <input matInput [(ngModel)]="school.city" name="city" required placeholder="مثال: معرة مصرين" />
         <mat-icon matSuffix>location_city</mat-icon>
         <mat-error *ngIf="schoolForm.submitted && !school?.city">المدينة مطلوبة</mat-error>
+      </mat-form-field>
+
+      <!-- الكلفة التقديرية -->
+      <mat-form-field appearance="outline">
+        <mat-label>الكلفة التقديرية بالدولار</mat-label>
+        <input matInput [(ngModel)]="school.estimatedRenovationCost" min="0" max="1000001" type="number" name="estimatedRenovationCost" placeholder="مثال: 1000" 
+        #cost="ngModel"
+        (keydown)="blockMinusAndExp($event)"
+        (input)="clampNonNegative()"/>
+        <mat-icon matSuffix>money</mat-icon>
+        <mat-error *ngIf="cost.errors?.['min']"></mat-error>
       </mat-form-field>
 
       <!-- اللوازم المطلوبة كـ Chips مع أوتوكومبليت -->
@@ -102,28 +113,28 @@
       <!-- اسم المدير -->
       <mat-form-field appearance="outline">
         <mat-label>اسم المدير الكامل</mat-label>
-        <input matInput [(ngModel)]="school.managerName" name="managerName" required placeholder="مثال: أحمد محمود العلي" />
+        <input matInput [(ngModel)]="school.headTeacherName" name="headTeacherName" required placeholder="مثال: أحمد محمود العلي" />
         <mat-icon matSuffix>person</mat-icon>
-        <mat-error *ngIf="schoolForm.submitted && !school?.managerName">هذا الحقل مطلوب</mat-error>
+        <mat-error *ngIf="schoolForm.submitted && !school?.headTeacherName">هذا الحقل مطلوب</mat-error>
       </mat-form-field>
 
       <!-- رقم المدير -->
       <mat-form-field appearance="outline">
         <mat-label>رقم تواصل المدير</mat-label>
-        <input matInput type="tel" [(ngModel)]="school.managerPhone" name="managerPhone" required
-               placeholder="+"
+        <input matInput type="tel" [(ngModel)]="school.headTeacherNumber" name="headTeacherNumber" required
+               placeholder="963933111222"
                pattern="^+\d$" />
         <mat-icon matPrefix>call</mat-icon>
-        <button mat-icon-button matSuffix type="button" aria-label="نسخ" (click)="copyPhone(school.managerPhone)" [disabled]="!school?.managerPhone">
-          <mat-icon>content_copy</mat-icon>
+        <button mat-icon-button matSuffix type="button" aria-label="نسخ" (click)="copyPhone(school.headTeacherName)" [disabled]="!school?.headTeacherName">
+          <mat-icon>add</mat-icon>
         </button>
-        <mat-error *ngIf="schoolForm.submitted && !school?.managerPhone">رقم الهاتف مطلوب</mat-error>
+        <mat-error *ngIf="schoolForm.submitted && !school?.headTeacherNumber">رقم الهاتف مطلوب</mat-error>
       </mat-form-field>
 
       <!-- ملاحظات -->
       <mat-form-field class="grid-span-2" appearance="outline">
         <mat-label>ملاحظات إضافية (اختياري)</mat-label>
-        <textarea matInput rows="3" [(ngModel)]="school.notes" name="notes" placeholder="أي تفاصيل مهمة عن المدرسة أو طرق التسليم…"></textarea>
+        <textarea matInput rows="3" [(ngModel)]="school.description" name="description" placeholder="أي تفاصيل مهمة عن المدرسة أو طرق التسليم…"></textarea>
         <mat-icon matSuffix>notes</mat-icon>
       </mat-form-field>
 
