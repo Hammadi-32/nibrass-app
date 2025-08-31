@@ -74,32 +74,37 @@ export class LoginComponent {
     this.initForm(); // إعادة تهيئة النموذج عند تبديل الوضع
   }
   errorMessage: string = 'خطأ في البيانات';
+  userId!: string;
+
   onSubmit(): void {
     if (this.authForm.valid) {
       const email = this.authForm.value.email;
       const password = this.authForm.value.password;
+      const info = {
+        email: email,
+        password: password
+      }
 
       if (this.isLoginMode) {
-        // هنا يمكنك استدعاء خدمة تسجيل الدخول الخاصة بك
-        this.login()
+        this.authService.auth(info).subscribe(res => {
+          this.userId = res.userId;
+          this.login()
+        })
       } else {
         const confirmPassword = this.authForm.value.confirmPassword;
         // هنا يمكنك استدعاء خدمة التسجيل الخاصة بك
       }
-      // في كلا الحالتين، يمكنك توجيه المستخدم أو إظهار رسالة نجاح/خطأ
     } else {
       // التعامل مع النموذج غير الصالح (مثلاً، إظهار رسائل خطأ عامة أو تمييز الحقول)
       this.authForm.markAllAsTouched(); // لجعل جميع الحقول تظهر أخطائها
     }
   }
 
-  userId: string = '6667f0dd-f840-481e-a926-59ec9dc94795';
   isThereError: boolean = false;
   
   login() {
     this.authService.getUserInfoById(this.userId).subscribe(res => {
       if (res) {
-        console.log(res)
         localStorage.setItem('user-Info', JSON.stringify(res));
         this.router.navigateByUrl('home');
       }
