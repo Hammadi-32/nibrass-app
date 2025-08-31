@@ -6,8 +6,12 @@ import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SchoolsServices } from './services/schools.services';
+import { Governorates } from '../Governorates/models/governorate.model';
+import { GovernorateServices } from '../Governorates/services/governorate.services';
+import { getUserInfo } from '../../functions/getUserInfo';
+import { School } from './schools-models/schools.model';
 
-interface School {
+interface fSchool {
   name: string;
   province: string;
   city: string;
@@ -30,11 +34,6 @@ interface SwaggerSchool {
   numberOfClassrooms: string;
   yearEstablished: string;
   addedByUserId: string;
-  requiredRenovations: RequiredRenovations[];
-}
-interface RequiredRenovations{
-  renovationTypeId: string;
-  notes: string;
 }
 
 @Component({
@@ -46,7 +45,10 @@ interface RequiredRenovations{
 })
 
 export class SchoolsComponent implements OnInit {
-  constructor(private dialog: MatDialog, private router: Router, private schoolsService: SchoolsServices){}
+  constructor(private dialog: MatDialog, 
+              private router: Router, 
+              private schoolsService: SchoolsServices,
+              private governorateServices: GovernorateServices){}
   
   schoolsData = [
     {
@@ -114,24 +116,32 @@ export class SchoolsComponent implements OnInit {
     }
   ];
 
-  ngOnInit(): void {
+  userId!: string;
+  provinces = [...new Set(this.schoolsData.map(s => s.province))];
+  selectedGovernorateId: string | null = "";
+  schools: School[] = [];
+  filteredSchools: School[] = []; 
+
+   ngOnInit(): void {
     this.getschools();
+    this.getGovernorates();
+
+    const userInfo = getUserInfo()
+    if (userInfo) {
+      this.userId = userInfo.userId;
+    }
   }
 
-  provinces = [...new Set(this.schoolsData.map(s => s.province))];
-  selectedProvince: string | null = "";
-  // schools: School[] = []
-  filteredSchools: School[] = this.schoolsData; 
   getschools() {
     this.schoolsService.getSchoolss().subscribe(res => {
-      // this.schools = res
+      this.schools = res
       this.filteredSchools = res;
     })
   }
 
   onProvinceChange() {
-    if (this.selectedProvince) {
-      this.filteredSchools = this.schoolsData.filter(s => s.province === this.selectedProvince);
+    if (this.selectedGovernorateId) {
+      this.filteredSchools = this.schools.filter(s => s.governorateId === this.selectedGovernorateId);
     } else {
       this.filteredSchools = [];
     }
@@ -141,16 +151,16 @@ export class SchoolsComponent implements OnInit {
   onSearchChange() {
     const term = this.searchTerm.trim().toLowerCase();
 
-    if (this.selectedProvince) {
-      this.filteredSchools = this.schoolsData.filter(
+    if (this.selectedGovernorateId) {
+      this.filteredSchools = this.schools.filter(
         s =>
-          s.province === this.selectedProvince &&
-          (s.name.toLowerCase().includes(term) || s.city.toLowerCase().includes(term))
+          s.governorateId === this.selectedGovernorateId &&
+          (s.nameAr.toLowerCase().includes(term) || s.city.toLowerCase().includes(term))
       );
     } else {
-      this.filteredSchools = this.schoolsData.filter(
+      this.filteredSchools = this.schools.filter(
         s =>
-          s.name.toLowerCase().includes(term) || s.city.toLowerCase().includes(term)
+          s.nameAr.toLowerCase().includes(term) || s.city.toLowerCase().includes(term)
       );
     }
   }
@@ -159,9 +169,16 @@ export class SchoolsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddSchoolDialogComponent, {
       width: 'auto',
       disableClose: true,
+      data: {
+        governorates: this.governorates,
+        userId: this.userId
+      }
     });
     dialogRef.afterClosed().subscribe(result =>{
       if (result) {
+        this.schoolsService.addSchool(result).subscribe(res => {
+          console.log('added: ', res)
+        })
         this.filteredSchools.push(result);
       }
     })
@@ -169,6 +186,13 @@ export class SchoolsComponent implements OnInit {
 
   goToDetails(){
     this.router.navigateByUrl('schools/11/school-details')
+  }
+
+  governorates: Governorates[] = []
+  getGovernorates(){
+    this.governorateServices.getListGovernorates().subscribe(res => {
+      this.governorates = res;
+    })
   }
 }
 

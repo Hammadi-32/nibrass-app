@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
-import { JsonSchoolData, School } from '../schools-models/schools.model';
+import { School } from '../schools-models/schools.model';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,7 +37,7 @@ export class SchoolDetailsComponent implements OnInit{
   constructor(private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
-    this.school = new JsonSchoolData().schoolsData[0];
+    // this.school = null;
     console.log(this.school)
   }
 

@@ -1,0 +1,77 @@
+<section class="about" dir="rtl">
+  <header class="hero">
+    <h1>من نحن</h1>
+    <p>نبراس منصة مجتمعية تسلّط الضوء على المدارس المتضررة واحتياجاتها بشفافية.</p>
+  </header>
+
+  <div class="grid">
+    <article class="card">
+      <h2>رسالتنا</h2>
+      <p>ربط الجهات الداعمة بالمدارس عبر بيانات دقيقة ومحدّثة.</p>
+    </article>
+    <br>
+    <article class="card">
+      <h2>قيمنا</h2>
+      <ul>
+        <li>الشفافية</li>
+        <li>الموثوقية</li>
+        <li>الأثر المجتمعي</li>
+      </ul>
+    </article>
+    <br>
+    <article class="card">
+      <h2>كيف </h2>
+      <p>نجمع البيانات، نتحقق منها، ثم نعرضها بطريقة تساعد على اتخاذ القرار.</p>
+    </article>
+  </div>
+
+  <footer class="cta">
+    <a routerLink="/schools" class="btn">تعرّف على المدارس</a>
+  </footer>
+</section>
+
+
+<section class="about" dir="rtl">
+  <!-- ... hero + grid السابقة لديك ... -->
+
+  <!-- تواصل معنا داخل نفس الصفحة -->
+  <section class="card contact" aria-label="تواصل معنا">
+    <h2>تواصل معنا</h2>
+
+    <ul class="contact-list">
+      <li>
+        <span class="icon" aria-hidden="true">📧</span>
+        <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+      </li>
+      <li>
+        <span class="icon" aria-hidden="true">📞</span>
+        <a class="tel" [href]="phoneHref">{{ contact.phone }}</a>
+      </li>
+      <li>
+        <mat-icon aria-hidden="true" class="icon">place</mat-icon> 
+        <span>{{ contact.location }}</span>
+      </li>
+      <!-- <li>
+        <span class="icon" aria-hidden="true">🕘</span>
+        <span>{{ contact.hours }}</span>
+      </li> -->
+    </ul>
+
+    <div class="contact-actions">
+      <a class="btn primary" [href]="'mailto:' + contact.email">أرسل بريدًا</a>
+      <a class="btn outline"
+         [href]="waHref"
+         target="_blank" rel="noopener">
+        واتساب
+      </a>
+      <a class="btn subtle" *ngIf="contact.twitter"
+         [href]="'https://x.com/' + contact.twitter" target="_blank" rel="noopener">
+        X (تويتر)
+      </a>
+      <a class="btn subtle" *ngIf="contact.facebook"
+         [href]="'https://www.facebook.com/' + contact.facebook" target="_blank" rel="noopener">
+        فيسبوك
+      </a>
+    </div>
+  </section>
+</section>

@@ -8,6 +8,28 @@
   top: 52px;
   right: 0;
   direction: rtl;
+
+  .material-icons {
+    color: #6b7280;
+    transition: color .2s ease, transform .06s ease;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .item:hover .material-icons {
+    color: #91c386;
+  }
+
+  .item.active .material-icons {
+    color: #3ca16f;
+  }
+ 
+  .arrow-icon .material-icons {
+    color: #6b7280;
+  }
+  .arrow-icon:hover .material-icons {
+    color: #3ca16f;
+  }
 }
 
 .sidebar ul {

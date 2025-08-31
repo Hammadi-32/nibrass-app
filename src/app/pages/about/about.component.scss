@@ -1,0 +1,106 @@
+.about {
+  --ink:#0f172a; --muted:#64748b; --card:#fff; --bg:#f8fafc; --radius:16px;
+  max-width:1100px; margin:0 auto; padding:24px; color:var(--ink);
+  font-family: ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+
+  .card{
+    background:var(--card);
+    border:1px solid rgba(15,23,42,.08);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:0 10px 30px rgba(2,6,23,.06);
+  }
+
+  /* ===== Contact ===== */
+  .contact{
+    margin-top:16px;
+
+    h2{ margin:0 0 10px; font-size:18px; }
+
+    .contact-list{
+      list-style:none; margin:0 0 12px; padding:0;
+      display:grid; gap:10px;
+
+      li{
+        display:grid;
+        grid-template-columns: 28px 1fr;
+        align-items:center; gap:10px;
+        padding:10px 12px;
+        border-radius:12px;
+        background:#f9fafb;
+        border:1px dashed rgba(15,23,42,.10);
+      }
+
+      .icon{ font-size:18px; line-height:1; display:grid; place-items:center; }
+      a{ color:#005c99; text-decoration:none; font-weight:600; }
+      a:hover{ text-decoration:underline; }
+
+      /* أرقام الهاتف LTR لعرض + والأرقام بشكل صحيح */
+      .tel{ direction:ltr; unicode-bidi: plaintext; font-variant-numeric: tabular-nums; }
+    }
+
+    .contact-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+
+      .btn{
+        display:inline-block; padding:10px 14px; border-radius:12px; font-weight:700;
+        text-decoration:none; transition: transform .06s, box-shadow .2s, background-color .2s;
+        &.primary{ background:#005c99; color:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); }
+        &.primary:hover{ box-shadow:0 12px 30px rgba(0,0,0,.16); }
+        &.outline{ background:#fff; color:#005c99; border:1px solid #cfe6f4; }
+        &.outline:hover{ background:#f5fbff; }
+        &.subtle{ background:#f6f7f9; color:#334155; border:1px solid #e5e7eb; }
+        &.subtle:hover{ background:#eef1f5; }
+      }
+      .btn:active{ transform: translateY(1px); }
+    }
+  }
+
+  /* شاشة صغيرة */
+  @media (max-width: 560px) {
+    .contact .contact-list li{
+      grid-template-columns: 24px 1fr;
+      padding:8px 10px;
+    }
+    .contact .contact-actions .btn{ padding:9px 12px; }
+  }
+}
+
+
+// .about {
+//   --ink:#0f172a; --muted:#64748b; --card:#fff; --bg:#f8fafc; --radius:16px;
+//   max-width: 1100px; margin: 0 auto; padding: 24px; color: var(--ink);
+//   font-family: ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+
+//   .hero {
+//     text-align: center; margin-bottom: 18px;
+//     h1 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); }
+//     p { margin: 0; color: var(--muted); }
+//   }
+
+//   .grid {
+//     display: grid; gap: 14px;
+//     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+//   }
+
+//   .card {
+//     background: var(--card);
+//     border: 1px solid rgba(15,23,42,.08);
+//     border-radius: var(--radius);
+//     padding: 16px;
+//     box-shadow: 0 10px 30px rgba(2,6,23,.06);
+//     h2 { margin: 0 0 8px; font-size: 18px; }
+//     ul { margin: 0; padding-inline-start: 18px; }
+//   }
+
+//   .cta {
+//     display: grid; place-items: center; margin-top: 18px;
+//     .btn {
+//       display: inline-block; padding: 12px 18px; border-radius: 12px;
+//       background: #005c99; color: #fff; text-decoration: none; font-weight: 700;
+//       box-shadow: 0 8px 22px rgba(0,0,0,.12); transition: transform .06s, box-shadow .2s;
+//     }
+//     .btn:hover { box-shadow: 0 12px 28px rgba(0,0,0,.16); }
+//     .btn:active { transform: translateY(1px); }
+//   }
+// }

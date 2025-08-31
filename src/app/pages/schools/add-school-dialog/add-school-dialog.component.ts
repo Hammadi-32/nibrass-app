@@ -1,9 +1,9 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component, inject, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 
 // Angular Material
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,28 +16,19 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/ma
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { SchoolsServices } from '../services/schools.services';
+import { SchoolForCreation } from '../schools-models/schools.model';
+import { getUserInfo } from '../../../functions/getUserInfo';
+import { GovernorateServices } from '../../Governorates/services/governorate.services';
+import { Governorates } from '../../Governorates/models/governorate.model';
 
 export interface SwaggerSchoolModel {
-  name: string;
+  nameAr: string;
   province: string;
   city: string;
   needs: string[];
   managerName: string;
-  managerPhone: string;
+  headTeacherNumber: string;
   notes?: string;
-}
-
-interface SchoolModel {
-  nameAr: string;
-  nameEn: string;
-  city: string;
-  description: string;
-  estimatedRenovationCost: number;
-  governortesId: string;
-  userId: string;
-  needs: string[];
-  headTeacherName: string;
-  headTeacherNumber: number;
 }
 
 /* ========= Pipe للفلترة كما في القالب المقترح ========= */
@@ -50,6 +41,7 @@ export class FilterStartsWithPipe implements PipeTransform {
     return list.filter(v => (v ?? '').toString().toLowerCase().startsWith(q));
   }
 }
+type GovernorateMin = Pick<Governorates, 'governorateId' | 'nameAr'>;
 
 @Component({
   selector: 'app-add-school-dialog',
@@ -76,17 +68,31 @@ export class FilterStartsWithPipe implements PipeTransform {
   templateUrl: './add-school-dialog.component.html',
   styleUrls: ['./add-school-dialog.component.scss'],
 })
-export class AddSchoolDialogComponent {
+export class AddSchoolDialogComponent implements OnInit {
+  readonly data = inject<any>(MAT_DIALOG_DATA);
+  governorates: Governorates[] = []
+  userId!: string;
 
   provinces: string[] = ['إدلب', 'حلب', 'دمشق', 'حمص', 'حماة'];
+  school: SchoolForCreation = {
+    nameAr: '',
+    nameEn: 'ww',
+    city: '',
+    description: '',
+    estimatedRenovationCost: 0,
+    governorateId: '',
+    userId: this.userId,
+    needs: [],
+    headTeacherName: ''
+  }
 
-  school: SwaggerSchoolModel = {
-    name: '',
+  schools: SwaggerSchoolModel = {
+    nameAr: '',
     province: '',
     city: '',
     needs: [],
     managerName: '',
-    managerPhone: '',
+    headTeacherNumber: '',
     notes: '',
   };
 
@@ -101,11 +107,22 @@ export class AddSchoolDialogComponent {
   // موافقة صحة البيانات
   confirmAccurate = false;
   chipInputValue: string = '';
-
+  
   constructor(
     private dialogRef: MatDialogRef<AddSchoolDialogComponent>,
-    private schoolsService: SchoolsServices
-  ) {}
+    private schoolsService: SchoolsServices,
+    private governorateServices: GovernorateServices
+  ) {
+    this.governorates = this.data.governorates;
+    this.userId = this.data.userId;
+  }
+  
+  filteredGovernorates: GovernorateMin[] = [];
+  ngOnInit(): void {
+    this.filteredGovernorates = (this.governorates ?? []).map(
+     ({ governorateId, nameAr }) => ({ governorateId, nameAr })
+    );
+  }
 
   /* ========= Chips: إضافة/إزالة ========= */
   addNeed(event: MatChipInputEvent): void {
@@ -144,8 +161,8 @@ export class AddSchoolDialogComponent {
 
   /* ========= مساعدة: نسخ رقم الهاتف ========= */
   copyPhone(val?: string) {
-    if (!val) return;
-    navigator.clipboard?.writeText(val).catch(() => {});
+    // if (!val) return;
+    // navigator.clipboard?.writeText(val).catch(() => {});
   }
 
   onCancel() {
@@ -153,14 +170,29 @@ export class AddSchoolDialogComponent {
   }
 
   onSave(form?: any) {
-    console.log('school data:' ,form)
+    this.school.userId = this.userId;
+    console.log(this.school)
+
     if (!this.school.needs.length) {
-    // علّم الحقل الخفي كـ touched لعرض رسالة الخطأ
-    const ctrl = form?.controls?.['needsRequired'];
-    ctrl?.markAsTouched();
-    ctrl?.updateValueAndValidity();
-    return;
-  }
+      const ctrl = form?.controls?.['needsRequired'];
+      ctrl?.markAsTouched();
+      ctrl?.updateValueAndValidity();
+      return;
+    }
     this.dialogRef.close(this.school);
+  }
+
+  blockMinusAndExp(e: KeyboardEvent) {
+    const k = e.key.toLowerCase();
+    if (k === '-' || k === 'e' || k === '+') {
+      e.preventDefault();
+    }
+  }
+
+  clampNonNegative() {
+    const v = Number(this.school?.estimatedRenovationCost);
+    if (Number.isFinite(v) && v < 0) {
+      this.school.estimatedRenovationCost = 0;
+    }
   }
 }

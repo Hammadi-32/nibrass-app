@@ -25,11 +25,12 @@ export class SidebarComponent implements OnInit {
   menuItems = [
     { icon: 'account_circle', label: 'الملف الشخصي', route: '/user-profile' },
     { icon: 'home', label: 'الرئيسية', route: '/home' },
-    { icon: 'account_balance', label: 'المحافظات', route: '/governorates' },
-    { icon: 'location_city', label: 'المدن', route: '/cities' },
     { icon: 'school', label: 'المدارس', route: '/schools' },
+    { icon: 'account_balance', label: 'المحافظات', route: '/governorates' },
+    // { icon: 'location_city', label: 'المدن', route: '/cities' },
     // { icon: 'insert_chart', label: 'التقارير', route: '/reports' },
     { icon: 'hourglass_bottom', label: 'مدارس بانتظار المراجعة', route: '/pending-schools', onlyAdmin: true },
+    { icon: 'info', label: 'من نحن', route: '/about' },
   ];
 
   sideBar() {
