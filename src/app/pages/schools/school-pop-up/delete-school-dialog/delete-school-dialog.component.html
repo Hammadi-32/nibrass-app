@@ -1,0 +1,18 @@
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon color="warn">warning</mat-icon>
+  تأكيد الحذف
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  هل أنت متأكد أنك تريد حذف هذه المدرسة
+  <span class="item-name">{{data.name}}</span>؟
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button color="primary" (click)="onNoClick()">
+    إلغاء
+  </button>
+  <button mat-flat-button color="warn" (click)="onYesClick()">
+    حذف
+  </button>
+</mat-dialog-actions>

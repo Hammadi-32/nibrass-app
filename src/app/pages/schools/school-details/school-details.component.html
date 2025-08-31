@@ -1,0 +1,93 @@
+<div class="school-details container" dir="rtl">
+
+  <!-- GRID: معلومات + لوازم + صور -->
+  <div class="grid">
+    <!-- معلومات المدرسة -->
+    <section class="card info" aria-label="معلومات المدرسة">
+      <h2>معلومات المدرسة</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">اسم المدرسة</span>
+          <span class="value">{{ school.nameAr }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">المحافظة</span>
+          <span class="value">حماة</span>
+        </div>
+        <div class="info-item">
+          <span class="label">المدينة / البلدة</span>
+          <span class="value">{{ school.city }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">مدير المدرسة</span>
+          <span class="value">{{ school.headTeacherName || '—' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">رقم التواصل</span>
+          <span class="value">{{ school.headTeacherNumber || '—' }}+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERO -->
+    <section>
+      <div class="school-hero">
+        <img
+          [src]="'assets/school1.jpeg'"
+          alt="صورة {{ school.nameAr }}"
+          loading="lazy"
+          decoding="async"
+        />
+      
+        <!-- طبقة تأثير/تدرّج -->
+        <div class="hero-gradient"></div>
+      
+        <!-- محتوى فوق الصورة -->
+        <div class="overlay">
+          <div class="title-wrap">
+            <h1 class="school-name">{{ school.nameAr }}</h1>
+            <p class="school-loc">
+              <mat-icon aria-hidden="true">place</mat-icon>
+              <span>{{ school.governortesName }} – {{ school.city }}</span>
+            </p>
+          </div>
+         
+          <button
+            mat-stroked-button
+            color="primary"
+            class="back-btn"
+            (click)="goBack()"
+            aria-label="رجوع"
+          >
+            <mat-icon>arrow_back</mat-icon>
+            رجوع
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- اللوازم المطلوبة -->
+    <section class="card needs" aria-label="اللوازم المطلوبة">
+      <h2>اللوازم المطلوبة</h2>
+
+      <ng-container *ngIf="school?.needs?.length; else noNeeds">
+        <mat-chip-grid aria-label="لوازم مطلوبة">
+          <mat-chip-row *ngFor="let need of school.needs">{{ need }}</mat-chip-row>
+        </mat-chip-grid>
+      </ng-container>
+
+      <ng-template #noNeeds>
+        <div class="empty">لا توجد لوازم مطلوبة حالياً.</div>
+      </ng-template>
+    </section>
+
+    <!-- صور إضافية -->
+    <section class="card gallery" aria-label="صور المدرسة">
+      <h2>صور المدرسة</h2>
+      <div class="images">
+        <!-- استبدل لاحقًا بـ *ngFor للمعرض -->
+        <img [src]="'assets/school1.jpeg'" alt="صورة من {{ school.nameAr }}" />
+      </div>
+    </section>
+  </div>
+</div>

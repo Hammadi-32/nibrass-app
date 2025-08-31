@@ -124,6 +124,11 @@ mat-form-field mat-icon[matPrefix] {
   height: 90vh;
   font-family: 'Segoe UI', sans-serif;
 }
+
+::ng-deep .mat-mdc-dialog-content{
+  max-height: 75vh;
+}
+
 /* زر الإلغاء مجرد حدود وزر الحفظ ممتلئ */
 button[mat-stroked-button] mat-icon,
 button[mat-flat-button] mat-icon {

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SchoolsServices } from '../services/schools.services';
 
 @Component({
   standalone: true,
@@ -33,12 +34,19 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   styleUrl: './school-details.component.scss'
 })
 export class SchoolDetailsComponent implements OnInit{
-  school!: School;
-  constructor(private route: ActivatedRoute, private router: Router){}
+  school!: any;
+  constructor(private route: ActivatedRoute, private router: Router, private schoolService: SchoolsServices){}
 
   ngOnInit(): void {
     // this.school = null;
-    console.log(this.school)
+    this.getData();
+  }
+  
+  getData(){
+    this.schoolService.getSchoolById('eab8b6a3-76e2-4955-9130-54ef9dd8899d').subscribe(res => {
+      this.school = res;
+      console.log(this.school)
+    })
   }
 
   goBack(){

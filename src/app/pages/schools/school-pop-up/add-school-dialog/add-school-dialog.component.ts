@@ -13,13 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-
+import { Governorates } from '../../../Governorates/models/governorate.model';
+import { CreateSchool, SchoolForCreation } from '../../schools-models/schools.model';
+import { SchoolsServices } from '../../services/schools.services';
+import { GovernorateServices } from '../../../Governorates/services/governorate.services';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { SchoolsServices } from '../services/schools.services';
-import { SchoolForCreation } from '../schools-models/schools.model';
-import { getUserInfo } from '../../../functions/getUserInfo';
-import { GovernorateServices } from '../../Governorates/services/governorate.services';
-import { Governorates } from '../../Governorates/models/governorate.model';
+
 
 export interface SwaggerSchoolModel {
   nameAr: string;
@@ -74,26 +73,18 @@ export class AddSchoolDialogComponent implements OnInit {
   userId!: string;
 
   provinces: string[] = ['إدلب', 'حلب', 'دمشق', 'حمص', 'حماة'];
-  school: SchoolForCreation = {
+
+  school: CreateSchool = {
     nameAr: '',
-    nameEn: 'ww',
     city: '',
     description: '',
     estimatedRenovationCost: 0,
     governorateId: '',
-    userId: this.userId,
+    headTeacherName: '',
+    headTeacherNumber: 0,
+    nameEn: 'www',
     needs: [],
-    headTeacherName: ''
-  }
-
-  schools: SwaggerSchoolModel = {
-    nameAr: '',
-    province: '',
-    city: '',
-    needs: [],
-    managerName: '',
-    headTeacherNumber: '',
-    notes: '',
+    userId: '',
   };
 
   // خيارات جاهزة للّوازم (Autocomplete)
@@ -107,7 +98,7 @@ export class AddSchoolDialogComponent implements OnInit {
   // موافقة صحة البيانات
   confirmAccurate = false;
   chipInputValue: string = '';
-  
+
   constructor(
     private dialogRef: MatDialogRef<AddSchoolDialogComponent>,
     private schoolsService: SchoolsServices,
@@ -116,11 +107,11 @@ export class AddSchoolDialogComponent implements OnInit {
     this.governorates = this.data.governorates;
     this.userId = this.data.userId;
   }
-  
+
   filteredGovernorates: GovernorateMin[] = [];
   ngOnInit(): void {
     this.filteredGovernorates = (this.governorates ?? []).map(
-     ({ governorateId, nameAr }) => ({ governorateId, nameAr })
+      ({ governorateId, nameAr }) => ({ governorateId, nameAr })
     );
   }
 
@@ -170,8 +161,7 @@ export class AddSchoolDialogComponent implements OnInit {
   }
 
   onSave(form?: any) {
-    this.school.userId = this.userId;
-    console.log(this.school)
+    this.school.userId = '81bf7251-f15b-4492-8d32-19144689bed9';
 
     if (!this.school.needs.length) {
       const ctrl = form?.controls?.['needsRequired'];
@@ -193,6 +183,23 @@ export class AddSchoolDialogComponent implements OnInit {
     const v = Number(this.school?.estimatedRenovationCost);
     if (Number.isFinite(v) && v < 0) {
       this.school.estimatedRenovationCost = 0;
+    }
+  }
+
+  preview: string | ArrayBuffer | null = null;
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    console.log(file)
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        console.log(reader.result)
+        this.school.schoolImageBase64 = reader.result as any || ''; // Base64
+        this.preview = reader.result;
+
+        console.log(this.school.schoolImageBase64)
+      };
+      reader.readAsDataURL(file);
     }
   }
 }
