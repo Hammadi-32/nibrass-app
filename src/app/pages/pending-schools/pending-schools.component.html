@@ -14,7 +14,7 @@
             <h3 class="name rtl-text">{{ school.nameAr }}</h3>
             <p class="loc">
               <mat-icon aria-hidden="true">place</mat-icon>
-              <span class="rtl-text">{{ school.governorateName }} – {{ school.city }}</span>
+              <span class="rtl-text">{{ school.governortesName }} – {{ school.city }}</span>
             </p>
           </div>
           <span class="badge">بانتظار</span>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="needs">
-          <div class="label">اللوازم المطلوبة</div >
+          <div class="label">اللوازم المطلوبة</div>
           <ul class="need-list">
             <li *ngFor="let item of school.needs; let last = last" [class.sep]="!last">
               {{ item }}
@@ -43,10 +43,10 @@
         </div>
 
         <div class="actions">
-          <button mat-flat-button color="primary" (click)="approveSchool(i)">
+          <button mat-flat-button color="primary" (click)="approveSchool(school, i)">
             <mat-icon>check</mat-icon><span>قبول</span>
           </button>
-          <button mat-flat-button class="close-btn" (click)="rejectSchool(i)">
+          <button mat-flat-button class="close-btn" (click)="rejectSchool(school.schoolId ,i)">
             <mat-icon>close</mat-icon><span>رفض</span>
           </button>
         </div>

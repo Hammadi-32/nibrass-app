@@ -3,7 +3,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthLayoutComponent } from './auth/layout/auth-layout/auth-layout.component';
 import { HomeComponent } from './pages/home/home.component';
-import { title } from 'process';
 
 export const AUTH_ROUTES: Routes = [
   {
@@ -41,8 +40,8 @@ export const routes: Routes = [
     title: 'معلومات المدرسة'
   },
   {
-    path:'pending-schools',
-    loadComponent: () => 
+    path: 'pending-schools',
+    loadComponent: () =>
       import('./pages/pending-schools/pending-schools.component').then((m) => m.PendingSchoolsComponent),
     title: 'مدارس بانتظار المراحعة'
   },

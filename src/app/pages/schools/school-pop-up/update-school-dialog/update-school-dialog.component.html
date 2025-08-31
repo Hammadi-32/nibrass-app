@@ -1,0 +1,161 @@
+<!-- حاوية بحواف دائرية وتدرّج في الترويسة -->
+<div class="dialog-surface" dir="rtl" [formGroup]="form">
+  <header class="dialog-header">
+    <div class="header-icon">
+      <mat-icon>school</mat-icon>
+    </div>
+    <div class="header-text">
+      <h3 class="title"> تعديل بيانات مدرسة </h3>
+      <p class="subtitle">أدخل بيانات المدرسة بدقة لتسهيل التواصل والدعم</p>
+    </div>
+  </header>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-content class="dialog-content">
+    <form class="form-grid" autocomplete="off" (ngSubmit)="onSave()">
+      <!-- الاسم العربي -->
+      <mat-form-field appearance="outline">
+        <mat-label>اسم المدرسة</mat-label>
+        <input matInput formControlName="nameAr" placeholder="مثال: مدرسة النهضة" />
+        <mat-icon matSuffix>apartment</mat-icon>
+        <mat-hint align="start">الاسم الرسمي كما في السجلات</mat-hint>
+        <mat-error *ngIf="form.get('nameAr')?.touched && form.get('nameAr')?.hasError('required')">
+          الاسم مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- المحافظة -->
+      <mat-form-field appearance="outline">
+        <mat-label>المحافظة</mat-label>
+        <mat-select formControlName="governorateId" placeholder="اختر المحافظة">
+          <mat-option *ngFor="let gov of filteredGovernorates" [value]="gov.governorateId">
+            {{ gov.nameAr }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>map</mat-icon>
+        <mat-error *ngIf="form.get('governorateId')?.touched && form.get('governorateId')?.hasError('required')">
+          المحافظة مطلوبة
+        </mat-error>
+      </mat-form-field>
+
+      <!-- المدينة -->
+      <mat-form-field appearance="outline">
+        <mat-label>المدينة / البلدة</mat-label>
+        <input matInput formControlName="city" placeholder="مثال: معرة مصرين" />
+        <mat-icon matSuffix>location_city</mat-icon>
+        <mat-error *ngIf="form.get('city')?.touched && form.get('city')?.hasError('required')">
+          المدينة مطلوبة
+        </mat-error>
+      </mat-form-field>
+
+      <!-- الكلفة التقديرية -->
+      <mat-form-field appearance="outline">
+        <mat-label>الكلفة التقديرية بالدولار</mat-label>
+        <input matInput type="number" formControlName="estimatedRenovationCost" placeholder="مثال: 1000"
+          (keydown)="blockMinusAndExp($event)" (input)="clampNonNegative()" />
+        <mat-icon matSuffix>money</mat-icon>
+        <mat-error *ngIf="form.get('estimatedRenovationCost')?.hasError('min')">
+          لا يمكن أن تكون سالبة
+        </mat-error>
+        <mat-error *ngIf="form.get('estimatedRenovationCost')?.hasError('max')">
+          القيمة كبيرة جداً
+        </mat-error>
+      </mat-form-field>
+
+      <!-- اللوازم (Chips + Autocomplete) -->
+      <div class="grid-span-2">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>اللوازم المطلوبة*</mat-label>
+
+          <mat-chip-grid #chipGrid aria-label="لوازم مطلوبة" formArrayName="needs">
+            <mat-chip-row *ngFor="let need of needs.controls; let i = index" [editable]="true"
+              (removed)="removeNeed(i)">
+              {{ need.value }}
+              <button matChipRemove aria-label="إزالة">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+
+            <input placeholder="اكتب ثم اضغط إدخال…" [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="addNeed($event)" (input)="chipInputValue = ($any($event.target).value || '')"
+              [matAutocomplete]="needsAuto" />
+          </mat-chip-grid>
+
+          <mat-autocomplete #needsAuto="matAutocomplete" autoActiveFirstOption>
+            <mat-option *ngFor="let opt of commonNeeds | filterStartsWith: chipInputValue"
+              (onSelectionChange)="addNeedFromOption($event.source.selected, opt)">
+              {{ opt }}
+            </mat-option>
+          </mat-autocomplete>
+
+          <mat-hint align="start">مثال: دفاتر، أقلام، حقائب، سبورات…</mat-hint>
+          <mat-error *ngIf="needs.length === 0 && form.touched">
+            يجب إضافة عنصر واحد على الأقل في اللوازم
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- اسم المدير -->
+      <mat-form-field appearance="outline">
+        <mat-label>اسم المدير الكامل</mat-label>
+        <input matInput formControlName="headTeacherName" placeholder="مثال: أحمد محمود العلي" />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="form.get('headTeacherName')?.touched && form.get('headTeacherName')?.hasError('required')">
+          هذا الحقل مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- رقم المدير -->
+      <mat-form-field appearance="outline">
+        <mat-label>رقم تواصل المدير</mat-label>
+        <input matInput type="tel" formControlName="headTeacherNumber" placeholder="963933111222" />
+        <mat-icon matPrefix>call</mat-icon>
+        <button mat-icon-button matSuffix type="button" aria-label="نسخ"
+          (click)="copyPhone(form.get('headTeacherNumber')?.value)" [disabled]="!form.get('headTeacherNumber')?.value">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="form.get('headTeacherNumber')?.touched && form.get('headTeacherNumber')?.hasError('required')">
+          رقم الهاتف مطلوب
+        </mat-error>
+        <mat-error *ngIf="form.get('headTeacherNumber')?.hasError('pattern')">
+          رقم غير صالح (9–15 خانة، مع السماح بـ +)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- ملاحظات -->
+      <mat-form-field class="grid-span-2" appearance="outline">
+        <mat-label>ملاحظات إضافية (اختياري)</mat-label>
+        <textarea matInput rows="3" formControlName="description" placeholder="أي تفاصيل مهمة…"></textarea>
+        <mat-icon matSuffix>notes</mat-icon>
+      </mat-form-field>
+
+      <!-- تم تغطية التكاليف -->
+      <mat-checkbox class="grid-span-2" formControlName="isRequirementsMet" required>
+        هل تم تغطية تكاليف المدرسة
+      </mat-checkbox>
+
+      <!-- تأكيد صحة البيانات -->
+      <mat-checkbox class="grid-span-2" formControlName="confirmAccurate" required>
+        أؤكد أن البيانات المدخلة صحيحة قدر الإمكان
+      </mat-checkbox>
+
+      <div class="footer-spacer grid-span-2"></div>
+
+      <div class="dialog-actions">
+        <button mat-stroked-button type="button" (click)="onCancel()">
+          <mat-icon>close</mat-icon>
+          إلغاء
+        </button>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || needs.length === 0"
+          (click)="onSave()">
+          <mat-icon>save</mat-icon>
+          حفظ
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
