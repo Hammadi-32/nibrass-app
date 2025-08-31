@@ -23,11 +23,21 @@ export class UserProfileComponent implements OnInit {
   constructor( private dialog: MatDialog, private userService: UserProfileService) {}
 
   ngOnInit(): void {
+    this.getUserProfileData();
+  }
+
+  getUserProfileData() {
     this.user = getUserInfo();
-    if (this.user) {
-      this.schools = this.user.schools;
-    }
-    // this.getUserProfileData();
+    this.userService.getUserData(this.user.userId).subscribe(res => {
+      this.user = res;
+      // localStorage.removeItem('user-Info');
+      localStorage.setItem('user-Info', JSON.stringify(res));
+      // this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
+
+      if (this.user) {
+        this.schools = this.user.schools;
+      }
+    })
   }
 
   editProfile() {
@@ -89,9 +99,4 @@ export class UserProfileComponent implements OnInit {
   //   { governorate: 'حمص', city: 'كرم الشامي', name: 'مدرسة الوحدة', view: true, edit: true, delete: true }
   // ];
 
-  // getUserProfileData() {
-  //   this.userService.getUserData('ecd6a5af-89f7-452d-9bb4-eb72c4966c66').subscribe(res => {
-  //     this.user = res;
-  //     this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
-  //   })
-  // }
+  

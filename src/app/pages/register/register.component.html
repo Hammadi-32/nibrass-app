@@ -10,6 +10,12 @@
   </label>
 
   <label class="field">
+    <span>اسم المستخدم</span>
+    <input type="text" formControlName="userName" placeholder="اسم المستخدم" autocomplete="name">
+    <small class="error" *ngIf="invalid('userName')">اسم المستخدم مطلوب</small>
+  </label>
+
+  <label class="field">
     <span>البريد الإلكتروني</span>
     <input type="email" formControlName="email" placeholder="name@example.com" autocomplete="email">
     <small class="error" *ngIf="invalid('email')">صيغة بريد غير صحيحة</small>
