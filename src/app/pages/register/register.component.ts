@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthServiceService } from '../../auth/layout/layout-service/auth.service';
 
 function match(a: string, b: string) {
   return (group: AbstractControl) => {
@@ -35,6 +32,7 @@ export class RegisterComponent implements OnInit {
 initForm() {
   this.form = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(2)]],
+    userName: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]],
@@ -42,7 +40,7 @@ initForm() {
   }, { validators: match('password', 'confirmPassword') });
 }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthServiceService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -54,6 +52,10 @@ initForm() {
   }
 
   submit() {
+    this.authService.register(this.form.value).subscribe(res => {
+      console.log(res)
+    })
+    
     if (this.form.invalid) return;
     // TODO: استدعاء API فعلي
     this.error = '';

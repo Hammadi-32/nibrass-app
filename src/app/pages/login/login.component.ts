@@ -89,7 +89,14 @@ export class LoginComponent {
         this.authService.auth(info).subscribe(res => {
           this.userId = res.userId;
           this.login()
-        })
+        },
+        error => {
+          if (error.status === 401) {
+            this.errorMessage = 'غير مصرح لهذا السمتخدم بالدخول'
+          }
+          this.isThereError = true;
+        }
+      )
       } else {
         const confirmPassword = this.authForm.value.confirmPassword;
         // هنا يمكنك استدعاء خدمة التسجيل الخاصة بك

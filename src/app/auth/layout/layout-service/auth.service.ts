@@ -8,12 +8,19 @@ export interface authInfo {
   password: string;
 }
 
+export interface newUser {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  fullName: string;
+  userName: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthServiceService {
-
   private url: string = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
@@ -23,5 +30,9 @@ export class AuthServiceService {
 
   auth(info: authInfo): Observable<any> {
     return this.http.post(`${this.url}/User/authenticate`,info)
+  }
+
+  register(info: newUser): Observable<any> {
+    return this.http.post(`${this.url}/User?Username=${info.userName}&Email=${info.email}&Password=${info.password}&FullName=${info.fullName}`,{});
   }
 }
