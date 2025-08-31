@@ -17,8 +17,7 @@
       <!-- اسم المدرسة -->
       <mat-form-field appearance="outline">
         <mat-label>اسم المدرسة</mat-label>
-        <input matInput [(ngModel)]="school.nameAr" name="nameAr" required
-               placeholder="مثال: مدرسة النهضة" />
+        <input matInput [(ngModel)]="school.nameAr" name="nameAr" required placeholder="مثال: مدرسة النهضة" />
         <mat-icon matSuffix>apartment</mat-icon>
         <mat-hint align="start">الاسم الرسمي كما في السجلات</mat-hint>
         <mat-error *ngIf="schoolForm.submitted && !school?.nameAr">الاسم مطلوب</mat-error>
@@ -27,18 +26,13 @@
       <!-- المحافظة -->
       <mat-form-field appearance="outline">
         <mat-label>المحافظة</mat-label>
-        <mat-select
-          type="text"
-          matInput
-          [(ngModel)]="school.governorateId"
-          name="governorateId"
-          required
-          placeholder="اختر المحافظة" >
-        <!-- <mat-autocomplete #provAuto="matAutocomplete" autoActiveFirstOption> -->
+        <mat-select type="text" matInput [(ngModel)]="school.governorateId" name="governorateId" required
+          placeholder="اختر المحافظة">
+          <!-- <mat-autocomplete #provAuto="matAutocomplete" autoActiveFirstOption> -->
           <mat-option *ngFor="let gov of filteredGovernorates" [value]="gov.governorateId">
             {{ gov.nameAr }}
           </mat-option>
-        <!-- </mat-autocomplete> -->
+          <!-- </mat-autocomplete> -->
         </mat-select>
         <mat-icon matSuffix>map</mat-icon>
         <mat-error *ngIf="schoolForm.submitted && !school?.governorateId">المحافظة مطلوبة</mat-error>
@@ -55,10 +49,9 @@
       <!-- الكلفة التقديرية -->
       <mat-form-field appearance="outline">
         <mat-label>الكلفة التقديرية بالدولار</mat-label>
-        <input matInput [(ngModel)]="school.estimatedRenovationCost" min="0" max="1000001" type="number" name="estimatedRenovationCost" placeholder="مثال: 1000" 
-        #cost="ngModel"
-        (keydown)="blockMinusAndExp($event)"
-        (input)="clampNonNegative()"/>
+        <input matInput [(ngModel)]="school.estimatedRenovationCost" min="0" max="1000001" type="number"
+          name="estimatedRenovationCost" placeholder="مثال: 1000" #cost="ngModel" (keydown)="blockMinusAndExp($event)"
+          (input)="clampNonNegative()" />
         <mat-icon matSuffix>money</mat-icon>
         <mat-error *ngIf="cost.errors?.['min']"></mat-error>
       </mat-form-field>
@@ -68,40 +61,30 @@
         <mat-label>اللوازم المطلوبة*</mat-label>
 
         <mat-chip-grid #chipGrid aria-label="لوازم مطلوبة">
-          <mat-chip-row
-            *ngFor="let need of school.needs; let i = index"
-            [editable]="true"
-            (removed)="removeNeed(i)">
+          <mat-chip-row *ngFor="let need of school.needs; let i = index" [editable]="true" (removed)="removeNeed(i)">
             {{ need }}
             <button matChipRemove aria-label="إزالة">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip-row>
 
-          <input
-            placeholder="اكتب ثم اضغط إدخال…"
-            [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="true"
-            (matChipInputTokenEnd)="addNeed($event)"
-            (input)="chipInputValue = $any($event.target).value"
-            [matAutocomplete]="needsAuto"/>
+          <input placeholder="اكتب ثم اضغط إدخال…" [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addNeed($event)" (input)="chipInputValue = $any($event.target).value"
+            [matAutocomplete]="needsAuto" />
 
-          </mat-chip-grid>
-          
-          <mat-autocomplete #needsAuto="matAutocomplete" autoActiveFirstOption>
-            <mat-option *ngFor="let opt of commonNeeds | filterStartsWith: chipInputValue" (onSelectionChange)="addNeedFromOption($event.source.selected, opt)">
-              {{ opt }}
-            </mat-option>
-          </mat-autocomplete>
-          
-          <!-- حقل خفي من أجل الخطأ -->
-        <input
-          type="hidden"
-          name="needsRequired"
-          [ngModel]="school.needs.length ? 'ok' : ''"
-          required
-          #needsCtrl="ngModel"/>
+        </mat-chip-grid>
+
+        <mat-autocomplete #needsAuto="matAutocomplete" autoActiveFirstOption>
+          <mat-option *ngFor="let opt of commonNeeds | filterStartsWith: chipInputValue"
+            (onSelectionChange)="addNeedFromOption($event.source.selected, opt)">
+            {{ opt }}
+          </mat-option>
+        </mat-autocomplete>
+
+        <!-- حقل خفي من أجل الخطأ -->
+        <input type="hidden" name="needsRequired" [ngModel]="school.needs.length ? 'ok' : ''" required
+          #needsCtrl="ngModel" />
 
         <!-- رسالة الخطأ -->
         <mat-error *ngIf="(!school.needs.length && schoolForm.submitted)">
@@ -113,7 +96,8 @@
       <!-- اسم المدير -->
       <mat-form-field appearance="outline">
         <mat-label>اسم المدير الكامل</mat-label>
-        <input matInput [(ngModel)]="school.headTeacherName" name="headTeacherName" required placeholder="مثال: أحمد محمود العلي" />
+        <input matInput [(ngModel)]="school.headTeacherName" name="headTeacherName" required
+          placeholder="مثال: أحمد محمود العلي" />
         <mat-icon matSuffix>person</mat-icon>
         <mat-error *ngIf="schoolForm.submitted && !school?.headTeacherName">هذا الحقل مطلوب</mat-error>
       </mat-form-field>
@@ -122,10 +106,10 @@
       <mat-form-field appearance="outline">
         <mat-label>رقم تواصل المدير</mat-label>
         <input matInput type="tel" [(ngModel)]="school.headTeacherNumber" name="headTeacherNumber" required
-               placeholder="963933111222"
-               pattern="^+\d$" />
+          placeholder="963933111222" pattern="^+\d$" />
         <mat-icon matPrefix>call</mat-icon>
-        <button mat-icon-button matSuffix type="button" aria-label="نسخ" (click)="copyPhone(school.headTeacherName)" [disabled]="!school?.headTeacherName">
+        <button mat-icon-button matSuffix type="button" aria-label="نسخ" (click)="copyPhone(school.headTeacherName)"
+          [disabled]="!school?.headTeacherName">
           <mat-icon>add</mat-icon>
         </button>
         <mat-error *ngIf="schoolForm.submitted && !school?.headTeacherNumber">رقم الهاتف مطلوب</mat-error>
@@ -134,14 +118,25 @@
       <!-- ملاحظات -->
       <mat-form-field class="grid-span-2" appearance="outline">
         <mat-label>ملاحظات إضافية (اختياري)</mat-label>
-        <textarea matInput rows="3" [(ngModel)]="school.description" name="description" placeholder="أي تفاصيل مهمة عن المدرسة أو طرق التسليم…"></textarea>
+        <textarea matInput rows="3" [(ngModel)]="school.description" name="description"
+          placeholder="أي تفاصيل مهمة عن المدرسة أو طرق التسليم…"></textarea>
         <mat-icon matSuffix>notes</mat-icon>
       </mat-form-field>
+
+      <div class="image-input">
+        <label for="fileUpload" class="circle-upload">
+          <img *ngIf="preview" [src]="preview" alt="School Image">
+          <span *ngIf="!preview">+</span>
+        </label>
+        <input type="file" id="fileUpload" (change)="onFileSelected($event)">
+      </div>
+
 
       <!-- الموافقة والتأكيد على صحة البيانات -->
       <mat-checkbox class="grid-span-2" [(ngModel)]="confirmAccurate" name="confirmAccurate" required>
         أؤكد أن البيانات المدخلة صحيحة قدر الإمكان
       </mat-checkbox>
+
 
       <!-- مساحة صغيرة لضمان عدم اختباء الحقول خلف أزرار الفوتر المثبتة -->
       <div class="footer-spacer grid-span-2"></div>
@@ -156,9 +151,8 @@
       إلغاء
     </button>
 
-    <button mat-flat-button color="primary"
-            (click)="onSave(school)"
-            [disabled]="!schoolForm.form.valid || !confirmAccurate || school.needs.length === 0">
+    <button mat-flat-button color="primary" (click)="onSave(school)"
+      [disabled]="!schoolForm.form.valid || !confirmAccurate || school.needs.length === 0">
       <mat-icon>save</mat-icon>
       حفظ
     </button>
