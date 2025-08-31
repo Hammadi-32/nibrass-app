@@ -1,6 +1,7 @@
+@if (school) {
+
 <div class="school-details container" dir="rtl">
 
-  <!-- GRID: معلومات + لوازم + صور -->
   <div class="grid">
     <!-- معلومات المدرسة -->
     <section class="card info" aria-label="معلومات المدرسة">
@@ -26,22 +27,21 @@
           <span class="label">رقم التواصل</span>
           <span class="value">{{ school.headTeacherNumber || '—' }}+</span>
         </div>
+        <div class="info-item">
+          <span class="label">التكلفة التقديرية</span>
+          <span class="value">{{ school.estimatedRenovationCost || '—' }} $</span>
+        </div>
       </div>
     </section>
 
     <!-- HERO -->
     <section>
       <div class="school-hero">
-        <img
-          [src]="'assets/school1.jpeg'"
-          alt="صورة {{ school.nameAr }}"
-          loading="lazy"
-          decoding="async"
-        />
-      
+        <img [src]="'assets/school1.jpeg'" alt="صورة {{ school.nameAr }}" loading="lazy" decoding="async" />
+
         <!-- طبقة تأثير/تدرّج -->
         <div class="hero-gradient"></div>
-      
+
         <!-- محتوى فوق الصورة -->
         <div class="overlay">
           <div class="title-wrap">
@@ -51,14 +51,8 @@
               <span>{{ school.governortesName }} – {{ school.city }}</span>
             </p>
           </div>
-         
-          <button
-            mat-stroked-button
-            color="primary"
-            class="back-btn"
-            (click)="goBack()"
-            aria-label="رجوع"
-          >
+
+          <button mat-stroked-button color="primary" class="back-btn" (click)="goBack()" aria-label="رجوع">
             <mat-icon>arrow_back</mat-icon>
             رجوع
           </button>
@@ -91,3 +85,4 @@
     </section>
   </div>
 </div>
+}

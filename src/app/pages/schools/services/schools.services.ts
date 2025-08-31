@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { CreateSchool } from "../schools-models/schools.model";
+import { CreateSchool, School } from "../schools-models/schools.model";
 
 @Injectable({
     providedIn: 'root'
@@ -50,5 +50,9 @@ export class SchoolsServices {
 
     updateSchool(data: any) {
         return this.http.put(`${this.baseUrl}`, data)
+    }
+
+    getNonApprovedSchools():Observable<School[]> {
+        return this.http.get<School[]>(`${this.baseUrl}/non-approved-schools`)
     }
 }

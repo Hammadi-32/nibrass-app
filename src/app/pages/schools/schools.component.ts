@@ -222,15 +222,15 @@ export class SchoolsComponent implements OnInit {
         this.schoolsService.updateSchool(result).subscribe(res => {
           let school = this.schools.find(s => s.schoolId == schoolId);
           if (school) {
-            Object.assign(school, result); // ينسخ القيم الجديدة في الكائن الموجود
+            Object.assign(school, result);
           }
         })
       }
     })
   }
 
-  goToDetails() {
-    this.router.navigateByUrl('schools/11/school-details')
+  goToDetails(schooleId: string) {
+    this.router.navigateByUrl(`schools/${schooleId}/school-details`)
   }
 
   governorates: Governorates[] = []

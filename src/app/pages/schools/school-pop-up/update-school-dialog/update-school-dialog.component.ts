@@ -139,7 +139,7 @@ export class UpdateSchoolDialogComponent implements OnInit {
   }
 
   onSave() {
-   
+
     // نبني الكائن النهائي من الـ FormGroup
     const val = this.form.getRawValue();
     const result: UpdateSchool = {
@@ -153,9 +153,10 @@ export class UpdateSchoolDialogComponent implements OnInit {
       headTeacherName: val.headTeacherName,
       headTeacherNumber: val.headTeacherNumber,
       isRequirementsMet: !!val.isRequirementsMet,
+      isApproved: true,
       needs: [...(val.needs ?? [])],
     };
-console.log(result)
+    console.log(result)
     this.dialogRef.close(result);
   }
 

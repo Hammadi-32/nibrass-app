@@ -33,23 +33,30 @@ import { SchoolsServices } from '../services/schools.services';
   templateUrl: './school-details.component.html',
   styleUrl: './school-details.component.scss'
 })
-export class SchoolDetailsComponent implements OnInit{
-  school!: any;
-  constructor(private route: ActivatedRoute, private router: Router, private schoolService: SchoolsServices){}
+export class SchoolDetailsComponent implements OnInit {
+  school!: School;
+  schooleIdRout: string = '';
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private schoolService: SchoolsServices
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.schooleIdRout = params['schoolId'];
+    });
     // this.school = null;
     this.getData();
   }
-  
-  getData(){
-    this.schoolService.getSchoolById('eab8b6a3-76e2-4955-9130-54ef9dd8899d').subscribe(res => {
-      this.school = res;
+
+  getData() {
+    this.schoolService.getSchoolById(this.schooleIdRout).subscribe(res => {
+      this.school = res as School;
       console.log(this.school)
     })
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['/schools']);
   }
 }

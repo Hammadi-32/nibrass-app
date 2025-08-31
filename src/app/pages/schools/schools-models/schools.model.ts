@@ -15,19 +15,6 @@ export interface School {
   needs: string[];
 }
 
-export interface SchoolForCreation {
-  nameAr: string;
-  nameEn: string;
-  city: string;
-  description: string;
-  estimatedRenovationCost: number;
-  governorateId: string;
-  userId: string;
-  needs: string[];
-  headTeacherName: string;
-  headTeacherNumber?: number;
-}
-
 export interface CreateSchool {
   nameAr: string;
   nameEn: string;
@@ -54,5 +41,6 @@ export interface UpdateSchool {
   headTeacherName: string;
   headTeacherNumber: number;
   isRequirementsMet: boolean;
+  isApproved?: boolean;
 }
 

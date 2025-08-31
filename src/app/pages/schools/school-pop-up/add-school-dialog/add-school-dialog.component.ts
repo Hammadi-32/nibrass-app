@@ -14,7 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Governorates } from '../../../Governorates/models/governorate.model';
-import { CreateSchool, SchoolForCreation } from '../../schools-models/schools.model';
+import { CreateSchool } from '../../schools-models/schools.model';
 import { SchoolsServices } from '../../services/schools.services';
 import { GovernorateServices } from '../../../Governorates/services/governorate.services';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
