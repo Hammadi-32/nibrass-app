@@ -140,8 +140,8 @@ export class SchoolsComponent implements OnInit {
       this.schools = res;
       console.log(res)
       this.filteredSchools = res;
-      this.schools.forEach(s=>{
-        s.imageSrc=this.convertToDataUrl(s.profileImageUrl?.base64String!, s.profileImageUrl?.contentType!)
+      this.schools.forEach(s => {
+        s.imageSrc = this.convertToDataUrl(s.profileImageUrl?.base64String!, s.profileImageUrl?.contentType!)
       })
       console.log(this.schools)
     })
@@ -188,6 +188,8 @@ export class SchoolsComponent implements OnInit {
         this.schoolsService.addSchool(result).subscribe(res => {
           console.log('added: ', res)
           this.filteredSchools.push(res);
+          let school = this.schools.find(s => s.schoolId == res.schoolId);
+          school!.imageSrc = this.convertToDataUrl(school?.profileImageUrl.base64String!, school?.profileImageUrl.contentType!)!
         })
 
       }

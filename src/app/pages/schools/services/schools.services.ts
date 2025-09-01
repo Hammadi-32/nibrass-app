@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { CreateSchool, School } from "../schools-models/schools.model";
+import { SchoolStatisticsDto } from "../../home/models/home.model";
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ export class SchoolsServices {
     }
 
     addSchool(schoolData: CreateSchool): Observable<any> {
+        console.log('dataaaaaa', schoolData)
         const formData = new FormData();
 
         formData.append('nameAr', schoolData.nameAr);
@@ -56,6 +58,6 @@ export class SchoolsServices {
         return this.http.get<School[]>(`${this.baseUrl}/non-approved-schools`)
     }
     getDashboardData() {
-        return this.http.get(`${this.baseUrl}/dashboard-data`)
+        return this.http.get<SchoolStatisticsDto>(`${this.baseUrl}/dashboard-data`)
     }
 }

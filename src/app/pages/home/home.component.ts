@@ -40,11 +40,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit(): void {
-    this.getDashboardData()
-    this.animateValue('totalSchools', this.endStats.totalSchools, 1500);
-    this.animateValue('coveredSchools', this.endStats.coveredSchools, 1500);
-    this.animateValue('damagedSchools', this.endStats.damagedSchools, 1500);
-    this.animateValue('donors', this.endStats.donors, 1500);
+    this.getDashboardData();
+    
     // this.createChart();
     // this.createBarChart();
     const userInfo = getUserInfo();
@@ -54,7 +51,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   getDashboardData() {
     this.schoolService.getDashboardData().subscribe(res=>{
-      console.log(res)
+      this.dashboardData = res;
+      
+      this.endStats = this.dashboardData.schoolStatistics;
+      // console.log('dashb', res.schoolStatistics)
+      this.animateValue('totalSchools', this.endStats.totalSchools, 1500);
+      this.animateValue('coveredSchools', this.endStats.coveredSchools, 1500);
+      this.animateValue('damagedSchools', this.endStats.damagedSchools, 1500);
+      this.animateValue('donors', this.endStats.donors, 1500);
+
+      this.createChart();
+      this.createBarChart();
     })
   }
 
@@ -82,10 +89,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.createChart();
-      this.createBarChart();
-    }, 1500);
+    // setTimeout(() => {
+    //   this.createChart();
+    //   this.createBarChart();
+    // }, 1500);
   }
 
   redirctToSchools() {
@@ -94,12 +101,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   // المدارس المغطاة
   createChart() {
+    console.log(this.dashboardData.schoolStatistics.damagedSchools)
+    this.dashboardData.schoolStatistics.damagedSchools = 2;
     new Chart('schoolsChart', {
       type: 'doughnut',
       data: {
         labels: ['مدارس تم تغطيتها', 'مدارس متضررة'],
         datasets: [{
-          data: [this.stats.covered, this.stats.damaged],
+          data: [this.dashboardData.schoolStatistics.coveredSchools, this.dashboardData.schoolStatistics.damagedSchools],
           backgroundColor: ['#4caf50', '#007bff'],
         }]
       },
@@ -121,8 +130,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   //  عدد المدارس المغطاة في كل محافظة
   createBarChart() {
-    const coveredPerGov = this.fakeGovernorates.FakeGovernorates.map(() => Math.floor(Math.random() * 20));
-    const damagedPerGov = this.fakeGovernorates.FakeGovernorates.map(() => Math.floor(Math.random() * 20));
+    console.log('array', this.dashboardData.statisticsByGovernorate)
+    const stats: any = this.dashboardData.statisticsByGovernorate;
+
+    const labels = stats.map((g: any) => g.governorateName);
+    const coveredPerGov = stats.map((g: any) => g.coveredSchools);
+    const damagedPerGov = stats.map((g: any) => g.damagedSchools);
 
     new Chart('schoolsBar', {
       type: 'line',

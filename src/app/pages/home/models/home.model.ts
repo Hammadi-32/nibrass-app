@@ -1,9 +1,9 @@
 export interface SchoolStatisticsDto {
-    SchoolStatistics: SchoolStatistics;
-    StatisticsByGovernorate: SchoolStatisticsByGovernorate;
+    schoolStatistics: SchoolStatistics;
+    statisticsByGovernorate: SchoolStatisticsByGovernorate;
 }
 
-export interface SchoolStatistics {
+export interface SchoolStatistics { 
     totalSchools: number;
     coveredSchools: number;
     damagedSchools: number;
