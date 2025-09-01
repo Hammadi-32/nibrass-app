@@ -52,8 +52,12 @@ export class SchoolDetailsComponent implements OnInit {
   getData() {
     this.schoolService.getSchoolById(this.schooleIdRout).subscribe(res => {
       this.school = res as School;
-      console.log(this.school)
+      this.school.imageSrc = this.convertToDataUrl(this.school?.profileImageUrl.base64String!, this.school?.profileImageUrl.contentType!)!
     })
+  }
+
+  convertToDataUrl(fileContents: string, contentType: string): string {
+    return `data:${contentType};base64,${fileContents}`;
   }
 
   goBack() {

@@ -42,7 +42,7 @@ interface SwaggerSchool {
 @Component({
   selector: 'app-schools',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, CdkAutofill],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.scss',
 })
@@ -141,9 +141,10 @@ export class SchoolsComponent implements OnInit {
       console.log(res)
       this.filteredSchools = res;
       this.schools.forEach(s => {
-        s.imageSrc = this.convertToDataUrl(s.profileImageUrl?.base64String!, s.profileImageUrl?.contentType!)
+        if (s.profileImageUrl) {
+          s.imageSrc = this.convertToDataUrl(s.profileImageUrl?.base64String!, s.profileImageUrl?.contentType!)
+        }
       })
-      console.log(this.schools)
     })
   }
 

@@ -23,7 +23,12 @@
   <div class="schools-grid" *ngIf="filteredSchools.length > 0">
     <div class="school-card" *ngFor="let school of filteredSchools">
       <div class="image-wrapper">
-        <img [src]="school.imageSrc" alt="صورة المدرسة" />
+        @if (school.imageSrc || school.imageSrc != undefined) {
+          <img [src]="school.imageSrc || 'assets/school1.jpeg'" alt="صورة المدرسة" />
+        }
+        @else {
+          <img [src]="'assets/school1.jpeg'" alt="صورة المدرسة" />
+        }
       </div>
       <div class="card-content">
         <h3>{{ school.nameAr }}</h3>
