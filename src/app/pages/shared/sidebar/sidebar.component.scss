@@ -16,11 +16,13 @@
     line-height: 1;
   }
 
-  .item:hover .material-icons {
+  .item:hover .material-icons,
+  .item:hover .label {
     color: #91c386;
   }
 
-  .item.active .material-icons {
+  .item.active .material-icons,
+  .item.active .label {
     color: #3ca16f;
   }
  
@@ -44,6 +46,7 @@
   align-items: center;
   width: 100%;
   border-radius: 11px;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
 }
 
 .item {

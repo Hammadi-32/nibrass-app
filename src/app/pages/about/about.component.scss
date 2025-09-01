@@ -56,6 +56,22 @@
     }
   }
 
+  .contact-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+
+      .btn{
+        display:inline-block; padding:10px 14px; border-radius:12px; font-weight:700;
+        text-decoration:none; transition: transform .06s, box-shadow .2s, background-color .2s;
+        &.primary{ background:#005c99; color:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); }
+        &.primary:hover{ box-shadow:0 12px 30px rgba(0,0,0,.16); }
+        &.outline{ background:#fff; color:#005c99; border:1px solid #cfe6f4; }
+        &.outline:hover{ background:#f5fbff; }
+        &.subtle{ background:#f6f7f9; color:#334155; border:1px solid #e5e7eb; }
+        &.subtle:hover{ background:#eef1f5; }
+      }
+      .btn:active{ transform: translateY(1px); }
+    }
+
   /* شاشة صغيرة */
   @media (max-width: 560px) {
     .contact .contact-list li{

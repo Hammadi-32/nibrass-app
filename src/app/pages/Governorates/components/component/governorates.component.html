@@ -1,5 +1,5 @@
 <div class="container py-5 governorates">
-    <h2 class="text-center text-primary mb-4">قائمة المحافظات </h2>
+    <h2 class="text-center mb-4">قائمة المحافظات </h2>
     <div class="row">
         <div class="col-md-4 mb-4" *ngFor="let gov of governorates">
             <div class="custom-card" [routerLink]="[gov.governorateId, 'governorate-details']">

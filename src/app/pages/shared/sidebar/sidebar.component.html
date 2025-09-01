@@ -6,7 +6,7 @@
         [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px' ,'background':sidebarClosed?'#FFFFFF':'#F0F0F0'}"
         class="item" [routerLink]="item.route" routerLinkActive="active">
         <span class="material-icons" (click)="sideBar()">{{ item.icon }}</span>
-        <a *ngIf="!sidebarClosed">{{ item.label }}</a>
+        <a class="label" *ngIf="!sidebarClosed">{{ item.label }}</a>
       </li>
     </div>
 

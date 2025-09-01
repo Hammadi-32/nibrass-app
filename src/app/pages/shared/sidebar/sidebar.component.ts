@@ -26,9 +26,9 @@ export class SidebarComponent implements OnInit {
     .subscribe(() => {
       const raw = localStorage.getItem('user-Info');
       const user = raw ? JSON.parse(raw) : null;
-      console.log(raw)
       this.isLoggedin = !!user;
-      this.userRole   = user?.role ?? '01';
+      this.userRole   = user?.roleId ?? '01';
+      console.log(this.userRole)
     });
   }
 
@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
     { icon: 'home',             label: 'الرئيسية',                route: '/home' },
     { icon: 'school',           label: 'المدارس',                 route: '/schools' },
     { icon: 'account_balance',  label: 'المحافظات',               route: '/governorates' },
-    { icon: 'hourglass_bottom', label: 'مدارس بانتظار المراجعة', route: '/pending-schools', onlyAdmin: true },
+    { icon: 'hourglass_bottom', label: 'طلبات المدارس', route: '/pending-schools', onlyAdmin: true },
     { icon: 'info',             label: 'من نحن',                  route: '/about' },
     // { icon: 'location_city', label: 'المدن',                   route: '/cities' },
     // { icon: 'insert_chart',  label: 'التقارير',                route: '/reports' },
