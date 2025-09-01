@@ -37,14 +37,13 @@ export class GovernorateDetailsComponent implements OnInit {
   getGovernorateSummary() {
     this.governorateServices.getGovernorateSummary(this.governorateIdRout).subscribe(res => {
       this.governorate = res;
-      console.log('govern: ', this.governorate)
     })
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       this.renderCharts()
-    }, 2000);
+    }, 1000);
   }
 
   renderCharts() {

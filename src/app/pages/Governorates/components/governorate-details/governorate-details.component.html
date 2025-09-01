@@ -1,4 +1,84 @@
-<div class="container py-5" *ngIf="governorate">
+<div class="gov-page" dir="rtl" *ngIf="governorate">
+  <!-- Header / Hero Card -->
+  <header class="gov-header" aria-label="معلومات المحافظة">
+  <nav class="breadcrumb" aria-label="مسار التنقل">
+    <a routerLink="/governorates">المحافظات</a>
+    <span class="sep">/</span>
+    <span class="current">{{ governorate.nameEn }}</span>
+  </nav>
+
+  <div class="head-main">
+    <div class="title-wrap">
+      <h1 class="title">المحافظة: {{ governorate.nameEn }}</h1>
+      <p class="subtitle">نظرة عامة على التغطية ونِسَب الأضرار</p>
+    </div>
+
+    <a class="btn-link"
+       [routerLink]="['/governorates']"
+       routerLinkActive="active">
+      <span>رجوع</span>
+      <span class="mi" aria-hidden="true">arrow_back</span>
+    </a>
+  </div>
+</header>
+
+
+  <!-- Stats Grid -->
+  <section class="stats-grid" aria-label="إحصاءات">
+    <article class="stat">
+      <div class="stat-icon">🏫</div>
+      <div class="stat-body">
+        <h3 class="stat-number">
+          <span>{{ governorate.coveredSchools }}</span>
+          <span class="sep">/</span>
+          <span>{{ governorate.totalSchools }}</span>
+        </h3>
+        <p class="stat-label">المدارس المغطاة</p>
+      </div>
+    </article>
+
+    <article class="stat">
+      <div class="stat-icon">🏙️</div>
+      <div class="stat-body">
+        <h3 class="stat-number">
+          <span>{{ governorate.coveredCities }}</span>
+          <span class="sep">/</span>
+          <span>{{ governorate.totalCities }}</span>
+        </h3>
+        <p class="stat-label">المدن المغطاة</p>
+      </div>
+    </article>
+
+    <article class="stat warn">
+      <div class="stat-icon">🚧</div>
+      <div class="stat-body">
+        <h3 class="stat-number">{{ governorate.damagePercentage | number:'1.0-1' }}%</h3>
+        <p class="stat-label">نسبة الأضرار</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Charts -->
+  <section class="charts-grid" aria-label="رسومات بيانية">
+    <article class="chart-card">
+      <h4>تغطية المدارس</h4>
+      <canvas id="schoolsCoverageChart"></canvas>
+    </article>
+
+    <article class="chart-card">
+      <h4>تغطية المدن</h4>
+      <canvas id="citiesCoverageChart"></canvas>
+    </article>
+
+    <article class="chart-card">
+      <h4>الأضرار في المدارس</h4>
+      <canvas id="damageChart"></canvas>
+    </article>
+  </section>
+</div>
+
+
+<!-- <div class="container py-5" *ngIf="governorate">
   <h2 class="text-center text-primary mb-4">المحافظة: {{ governorate.nameEn }}</h2>
   <button class="btn-go" [routerLink]="['/governorates', governorateIdRout, 'cities']" routerLinkActive="active">
     اذهب إلى المدن
@@ -39,4 +119,4 @@
       <p class="mt-2">الأضرار في المدارس</p>
     </div>
   </div>
-</div>
+</div> -->
