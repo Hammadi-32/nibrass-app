@@ -77,14 +77,14 @@ export class AddSchoolDialogComponent implements OnInit {
   school: CreateSchool = {
     nameAr: '',
     city: '',
-    description: '',
+    description: 'w',
     estimatedRenovationCost: 0,
     governorateId: '',
     headTeacherName: '',
     headTeacherNumber: 0,
     nameEn: 'www',
     needs: [],
-    userId: '',
+    userId: this.userId,
   };
 
   // خيارات جاهزة للّوازم (Autocomplete)
@@ -106,6 +106,7 @@ export class AddSchoolDialogComponent implements OnInit {
   ) {
     this.governorates = this.data.governorates;
     this.userId = this.data.userId;
+    console.log(this.userId)
   }
 
   filteredGovernorates: GovernorateMin[] = [];
@@ -161,7 +162,7 @@ export class AddSchoolDialogComponent implements OnInit {
   }
 
   onSave(form?: any) {
-    this.school.userId = '81bf7251-f15b-4492-8d32-19144689bed9';
+    this.school.userId = this.userId;
 
     if (!this.school.needs.length) {
       const ctrl = form?.controls?.['needsRequired'];

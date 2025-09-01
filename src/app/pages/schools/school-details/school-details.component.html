@@ -37,7 +37,7 @@
     <!-- HERO -->
     <section>
       <div class="school-hero">
-        <img [src]="'assets/school1.jpeg'" alt="صورة {{ school.nameAr }}" loading="lazy" decoding="async" />
+        <img [src]="school.imageSrc || 'assets/school1.jpeg'" alt="صورة {{ school.nameAr }}" loading="lazy" decoding="async" />
 
         <!-- طبقة تأثير/تدرّج -->
         <div class="hero-gradient"></div>
@@ -80,7 +80,7 @@
       <h2>صور المدرسة</h2>
       <div class="images">
         <!-- استبدل لاحقًا بـ *ngFor للمعرض -->
-        <img [src]="'assets/school1.jpeg'" alt="صورة من {{ school.nameAr }}" />
+        <img [src]="school.imageSrc || 'assets/school1.jpeg'" alt="صورة من {{ school.nameAr }}" />
       </div>
     </section>
   </div>

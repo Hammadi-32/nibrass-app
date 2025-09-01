@@ -106,7 +106,7 @@ export class UpdateSchoolDialogComponent implements OnInit {
       estimatedRenovationCost: [
         s.estimatedRenovationCost ?? 0,
       ],
-      governorateId: [s.governorateId ?? '', Validators.required],
+      governorateId: [s.governorteId ?? '', Validators.required],
       headTeacherName: [s.headTeacherName ?? '', Validators.required],
       headTeacherNumber: [
         s.headTeacherNumber ?? '',
@@ -114,7 +114,7 @@ export class UpdateSchoolDialogComponent implements OnInit {
           Validators.required,
         ]
       ],
-      isRequirementsMet: [!!s.isRequirementsMet, Validators.requiredTrue],
+      isRequirementsMet: [!!s.isRequirementsMet],
       confirmAccurate: [false, Validators.requiredTrue],
 
       // مصفوفة اللوازم
@@ -149,14 +149,14 @@ export class UpdateSchoolDialogComponent implements OnInit {
       city: val.city,
       description: val.description,
       estimatedRenovationCost: Number(val.estimatedRenovationCost) || 0,
-      governorateId: val.governorateId,
+      governorteId: val.governorateId,
       headTeacherName: val.headTeacherName,
       headTeacherNumber: val.headTeacherNumber,
       isRequirementsMet: !!val.isRequirementsMet,
       isApproved: true,
       needs: [...(val.needs ?? [])],
     };
-    console.log(result)
+    // console.log(result)
     this.dialogRef.close(result);
   }
 
