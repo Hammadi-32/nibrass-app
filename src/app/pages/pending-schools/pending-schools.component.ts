@@ -44,7 +44,7 @@ export class PendingSchoolsComponent implements OnInit {
       schoolId: school.schoolId,
       needs: school.needs,
       estimatedRenovationCost: school.estimatedRenovationCost,
-      governorteId: school.governorteId,
+      governorateId: school.governorteId,
       headTeacherName: school.headTeacherName,
       headTeacherNumber: school.headTeacherNumber!,
       isRequirementsMet: school.isRequirementsMet,

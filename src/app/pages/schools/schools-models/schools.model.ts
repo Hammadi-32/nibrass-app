@@ -40,7 +40,7 @@ export interface UpdateSchool {
   city: string;
   description: string;
   estimatedRenovationCost: number;
-  governorteId: string;
+  governorateId: string;
   needs: string[];
   headTeacherName: string;
   headTeacherNumber: number;
