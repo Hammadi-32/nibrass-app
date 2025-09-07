@@ -9,6 +9,8 @@ export interface User {
     imageSrc?: string;
     schools?: School[];
     role: string;
+    IsDarkMode: boolean;
+    IsArabic: boolean;
     password: string;
 }
 export interface FileData {

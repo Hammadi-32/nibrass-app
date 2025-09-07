@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
       // localStorage.removeItem('user-Info');
       localStorage.setItem('user-Info', JSON.stringify(res));
       // this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
-
+      console.log(res)
       if (this.user) {
         this.schools = this.user.schools;
       }
