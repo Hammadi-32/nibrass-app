@@ -38,7 +38,7 @@ body {
 
 .sidebar {
   width: 220px;
-  background-color: #FFFFFF;
+  background-color: var(--card);
   height: calc(100vh - var(--navbar-height));
   position: fixed;
   top: var(--navbar-height);

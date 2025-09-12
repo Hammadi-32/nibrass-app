@@ -2,7 +2,7 @@
   --navbar-height: 50px; // Navbar
 
   --card: #fff; 
-  --bg: #f8fafc;
+  --bg: #fcf8f8;
   --basic: #005c99;
   --brand: #2563eb; 
   --brand-600: #1d4ed8; 
@@ -10,4 +10,27 @@
   --ring: 0 0 0 3px rgba(37, 99, 235, .14);
   --ink: #0f172a;          /* نص داكن */
   --muted: #64748b;        /* نص ثانوي */
+  
+  --border: #eeeeee;
+  --table-head: #f9fafb;
+  --row-hover: #fcfcfc;
+  --accent: #005c99;
+  --sb-g-item-bg: #F0F0F0;
 }
+
+/* Dark */
+:root.dark {
+  --bg: #0b1220;
+  --card: #0f172a;
+  --border: #1f2937;
+  --ink: #e5e7eb;
+  --muted: #94a3b8;
+  --table-head: #0b1320;
+  --row-hover: #0d1726;
+  --accent: #60a5fa;
+  
+  --sb-g-item-bg: #111827;
+}
+
+/* خلفية عامة */
+body { background: var(--bg); color: var(--ink); }

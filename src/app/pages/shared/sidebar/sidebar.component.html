@@ -1,9 +1,9 @@
 <nav class="sidebar" [ngStyle]="{'width':sidebarClosed?'50px':'220px','padding': sidebarClosed?'12px':'20px'}">
   <ul>
-    <div *ngFor="let item of menuItems">
+    <div *ngFor="let item of menuItems" class="menuItems">
       <li *ngIf=" (!item.onlyAdmin || userRole === '11') &&
                   (!item.onlyUser  || isLoggedin)"
-        [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px' ,'background':sidebarClosed?'#FFFFFF':'#F0F0F0'}"
+        [ngStyle]="{'padding': sidebarClosed ? '10px 0px' : '11px 10px'}"
         class="item" [routerLink]="item.route" routerLinkActive="active">
         <span class="material-icons" (click)="sideBar()">{{ item.icon }}</span>
         <a class="label" *ngIf="!sidebarClosed">{{ item.label }}</a>

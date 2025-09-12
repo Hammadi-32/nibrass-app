@@ -1,6 +1,15 @@
 <div class="profile-page" dir="rtl">
   @if (user; as u) {
     <section class="profile-card" aria-label="بطاقة الملف الشخصي">
+      <!-- From Uiverse.io by Madflows --> 
+      <div class="toggle-switch" aria-label="تبديل الوضع">
+        <label class="switch-label">
+          <input type="checkbox" class="checkbox"
+          [checked]="isDark"
+          (change)="onThemeToggle($event)">
+          <span class="slider"></span>
+        </label>
+      </div>  
       <header class="profile-header">
         <figure class="profile-avatar" aria-label="صورة المستخدم">
           <img

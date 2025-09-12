@@ -101,8 +101,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   // المدارس المغطاة
   createChart() {
-    console.log(this.dashboardData.schoolStatistics.damagedSchools)
-    this.dashboardData.schoolStatistics.damagedSchools = 2;
+    // console.log(this.dashboardData.schoolStatistics.damagedSchools)
+    // this.dashboardData.schoolStatistics.damagedSchools;
     new Chart('schoolsChart', {
       type: 'doughnut',
       data: {
@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     new Chart('schoolsBar', {
       type: 'line',
       data: {
-        labels: this.fakeGovernorates.FakeGovernorates.map((g: any) => g.nameAr),
+        labels: labels,
         datasets: [
           {
             label: 'مدارس مغطاة',

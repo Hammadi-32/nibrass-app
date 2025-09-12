@@ -1,6 +1,17 @@
+/*== Sidebar (Light & Dark ready) ==*/
 .sidebar {
+  /* tokens خاصة بالـ sidebar (يتم توريثها وتُغيَّر في .dark) */
+  --sb-bg: var(--card);
+  --sb-border: var(--border);
+  --sb-item-bg: #F0F0F0;
+  --sb-text: var(--ink);
+  --sb-icon: #6b7280;
+  --sb-hover: #91c386;     /* لون hover */
+  --sb-active: #3ca16f;    /* لون active */
+  --sb-ring: 0 0 0 3px rgba(60, 161, 111, .18);
+
   width: 220px;
-  background-color: #FFFFFF;
+  background: var(--sb-bg);
   height: 92vh;
   padding: 20px;
   box-sizing: border-box;
@@ -8,35 +19,30 @@
   top: 52px;
   right: 0;
   direction: rtl;
+  border-inline-end: 1px solid var(--sb-border); /* خط فاصل مع المحتوى */
 
   .material-icons {
-    color: #6b7280;
+    color: var(--sb-icon);
     transition: color .2s ease, transform .06s ease;
     font-size: 22px;
     line-height: 1;
   }
 
+  /* hover/active يلوّن الأيقونة والنص */
   .item:hover .material-icons,
-  .item:hover .label {
-    color: #91c386;
+  .item:hover a {
+    color: var(--sb-hover);
   }
-
   .item.active .material-icons,
-  .item.active .label {
-    color: #3ca16f;
+  .item.active a {
+    color: var(--sb-active);
   }
- 
-  .arrow-icon .material-icons {
-    color: #6b7280;
-  }
-  .arrow-icon:hover .material-icons {
-    color: #3ca16f;
-  }
+
+  .arrow-icon .material-icons { color: var(--sb-icon); }
+  .arrow-icon:hover .material-icons { color: var(--sb-active); }
 }
 
-.sidebar ul {
-  padding: 0;
-}
+.sidebar ul { padding: 0; }
 
 .sidebar ul li {
   margin-bottom: 10px;
@@ -47,29 +53,42 @@
   width: 100%;
   border-radius: 11px;
   font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  transition: background .2s ease, box-shadow .2s ease;
 }
 
 .item {
-  background: #F0F0F0;
+  background: var(--sb-item-bg);
   cursor: pointer;
+}
+.item:focus-within {
+  outline: none;
+  box-shadow: var(--sb-ring);
 }
 
 .sidebar ul li a {
   text-decoration: none;
-  color: #333;
+  color: var(--sb-text);
   font-weight: bold;
-}
-
-.sidebar ul li a {
   padding-right: 9px;
 }
 
+.menuItems li{
+  background: var(--sb-g-item-bg);
+  color: var(--ink);
+}
+
 .arrow-icon {
-  padding: 10px 0px;
+  padding: 10px 0;
   position: absolute;
   bottom: -8px;
 }
+.icon { cursor: pointer; }
 
-.icon {
-  cursor: pointer;
+/*== Dark overrides (تأقلم تلقائي عند إضافة .dark على <html>) ==*/
+:root.dark .sidebar {
+  --sb-item-bg: #111827;           /* خلفية عنصر القائمة */
+  --sb-icon: #9ca3af;
+  --sb-hover: #9ed3a1;             /* أخضر فاتح مناسب للداكن */
+  --sb-active: #60d394;            /* أخضر نشط في الداكن */
+  --sb-ring: 0 0 0 3px rgba(96, 211, 148, .22);
 }

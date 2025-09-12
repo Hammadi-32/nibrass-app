@@ -10,6 +10,8 @@ export interface User {
     schools?: School[];
     role: string;
     password: string;
+    isDarkMode?: boolean;
+    isArabic?: boolean;
 }
 export interface FileData {
     base64String: string;

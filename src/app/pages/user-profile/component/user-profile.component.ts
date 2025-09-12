@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserProfileComponent } from '../pop-up-user-profile/update-user-profile/update-user-profile.component';
@@ -20,7 +20,9 @@ export class UserProfileComponent implements OnInit {
   userInfo: any;
   user!: User;
   schools: any = [];
-  constructor( private dialog: MatDialog, private userService: UserProfileService) {}
+  isDark: boolean = false;
+  constructor( private dialog: MatDialog, private userService: UserProfileService,
+                @Inject(DOCUMENT) private doc: Document) {}
 
   ngOnInit(): void {
     this.getUserProfileData();
@@ -30,12 +32,17 @@ export class UserProfileComponent implements OnInit {
     this.user = getUserInfo();
     this.userService.getUserData(this.user.userId).subscribe(res => {
       this.user = res;
-      // localStorage.removeItem('user-Info');
       localStorage.setItem('user-Info', JSON.stringify(res));
-      // this.user.imageSrc = this.convertToDataUrl(this.user.profileImageUrl?.base64String!, this.user.profileImageUrl?.contentType!)
 
       if (this.user) {
         this.schools = this.user.schools;
+        this.isDark = this.user.isDarkMode!;
+        const saved = this.isDark? 'dark' : 'light';
+        // const saved = 'dark'
+        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+        console.log(prefersDark)
+        const startDark = saved ? saved === 'dark' : prefersDark;
+        this.applyTheme(startDark)
       }
     })
   }
@@ -72,6 +79,19 @@ export class UserProfileComponent implements OnInit {
 
   convertToDataUrl(fileContents: string, contentType: string): string {
     return `data:${contentType};base64,${fileContents}`;
+  }
+
+  onThemeToggle(ev: Event) {
+    console.log(ev)
+    const checked = (ev.target as HTMLInputElement).checked;
+    this.applyTheme(checked);
+  }
+
+  private applyTheme(dark: boolean) {
+    this.isDark = dark;
+    // أضف/أزل كلاس .dark على <html>
+    this.doc.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
   }
 
   logout(){
