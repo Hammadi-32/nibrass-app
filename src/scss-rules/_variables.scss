@@ -8,8 +8,8 @@
   --brand-600: #1d4ed8; 
   --radius: 16px;
   --ring: 0 0 0 3px rgba(37, 99, 235, .14);
-  --ink: #0f172a;          /* نص داكن */
-  --muted: #64748b;        /* نص ثانوي */
+  --ink: #0f172a;          /* كتابة داكنة */
+  --muted: #64748b;        /* لون كتابة ثانوي */
   
   --border: #eeeeee;
   --table-head: #f9fafb;
@@ -34,5 +34,5 @@
   --sb-g-item-bg: #111827;
 }
 
-/* خلفية عامة */
+/* عام */
 body { background: var(--bg); color: var(--ink); }
